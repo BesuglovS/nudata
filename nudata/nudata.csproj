@@ -12,6 +12,25 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <PublishUrl>ftp://u461885%40u461885.ftp.masterhost.ru/wiki.nayanova.edu/www/nudata/</PublishUrl>
+    <Install>false</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>http://wiki.nayanova.edu/nudata/</InstallUrl>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>8</ApplicationRevision>
+    <ApplicationVersion>0.1.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,7 +51,22 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>5E70867592FF9C5D811CD2C892F69FC48DBA17D7</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>nudata_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,14 +80,134 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Core\AppPermissions.cs" />
+    <Compile Include="Core\PhoneType.cs" />
+    <Compile Include="DomainClasses\Extra\StudentDetailsMode.cs" />
+    <Compile Include="DomainClasses\Extra\UserPermission.cs" />
+    <Compile Include="DomainClasses\Main\AcademicDegree.cs" />
+    <Compile Include="DomainClasses\Main\AcademicRank.cs" />
+    <Compile Include="DomainClasses\Main\Education.cs" />
+    <Compile Include="DomainClasses\Main\Experience.cs" />
+    <Compile Include="DomainClasses\Main\Faculty.cs" />
+    <Compile Include="DomainClasses\Main\FacultyStudentGroup.cs" />
+    <Compile Include="DomainClasses\Main\Position.cs" />
+    <Compile Include="DomainClasses\Main\Student.cs" />
+    <Compile Include="DomainClasses\Main\StudentGroup.cs" />
+    <Compile Include="DomainClasses\Main\StudentInGroup.cs" />
+    <Compile Include="DomainClasses\Main\StudentStudentGroup.cs" />
+    <Compile Include="DomainClasses\Main\Teacher.cs" />
+    <Compile Include="DomainClasses\Schedule\Auditorium.cs" />
+    <Compile Include="DomainClasses\Schedule\AuditoriumEvent.cs" />
+    <Compile Include="DomainClasses\Schedule\Building.cs" />
+    <Compile Include="DomainClasses\Schedule\Calendar.cs" />
+    <Compile Include="DomainClasses\Schedule\ConfigOption.cs" />
+    <Compile Include="DomainClasses\Schedule\CustomDisciplineAttribute.cs" />
+    <Compile Include="DomainClasses\Schedule\CustomStudentGroupAttribute.cs" />
+    <Compile Include="DomainClasses\Schedule\CustomTeacherAttribute.cs" />
+    <Compile Include="DomainClasses\Schedule\Discipline.cs" />
+    <Compile Include="DomainClasses\Schedule\DisciplineName.cs" />
+    <Compile Include="DomainClasses\Schedule\Exam.cs" />
+    <Compile Include="DomainClasses\Schedule\Faculty.cs" />
+    <Compile Include="DomainClasses\Schedule\GroupsInFaculty.cs" />
+    <Compile Include="DomainClasses\Schedule\Lesson.cs" />
+    <Compile Include="DomainClasses\Schedule\LessonLogEvent.cs" />
+    <Compile Include="DomainClasses\Schedule\LogEvent.cs" />
+    <Compile Include="DomainClasses\Schedule\Ring.cs" />
+    <Compile Include="DomainClasses\Schedule\ScheduleNote.cs" />
+    <Compile Include="DomainClasses\Schedule\Semester.cs" />
+    <Compile Include="DomainClasses\Schedule\Shift.cs" />
+    <Compile Include="DomainClasses\Schedule\ShiftRing.cs" />
+    <Compile Include="DomainClasses\Schedule\Student.cs" />
+    <Compile Include="DomainClasses\Schedule\StudentGroup.cs" />
+    <Compile Include="DomainClasses\Schedule\StudentsInGroups.cs" />
+    <Compile Include="DomainClasses\Schedule\Teacher.cs" />
+    <Compile Include="DomainClasses\Schedule\TeacherForDiscipline.cs" />
+    <Compile Include="DomainClasses\Schedule\TeacherWish.cs" />
+    <Compile Include="Forms\AuthForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Forms\AuthForm.Designer.cs">
+      <DependentUpon>AuthForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FacultyList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FacultyList.Designer.cs">
+      <DependentUpon>FacultyList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PhoneForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PhoneForm.Designer.cs">
+      <DependentUpon>PhoneForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\StudentGroupList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StudentGroupList.Designer.cs">
+      <DependentUpon>StudentGroupList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\StudentList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StudentList.Designer.cs">
+      <DependentUpon>StudentList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\StudentProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StudentProperties.Designer.cs">
+      <DependentUpon>StudentProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TeacherList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TeacherList.Designer.cs">
+      <DependentUpon>TeacherList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Net\ApiHelper.cs" />
+    <Compile Include="nubackRepos\AcademicDegreeRepo.cs" />
+    <Compile Include="nubackRepos\AcademicRankRepo.cs" />
+    <Compile Include="nubackRepos\EducationRepo.cs" />
+    <Compile Include="nubackRepos\ExperienceRepo.cs" />
+    <Compile Include="nubackRepos\FacultyRepo.cs" />
+    <Compile Include="nubackRepos\FacultyStudentGroupRepo.cs" />
+    <Compile Include="nubackRepos\PositionRepo.cs" />
+    <Compile Include="nubackRepos\StudentGroupRepo.cs" />
+    <Compile Include="nubackRepos\StudentRepo.cs" />
+    <Compile Include="nubackRepos\StudentStudentGroupRepo.cs" />
+    <Compile Include="nubackRepos\TeacherRepo.cs" />
+    <Compile Include="nubackRepos\UserPermissionRepo.cs" />
+    <Compile Include="StartupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StartupForm.Designer.cs">
+      <DependentUpon>StartupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HotKeyManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\PhoneItem.cs" />
+    <Compile Include="Views\StudentListView.cs" />
+    <Compile Include="Views\StudentView.cs" />
+    <EmbeddedResource Include="Forms\AuthForm.resx">
+      <DependentUpon>AuthForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FacultyList.resx">
+      <DependentUpon>FacultyList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PhoneForm.resx">
+      <DependentUpon>PhoneForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StudentGroupList.resx">
+      <DependentUpon>StudentGroupList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StudentProperties.resx">
+      <DependentUpon>StudentProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TeacherList.resx">
+      <DependentUpon>TeacherList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -62,7 +216,13 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="StartupForm.resx">
+      <DependentUpon>StartupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="nudata_TemporaryKey.pfx" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -75,6 +235,67 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ajax-loader.gif" />
+    <None Include="Resources\people.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="nuIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\732691.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\teacher1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\print.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\notes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\diff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\green_add_plus_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minus_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\phone.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\a-green-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bell.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\daily1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Login.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
