@@ -1,4 +1,6 @@
-﻿using nudata.DomainClasses.Main;
+﻿using nudata.AccessPps.AccessClasses;
+using nudata.AccessPps.PpsDataSetTableAdapters;
+using nudata.DomainClasses.Main;
 using nudata.nubackRepos;
 using nudata.Properties;
 using System;
@@ -8,6 +10,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static nudata.AccessPps.PpsDataSet;
 
 namespace nudata.Forms
 {
@@ -22,6 +25,8 @@ namespace nudata.Forms
         EducationRepo eduRepo;
         AcademicDegreeRepo adRepo;
         AcademicRankRepo arRepo;
+
+        Timer searchTimer;
 
         public TeacherList(string apiEndpoint)
         {
@@ -41,7 +46,31 @@ namespace nudata.Forms
             IntPtr pIcon = Resources.teacher.GetHicon();
             Icon = Icon.FromHandle(pIcon);
 
-            RefreshView((int)RefreshType.FullRefresh);            
+            RefreshView((int)RefreshType.FullRefresh);
+
+            searchTimer = new Timer();
+            searchTimer.Interval = 1000;
+            searchTimer.Tick += new EventHandler(searchTimer_Tick);
+        }
+
+        private void searchTimer_Tick(object sender, EventArgs e)
+        {
+            if (fioFilter.Focused)
+            {
+                var teachers = tRepo.all()
+                    .Where(t => (t.f + " " + t.i + " " + t.o).ToLower()
+                        .Contains(fioFilter.Text.ToLower()))
+                    .OrderBy(t => t.f)
+                    .ThenBy(t => t.i)
+                    .ThenBy(t => t.o)
+                    .ThenBy(t => t.birth_date)
+                    .ToList();
+
+                TeacherListView.DataSource = teachers;
+                FromatTeacherList();
+
+                searchTimer.Stop(); //No disposing required, just stop the timer.
+            }
         }
 
         private void RefreshView(int refreshType)
@@ -52,13 +81,7 @@ namespace nudata.Forms
                 teachersList = teachersList.OrderBy(t => t.f).ThenBy(t => t.i).ThenBy(t => t.o).ToList();
 
                 TeacherListView.DataSource = teachersList;
-
-                TeacherListView.Columns["id"].Visible = false;
-                TeacherListView.Columns["f"].Width = 100;
-                TeacherListView.Columns["i"].Width = 100;
-                TeacherListView.Columns["o"].Width = 100;
-                TeacherListView.Columns["phone"].Visible = false;
-                TeacherListView.Columns["birth_date"].Visible = false;
+                FromatTeacherList();
 
                 //TeacherListView.ClearSelection();
             }
@@ -66,6 +89,16 @@ namespace nudata.Forms
             {
                 //FillDicsiplinesList(true);
             }
+        }
+
+        private void FromatTeacherList()
+        {
+            TeacherListView.Columns["id"].Visible = false;
+            TeacherListView.Columns["f"].Width = 100;
+            TeacherListView.Columns["i"].Width = 100;
+            TeacherListView.Columns["o"].Width = 100;
+            TeacherListView.Columns["phone"].Visible = false;
+            TeacherListView.Columns["birth_date"].Visible = false;
         }
 
         private async void TeacherListView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -202,7 +235,7 @@ namespace nudata.Forms
 
         private void educationGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            var education = ((List<Education>)educationGridView.DataSource)[e.RowIndex];
+            var education = ((List<DomainClasses.Main.Education>)educationGridView.DataSource)[e.RowIndex];
 
             educationLevel.Text = education.level;
             educationSpeciality.Text = education.specialty;
@@ -398,7 +431,7 @@ namespace nudata.Forms
             }
             var teacher = ((List<Teacher>)TeacherListView.DataSource)[TeacherListView.SelectedCells[0].RowIndex];
 
-            var education = new Education();
+            var education = new DomainClasses.Main.Education();
 
             education.level = educationLevel.Text;
             education.specialty = educationSpeciality.Text;
@@ -439,7 +472,7 @@ namespace nudata.Forms
             {
                 return;
             }
-            var education = ((List<Education>)educationGridView.DataSource)[educationGridView.SelectedCells[0].RowIndex];
+            var education = ((List<DomainClasses.Main.Education>)educationGridView.DataSource)[educationGridView.SelectedCells[0].RowIndex];
 
             education.level = educationLevel.Text;
             education.specialty = educationSpeciality.Text;
@@ -463,7 +496,7 @@ namespace nudata.Forms
             {
                 return;
             }
-            var education = ((List<Education>)educationGridView.DataSource)[educationGridView.SelectedCells[0].RowIndex];
+            var education = ((List<DomainClasses.Main.Education>)educationGridView.DataSource)[educationGridView.SelectedCells[0].RowIndex];
 
             eduRepo.delete(education.id);
 
@@ -615,6 +648,270 @@ namespace nudata.Forms
             arRepo.delete(academicRank.id);
 
             UpdateAcademicRankList(teacher.id);
+        }
+
+        private void importAccessData_Click(object sender, EventArgs e)
+        {
+            // Person
+            var PersonList = new List<Person>();            
+            var personsData = new PersonsTableAdapter().GetData().Rows;
+            foreach (var person in personsData)
+            {
+                var row = (PersonsRow)person;
+                PersonList.Add(new Person {
+                    Person_ID = row.Person_ID,
+                    Person_FIO = row.Person_FIO
+                });
+            }
+
+            // Dolgnost
+            var DolgnostList = new List<Dolgnost>();
+            var dolgnostData = new DolgnostTableAdapter().GetData().Rows;
+            foreach (var dolgnost in dolgnostData)
+            {
+                var row = (DolgnostRow)dolgnost;
+                DolgnostList.Add(new Dolgnost
+                {
+                    Dolg_Person_ID = row.Dolg_Person_ID,
+                    DolgnostName = row.Dolgnost,
+                    Uslovie_ID = row.Uslovie,
+                    Prikaz = row.Prikaz,
+                    Pokonkursu = row.Pokonkursu.ToString(),
+                    Konkurs = row.Konkurs,
+                    KafID = row.KafID
+                });
+            }
+
+            // DolgnostUsl
+            var DolgUslList = new List<DolgUsl>();
+            var duData = new DolgUslTableAdapter().GetData().Rows;
+            foreach (var du in duData)
+            {
+                var row = (DolgUslRow)du;
+                DolgUslList.Add(new DolgUsl
+                {
+                    DolgUsl_ID = row.DolgUslovija_ID,
+                    DolgUsl_Desc = row.DolgUslovija_Desc,
+                    DolgUsl_Desc2 = row.DolgUslovija_Desc2
+                });
+            }
+
+            // Education
+            var EducationList = new List<AccessPps.AccessClasses.Education>();
+            var edData = new EducationTableAdapter().GetData().Rows;
+            foreach (var ed in edData)
+            {
+                var row = (EducationRow)ed;
+                EducationList.Add(new AccessPps.AccessClasses.Education
+                {
+                    Edu_Person_ID = row.Edu_Person_ID,
+                    Edu_Counter = row.Edu_Counter,
+                    Edu_Level = row.Edu_Level,
+                    Edu_Year = row.Edu_Year,
+                    Edu_Kval = row.Edu_Kval,
+                    Edu_Spec = row.Edu_Spec
+                });
+            }
+
+            // EduLevel
+            var EduLevelList = new List<AccessPps.AccessClasses.EduLevel>();
+            var elData = new EduLevelsTableAdapter().GetData().Rows;
+            foreach (var el in elData)
+            {
+                var row = (EduLevelsRow)el;
+                EduLevelList.Add(new EduLevel
+                {
+                    Edu_Level_ID = row.Edu_Level_ID,
+                    Edu_Level_Desc = row.Edu_Level_Disc
+                });
+            }
+
+            // Stage
+            var StageList = new List<Stage>();
+            var stData = new StageTableAdapter().GetData().Rows;
+            foreach (var st in stData)
+            {
+                var row = (StageRow)st;
+                StageList.Add(new Stage
+                {
+                    Stage_Person_ID = row.Stage_Person_ID,
+                    Stage_Typ_ID = row.Stage_Typ,
+                    Stage_Years = row.Stage_Years,
+                    Stage_Months = row.Stage_Months
+                });
+            }
+
+            // StageTyp
+            var StageTypList = new List<StageTyp>();
+            var sttData = new StageTypsTableAdapter().GetData().Rows;
+            foreach (var stt in sttData)
+            {
+                var row = (StageTypsRow)stt;
+                StageTypList.Add(new StageTyp
+                {
+                   StageTyp_ID = row.StageTyp_ID,
+                   StageTyp_Desc = row.StageTyp_Desc
+                });
+            }
+
+            // Zvanije
+            var ZvanijeList = new List<Zvanije>();
+            var zData = new ZvanijaTableAdapter().GetData().Rows;
+            foreach (var z in zData)
+            {
+                var row = (ZvanijaRow)z;
+                ZvanijeList.Add(new Zvanije
+                {
+                    Zvanije_Person_ID = row.Zvan_Person_ID,
+                    Zvanije_Counter = row.ZvanCounter,
+                    Zvanije_Typ_ID = row.Zvan_ZvanID
+                });
+            }
+
+            // ZvanTyp
+            var ZvanijeTypList = new List<ZvanijeTyp>();
+            var ztData = new ZvanTypsTableAdapter().GetData().Rows;
+            foreach (var zt in ztData)
+            {
+                var row = (ZvanTypsRow)zt;
+                ZvanijeTypList.Add(new ZvanijeTyp
+                {
+                    ZvanijeTyp_ID = row.ZvanTyp_ID,
+                    ZvanijeTyp_Desc = row.ZvanTyp_Desc
+                });
+            }
+
+            // Stepeni
+            var StepenList = new List<Stepen>();
+            var sData = new StepeniTableAdapter().GetData().Rows;
+            foreach (var s in sData)
+            {
+                var row = (StepeniRow)s;
+                StepenList.Add(new Stepen
+                {
+                    Step_Person_ID = row.Step_Person_ID,
+                    Step_Counter = row.Step_Counter,
+                    Step_TypID = row.Step_TypID,
+                    Step_Nayk = row.Step_Nauk
+                });
+            }
+
+            // StepTyps
+            var StepTypList = new List<StepTyp>();
+            var stypsData = new StepTypsTableAdapter().GetData().Rows;
+            foreach (var styp in stypsData)
+            {
+                var row = (StepTypsRow)styp;
+                StepTypList.Add(new StepTyp
+                {
+                    StepTyp_ID = row.StepTyp_ID,
+                    StepTyp_Desc = row.StepTyp_Desc
+                });
+            }
+
+            // StepNauki
+            var StepNaukiList = new List<StepNauki>();
+            var snData = new StepNaukiTableAdapter().GetData().Rows;
+            foreach (var sn in snData)
+            {
+                var row = (StepNaukiRow)sn;
+                StepNaukiList.Add(new StepNauki
+                {
+                    StepNayki_ID = row.StepNauki_ID,
+                    StepNayki_Full = row.StepNauki_Full,
+                    StepNayki_Short = row.StepNauki_Short
+                });
+            }
+
+            // Kaf
+            var KafList = new List<Kaf>();
+            var kData = new KafTableAdapter().GetData().Rows;
+            foreach (var k in kData)
+            {
+                var row = (KafRow)k;
+                KafList.Add(new Kaf
+                {
+                    Kaf_ID = row.Kaf_ID,
+                    Kaf_Im = row.Kaf_Im,
+                    Kaf_Rd = row.Kaf_Rd,
+                    Kaf_Src = row.Kaf_Src
+                });
+            }
+
+            var teachers = tRepo.all()
+                .OrderBy(t => t.f)
+                .ThenBy(t => t.i)
+                .ThenBy(t => t.o)
+                .ThenBy(t => t.birth_date)
+                .ToList();
+
+            var personTeacherIdDict = new Dictionary<int, int>();
+
+            for (int i = 0; i < teachers.Count; i++)
+            {
+                var teacher = teachers[i];
+
+                var p = PersonList.FirstOrDefault(per => per.Person_FIO == teacher.f + " " + teacher.i + " " + teacher.o);
+                if (p != null)
+                {
+                    personTeacherIdDict.Add(p.Person_ID, teacher.id);
+
+                    // Dolgnost
+                    var dolList = DolgnostList
+                        .Where(d => d.Dolg_Person_ID == p.Person_ID)
+                        .ToList();
+                    var positions = Position.FromAccessList(dolList, DolgUslList, KafList, teacher.id);
+                    foreach (var pos in positions)
+                    {
+                        pRepo.add(pos);
+                    }
+
+                    // Education
+                    var eduList = EducationList
+                        .Where(ed => ed.Edu_Person_ID == p.Person_ID)
+                        .ToList();
+                    var educations = DomainClasses.Main.Education.FromAccessList(eduList, EduLevelList, teacher.id);
+                    foreach (var education in educations)
+                    {
+                        eduRepo.add(education);
+                    }
+
+                    // Stage
+                    var stList = StageList
+                        .Where(st => st.Stage_Person_ID == p.Person_ID)
+                        .ToList();
+                    var experiences = Experience.FromAccessList(stList, StageTypList, teacher.id);
+                    foreach (var experience in experiences)
+                    {
+                        expRepo.add(experience);
+                    }
+
+                    // Zavinija
+                    var ZvanList = ZvanijeList
+                        .Where(zv => zv.Zvanije_Person_ID == p.Person_ID)
+                        .ToList();
+                    var academicRanks = AcademicRank.FromAccessList(ZvanList, ZvanijeTypList, teacher.id);
+                    foreach (var academicRank in academicRanks)
+                    {
+                        arRepo.add(academicRank);
+                    }
+
+                    //Steneni
+                    var StepList = StepenList
+                        .Where(st => st.Step_Person_ID == p.Person_ID)
+                        .ToList();
+                    var academicDegrees = AcademicDegree.FromAccessList(StepList, StepTypList, StepNaukiList, teacher.id);
+                    foreach (var academicDegree in academicDegrees)
+                    {
+                        adRepo.add(academicDegree);
+                    }
+                }                
+            }            
+        }
+
+        private void fioFilter_TextChanged(object sender, EventArgs e)
+        {
+            searchTimer.Start();
         }
     }
 }

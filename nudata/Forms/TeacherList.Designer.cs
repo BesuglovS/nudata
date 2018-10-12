@@ -121,6 +121,8 @@
             this.academicRankDate = new System.Windows.Forms.DateTimePicker();
             this.academicRankRank = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.fioFilter = new System.Windows.Forms.TextBox();
             this.LeftPanel.SuspendLayout();
             this.TeacherListPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TeacherListView)).BeginInit();
@@ -165,9 +167,9 @@
             // 
             this.TeacherListPanel.Controls.Add(this.TeacherListView);
             this.TeacherListPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TeacherListPanel.Location = new System.Drawing.Point(0, 270);
+            this.TeacherListPanel.Location = new System.Drawing.Point(0, 325);
             this.TeacherListPanel.Name = "TeacherListPanel";
-            this.TeacherListPanel.Size = new System.Drawing.Size(305, 507);
+            this.TeacherListPanel.Size = new System.Drawing.Size(305, 452);
             this.TeacherListPanel.TabIndex = 1;
             // 
             // TeacherListView
@@ -183,12 +185,14 @@
             this.TeacherListView.Name = "TeacherListView";
             this.TeacherListView.ReadOnly = true;
             this.TeacherListView.RowHeadersVisible = false;
-            this.TeacherListView.Size = new System.Drawing.Size(305, 507);
+            this.TeacherListView.Size = new System.Drawing.Size(305, 452);
             this.TeacherListView.TabIndex = 1;
             this.TeacherListView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.TeacherListView_CellClick);
             // 
             // TeacherControlsPanel
             // 
+            this.TeacherControlsPanel.Controls.Add(this.fioFilter);
+            this.TeacherControlsPanel.Controls.Add(this.label26);
             this.TeacherControlsPanel.Controls.Add(this.teacherO);
             this.TeacherControlsPanel.Controls.Add(this.label5);
             this.TeacherControlsPanel.Controls.Add(this.teacherI);
@@ -205,7 +209,7 @@
             this.TeacherControlsPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.TeacherControlsPanel.Location = new System.Drawing.Point(0, 0);
             this.TeacherControlsPanel.Name = "TeacherControlsPanel";
-            this.TeacherControlsPanel.Size = new System.Drawing.Size(305, 270);
+            this.TeacherControlsPanel.Size = new System.Drawing.Size(305, 325);
             this.TeacherControlsPanel.TabIndex = 0;
             // 
             // teacherO
@@ -294,7 +298,7 @@
             // 
             // add
             // 
-            this.add.Location = new System.Drawing.Point(16, 221);
+            this.add.Location = new System.Drawing.Point(15, 221);
             this.add.Name = "add";
             this.add.Size = new System.Drawing.Size(85, 23);
             this.add.TabIndex = 5;
@@ -1067,6 +1071,24 @@
             this.label25.TabIndex = 19;
             this.label25.Text = "Учёное звание";
             // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(12, 253);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(47, 13);
+            this.label26.TabIndex = 39;
+            this.label26.Text = "Фильтр";
+            // 
+            // fioFilter
+            // 
+            this.fioFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.fioFilter.Location = new System.Drawing.Point(15, 269);
+            this.fioFilter.Name = "fioFilter";
+            this.fioFilter.Size = new System.Drawing.Size(267, 44);
+            this.fioFilter.TabIndex = 40;
+            this.fioFilter.TextChanged += new System.EventHandler(this.fioFilter_TextChanged);
+            // 
             // TeacherList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1210,5 +1232,7 @@
         private System.Windows.Forms.DateTimePicker academicRankDate;
         private System.Windows.Forms.TextBox academicRankRank;
         private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.TextBox fioFilter;
+        private System.Windows.Forms.Label label26;
     }
 }

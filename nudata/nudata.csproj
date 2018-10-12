@@ -26,7 +26,7 @@
     <InstallUrl>http://wiki.nayanova.edu/nudata/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>8</ApplicationRevision>
+    <ApplicationRevision>9</ApplicationRevision>
     <ApplicationVersion>0.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -80,6 +80,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessPps\AccessClasses\Dolgnost.cs" />
+    <Compile Include="AccessPps\AccessClasses\DolgUsl.cs" />
+    <Compile Include="AccessPps\AccessClasses\Education.cs" />
+    <Compile Include="AccessPps\AccessClasses\EduLevel.cs" />
+    <Compile Include="AccessPps\AccessClasses\Kaf.cs" />
+    <Compile Include="AccessPps\AccessClasses\Person.cs" />
+    <Compile Include="AccessPps\AccessClasses\Stage.cs" />
+    <Compile Include="AccessPps\AccessClasses\StageTyp.cs" />
+    <Compile Include="AccessPps\AccessClasses\Stepen.cs" />
+    <Compile Include="AccessPps\AccessClasses\StepNauki.cs" />
+    <Compile Include="AccessPps\AccessClasses\StepTyp.cs" />
+    <Compile Include="AccessPps\AccessClasses\Zvanije.cs" />
+    <Compile Include="AccessPps\AccessClasses\ZvanijeTyp.cs" />
+    <Compile Include="AccessPps\PpsDataSet.cs">
+      <DependentUpon>PpsDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Core\AppPermissions.cs" />
     <Compile Include="Core\PhoneType.cs" />
     <Compile Include="DomainClasses\Extra\StudentDetailsMode.cs" />
@@ -178,6 +194,11 @@
     <Compile Include="nubackRepos\StudentStudentGroupRepo.cs" />
     <Compile Include="nubackRepos\TeacherRepo.cs" />
     <Compile Include="nubackRepos\UserPermissionRepo.cs" />
+    <Compile Include="AccessPps\PpsDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PpsDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="StartupForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -223,6 +244,17 @@
     </EmbeddedResource>
     <None Include="nudata_TemporaryKey.pfx" />
     <None Include="packages.config" />
+    <None Include="AccessPps\PpsDataSet.xsc">
+      <DependentUpon>PpsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="AccessPps\PpsDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PpsDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="AccessPps\PpsDataSet.xss">
+      <DependentUpon>PpsDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -297,5 +329,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
