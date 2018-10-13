@@ -26,7 +26,7 @@
     <InstallUrl>http://wiki.nayanova.edu/nudata/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>9</ApplicationRevision>
+    <ApplicationRevision>10</ApplicationRevision>
     <ApplicationVersion>0.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -98,10 +98,13 @@
     </Compile>
     <Compile Include="Core\AppPermissions.cs" />
     <Compile Include="Core\PhoneType.cs" />
+    <Compile Include="DomainClasses\Extra\DepartmentHeadWithTeacherFio.cs" />
     <Compile Include="DomainClasses\Extra\StudentDetailsMode.cs" />
     <Compile Include="DomainClasses\Extra\UserPermission.cs" />
     <Compile Include="DomainClasses\Main\AcademicDegree.cs" />
     <Compile Include="DomainClasses\Main\AcademicRank.cs" />
+    <Compile Include="DomainClasses\Main\Department.cs" />
+    <Compile Include="DomainClasses\Main\DepartmentHead.cs" />
     <Compile Include="DomainClasses\Main\Education.cs" />
     <Compile Include="DomainClasses\Main\Experience.cs" />
     <Compile Include="DomainClasses\Main\Faculty.cs" />
@@ -145,6 +148,12 @@
     <Compile Include="Forms\AuthForm.Designer.cs">
       <DependentUpon>AuthForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\DepartmentList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DepartmentList.Designer.cs">
+      <DependentUpon>DepartmentList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FacultyList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -184,6 +193,8 @@
     <Compile Include="Net\ApiHelper.cs" />
     <Compile Include="nubackRepos\AcademicDegreeRepo.cs" />
     <Compile Include="nubackRepos\AcademicRankRepo.cs" />
+    <Compile Include="nubackRepos\DepartmentHeadRepo.cs" />
+    <Compile Include="nubackRepos\DepartmentRepo.cs" />
     <Compile Include="nubackRepos\EducationRepo.cs" />
     <Compile Include="nubackRepos\ExperienceRepo.cs" />
     <Compile Include="nubackRepos\FacultyRepo.cs" />
@@ -211,8 +222,12 @@
     <Compile Include="Views\PhoneItem.cs" />
     <Compile Include="Views\StudentListView.cs" />
     <Compile Include="Views\StudentView.cs" />
+    <Compile Include="Views\TeacherView.cs" />
     <EmbeddedResource Include="Forms\AuthForm.resx">
       <DependentUpon>AuthForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DepartmentList.resx">
+      <DependentUpon>DepartmentList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FacultyList.resx">
       <DependentUpon>FacultyList.cs</DependentUpon>
@@ -329,6 +344,11 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\dept.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dept.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

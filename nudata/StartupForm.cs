@@ -36,6 +36,9 @@ namespace nudata
         bool _phoneFormOpened;
         public PhoneForm PhoneForm;
 
+        bool _departmentFormOpened;
+        public DepartmentList DepartmentForm;
+
         public StartupForm()
         {
             InitializeComponent();
@@ -54,6 +57,9 @@ namespace nudata
 
             // Телефоны - Alt-P
             HotKeyManager.RegisterHotKey(Keys.P, (uint)KeyModifiers.Alt);
+
+            // Кафедры - Alt-D
+            HotKeyManager.RegisterHotKey(Keys.D, (uint)KeyModifiers.Alt);
 
             HotKeyManager.HotKeyPressed += ManageHotKeys;
 
@@ -92,6 +98,11 @@ namespace nudata
                 if (e.Key == Keys.P)
                 {
                     ShowPhoneForm();
+                }
+
+                if (e.Key == Keys.D)
+                {
+                    ShowDepartmentForm();
                 }
             }
 
@@ -267,6 +278,33 @@ namespace nudata
         private void телефоныToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowPhoneForm();
+        }
+
+        private void кафедрыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowDepartmentForm();
+        }
+
+        private void ShowDepartmentForm()
+        {
+            if (!AppPermissions.Check("DepartmentForm"))
+            {
+                MessageBox.Show("У вас нет разрешения на использование этой части приложения.");
+
+                return;
+            }
+
+            if (_departmentFormOpened)
+            {
+                DepartmentForm.Activate();
+                DepartmentForm.Focus();
+                return;
+            }
+
+            DepartmentForm = new DepartmentList(ApiEndpoint);
+            _departmentFormOpened = true;
+            DepartmentForm.Show();
+            _departmentFormOpened = false;
         }
     }
 }
