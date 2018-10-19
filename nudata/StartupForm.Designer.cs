@@ -32,9 +32,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartupForm));
             this.trayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.trayIconMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.телефоныToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.кафедрыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.преподавателиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.телефоныToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.контингентAltSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.группыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.факультетыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,8 +44,7 @@
             this.аутентификацияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
+            this.заметкиAltNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trayIconMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,6 +58,7 @@
             // 
             this.trayIconMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.телефоныToolStripMenuItem,
+            this.заметкиAltNToolStripMenuItem,
             this.toolStripMenuItem3,
             this.кафедрыToolStripMenuItem,
             this.преподавателиToolStripMenuItem,
@@ -69,7 +71,20 @@
             this.toolStripMenuItem1,
             this.выходToolStripMenuItem});
             this.trayIconMenu.Name = "trayIconMenu";
-            this.trayIconMenu.Size = new System.Drawing.Size(241, 204);
+            this.trayIconMenu.Size = new System.Drawing.Size(241, 248);
+            // 
+            // телефоныToolStripMenuItem
+            // 
+            this.телефоныToolStripMenuItem.Image = global::nudata.Properties.Resources.phone;
+            this.телефоныToolStripMenuItem.Name = "телефоныToolStripMenuItem";
+            this.телефоныToolStripMenuItem.Size = new System.Drawing.Size(240, 22);
+            this.телефоныToolStripMenuItem.Text = "Телефоны (Alt+P)";
+            this.телефоныToolStripMenuItem.Click += new System.EventHandler(this.телефоныToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(237, 6);
             // 
             // кафедрыToolStripMenuItem
             // 
@@ -87,13 +102,10 @@
             this.преподавателиToolStripMenuItem.Text = "Преподаватели (Ctrl+Alt+T)";
             this.преподавателиToolStripMenuItem.Click += new System.EventHandler(this.преподавателиToolStripMenuItem_Click);
             // 
-            // телефоныToolStripMenuItem
+            // toolStripMenuItem4
             // 
-            this.телефоныToolStripMenuItem.Image = global::nudata.Properties.Resources.phone;
-            this.телефоныToolStripMenuItem.Name = "телефоныToolStripMenuItem";
-            this.телефоныToolStripMenuItem.Size = new System.Drawing.Size(240, 22);
-            this.телефоныToolStripMenuItem.Text = "Телефоны (Alt+P)";
-            this.телефоныToolStripMenuItem.Click += new System.EventHandler(this.телефоныToolStripMenuItem_Click);
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(237, 6);
             // 
             // контингентAltSToolStripMenuItem
             // 
@@ -145,15 +157,13 @@
             this.выходToolStripMenuItem.Text = "Выход";
             this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
             // 
-            // toolStripMenuItem3
+            // заметкиAltNToolStripMenuItem
             // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(237, 6);
-            // 
-            // toolStripMenuItem4
-            // 
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(237, 6);
+            this.заметкиAltNToolStripMenuItem.Image = global::nudata.Properties.Resources.notes;
+            this.заметкиAltNToolStripMenuItem.Name = "заметкиAltNToolStripMenuItem";
+            this.заметкиAltNToolStripMenuItem.Size = new System.Drawing.Size(240, 22);
+            this.заметкиAltNToolStripMenuItem.Text = "Заметки (Alt+N)";
+            this.заметкиAltNToolStripMenuItem.Click += new System.EventHandler(this.заметкиAltNToolStripMenuItem_Click);
             // 
             // StartupForm
             // 
@@ -183,6 +193,7 @@
         private System.Windows.Forms.ToolStripMenuItem кафедрыToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem заметкиAltNToolStripMenuItem;
     }
 }
 

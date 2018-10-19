@@ -39,6 +39,9 @@ namespace nudata
         bool _departmentFormOpened;
         public DepartmentList DepartmentForm;
 
+        bool _noteFormOpened;
+        public NoteList NoteForm;
+
         public StartupForm()
         {
             InitializeComponent();
@@ -60,6 +63,9 @@ namespace nudata
 
             // Кафедры - Alt-D
             HotKeyManager.RegisterHotKey(Keys.D, (uint)KeyModifiers.Alt);
+
+            // Заметки - Alt-N
+            HotKeyManager.RegisterHotKey(Keys.N, (uint)KeyModifiers.Alt);
 
             HotKeyManager.HotKeyPressed += ManageHotKeys;
 
@@ -103,6 +109,11 @@ namespace nudata
                 if (e.Key == Keys.D)
                 {
                     ShowDepartmentForm();
+                }
+
+                if (e.Key == Keys.N)
+                {
+                    ShowNoteForm();
                 }
             }
 
@@ -305,6 +316,33 @@ namespace nudata
             _departmentFormOpened = true;
             DepartmentForm.Show();
             _departmentFormOpened = false;
+        }
+
+        private void заметкиAltNToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowNoteForm();
+        }
+
+        private void ShowNoteForm()
+        {
+            if (!AppPermissions.Check("NoteForm"))
+            {
+                MessageBox.Show("У вас нет разрешения на использование этой части приложения.");
+
+                return;
+            }
+
+            if (_noteFormOpened)
+            {
+                NoteForm.Activate();
+                NoteForm.Focus();
+                return;
+            }
+
+            NoteForm = new NoteList(ApiEndpoint);
+            _noteFormOpened = true;
+            NoteForm.Show();
+            _noteFormOpened = false;
         }
     }
 }
