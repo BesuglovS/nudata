@@ -26,7 +26,7 @@
     <InstallUrl>http://wiki.nayanova.edu/nudata/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>11</ApplicationRevision>
+    <ApplicationRevision>12</ApplicationRevision>
     <ApplicationVersion>0.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -113,6 +113,9 @@
     <Compile Include="DomainClasses\Main\Experience.cs" />
     <Compile Include="DomainClasses\Main\Faculty.cs" />
     <Compile Include="DomainClasses\Main\FacultyStudentGroup.cs" />
+    <Compile Include="DomainClasses\Main\LearningPlan.cs" />
+    <Compile Include="DomainClasses\Main\LearningPlanDiscipline.cs" />
+    <Compile Include="DomainClasses\Main\LearningPlanDisciplineSemester.cs" />
     <Compile Include="DomainClasses\Main\Note.cs" />
     <Compile Include="DomainClasses\Main\Position.cs" />
     <Compile Include="DomainClasses\Main\Student.cs" />
@@ -165,6 +168,12 @@
     <Compile Include="Forms\FacultyList.Designer.cs">
       <DependentUpon>FacultyList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\LearningPlanList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LearningPlanList.Designer.cs">
+      <DependentUpon>LearningPlanList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\NoteList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -210,6 +219,9 @@
     <Compile Include="nubackRepos\ExperienceRepo.cs" />
     <Compile Include="nubackRepos\FacultyRepo.cs" />
     <Compile Include="nubackRepos\FacultyStudentGroupRepo.cs" />
+    <Compile Include="nubackRepos\LearningPlanDisciplineRepo.cs" />
+    <Compile Include="nubackRepos\LearningPlanDisciplineSemesterRepo.cs" />
+    <Compile Include="nubackRepos\LearningPlanRepo.cs" />
     <Compile Include="nubackRepos\NoteRepo.cs" />
     <Compile Include="nubackRepos\PositionRepo.cs" />
     <Compile Include="nubackRepos\StudentGroupRepo.cs" />
@@ -243,6 +255,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FacultyList.resx">
       <DependentUpon>FacultyList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LearningPlanList.resx">
+      <DependentUpon>LearningPlanList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\NoteList.resx">
       <DependentUpon>NoteList.cs</DependentUpon>
@@ -364,6 +379,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\dept.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\applebooks.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

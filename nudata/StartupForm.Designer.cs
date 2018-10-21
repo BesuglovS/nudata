@@ -33,6 +33,7 @@
             this.trayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.trayIconMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.телефоныToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.заметкиAltNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.кафедрыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.преподавателиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,7 +45,8 @@
             this.аутентификацияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.заметкиAltNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.учебныеПланыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.trayIconMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,6 +59,8 @@
             // trayIconMenu
             // 
             this.trayIconMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.учебныеПланыToolStripMenuItem,
+            this.toolStripMenuItem5,
             this.телефоныToolStripMenuItem,
             this.заметкиAltNToolStripMenuItem,
             this.toolStripMenuItem3,
@@ -71,7 +75,7 @@
             this.toolStripMenuItem1,
             this.выходToolStripMenuItem});
             this.trayIconMenu.Name = "trayIconMenu";
-            this.trayIconMenu.Size = new System.Drawing.Size(241, 248);
+            this.trayIconMenu.Size = new System.Drawing.Size(241, 276);
             // 
             // телефоныToolStripMenuItem
             // 
@@ -80,6 +84,14 @@
             this.телефоныToolStripMenuItem.Size = new System.Drawing.Size(240, 22);
             this.телефоныToolStripMenuItem.Text = "Телефоны (Alt+P)";
             this.телефоныToolStripMenuItem.Click += new System.EventHandler(this.телефоныToolStripMenuItem_Click);
+            // 
+            // заметкиAltNToolStripMenuItem
+            // 
+            this.заметкиAltNToolStripMenuItem.Image = global::nudata.Properties.Resources.notes;
+            this.заметкиAltNToolStripMenuItem.Name = "заметкиAltNToolStripMenuItem";
+            this.заметкиAltNToolStripMenuItem.Size = new System.Drawing.Size(240, 22);
+            this.заметкиAltNToolStripMenuItem.Text = "Заметки (Alt+N)";
+            this.заметкиAltNToolStripMenuItem.Click += new System.EventHandler(this.заметкиAltNToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
@@ -157,13 +169,18 @@
             this.выходToolStripMenuItem.Text = "Выход";
             this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
             // 
-            // заметкиAltNToolStripMenuItem
+            // учебныеПланыToolStripMenuItem
             // 
-            this.заметкиAltNToolStripMenuItem.Image = global::nudata.Properties.Resources.notes;
-            this.заметкиAltNToolStripMenuItem.Name = "заметкиAltNToolStripMenuItem";
-            this.заметкиAltNToolStripMenuItem.Size = new System.Drawing.Size(240, 22);
-            this.заметкиAltNToolStripMenuItem.Text = "Заметки (Alt+N)";
-            this.заметкиAltNToolStripMenuItem.Click += new System.EventHandler(this.заметкиAltNToolStripMenuItem_Click);
+            this.учебныеПланыToolStripMenuItem.Image = global::nudata.Properties.Resources.applebooks;
+            this.учебныеПланыToolStripMenuItem.Name = "учебныеПланыToolStripMenuItem";
+            this.учебныеПланыToolStripMenuItem.Size = new System.Drawing.Size(240, 22);
+            this.учебныеПланыToolStripMenuItem.Text = "Учебные планы (Alt+L)";
+            this.учебныеПланыToolStripMenuItem.Click += new System.EventHandler(this.учебныеПланыToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(237, 6);
             // 
             // StartupForm
             // 
@@ -194,6 +211,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem заметкиAltNToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem учебныеПланыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
     }
 }
 

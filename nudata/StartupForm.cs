@@ -42,6 +42,9 @@ namespace nudata
         bool _noteFormOpened;
         public NoteList NoteForm;
 
+        bool _learningPlanFormOpened;
+        public LearningPlanList LearningPlanForm;
+
         public StartupForm()
         {
             InitializeComponent();
@@ -66,6 +69,9 @@ namespace nudata
 
             // Заметки - Alt-N
             HotKeyManager.RegisterHotKey(Keys.N, (uint)KeyModifiers.Alt);
+
+            // Учебные планы - Alt-L
+            HotKeyManager.RegisterHotKey(Keys.L, (uint)KeyModifiers.Alt);
 
             HotKeyManager.HotKeyPressed += ManageHotKeys;
 
@@ -114,6 +120,11 @@ namespace nudata
                 if (e.Key == Keys.N)
                 {
                     ShowNoteForm();
+                }
+
+                if (e.Key == Keys.L)
+                {
+                    ShowLearningPlanForm();
                 }
             }
 
@@ -343,6 +354,33 @@ namespace nudata
             _noteFormOpened = true;
             NoteForm.Show();
             _noteFormOpened = false;
+        }
+
+        private void учебныеПланыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowLearningPlanForm();
+        }
+
+        private void ShowLearningPlanForm()
+        {
+            if (!AppPermissions.Check("LearningPlanForm"))
+            {
+                MessageBox.Show("У вас нет разрешения на использование этой части приложения.");
+
+                return;
+            }
+
+            if (_learningPlanFormOpened)
+            {
+                LearningPlanForm.Activate();
+                NoteForm.Focus();
+                return;
+            }
+
+            LearningPlanForm = new LearningPlanList(ApiEndpoint);
+            _learningPlanFormOpened = true;
+            LearningPlanForm.Show();
+            _learningPlanFormOpened = false;
         }
     }
 }

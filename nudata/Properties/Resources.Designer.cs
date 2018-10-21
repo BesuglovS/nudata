@@ -63,6 +63,16 @@ namespace nudata.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap applebooks {
+            get {
+                object obj = ResourceManager.GetObject("applebooks", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap AuditoriumChanged {
             get {
                 object obj = ResourceManager.GetObject("AuditoriumChanged", resourceCulture);
