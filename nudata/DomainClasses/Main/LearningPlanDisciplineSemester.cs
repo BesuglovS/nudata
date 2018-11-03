@@ -22,6 +22,9 @@ namespace nudata.DomainClasses.Main
         public bool course_project { get; set; }
         public bool course_task { get; set; }
         public bool control_task { get; set; }
+        public bool referat { get; set; }
+        public bool essay { get; set; }
+        public int individual_hours { get; set; }
         public int learning_plan_discipline_id { get; set; }
     }
 }

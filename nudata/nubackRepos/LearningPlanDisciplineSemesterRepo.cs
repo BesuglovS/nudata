@@ -55,6 +55,9 @@ namespace nudata.nubackRepos
                     { "course_project", LearningPlanDisciplineSemester.course_project ? "1" : "0" },
                     { "course_task", LearningPlanDisciplineSemester.course_task ? "1" : "0" },
                     { "control_task", LearningPlanDisciplineSemester.control_task ? "1" : "0" },
+                    { "referat", LearningPlanDisciplineSemester.referat ? "1" : "0" },
+                    { "essay", LearningPlanDisciplineSemester.essay ? "1" : "0" },
+                    { "individual_hours", LearningPlanDisciplineSemester.individual_hours.ToString() },
                     { "learning_plan_discipline_id", LearningPlanDisciplineSemester.learning_plan_discipline_id.ToString() },
                 });
 
@@ -98,6 +101,9 @@ namespace nudata.nubackRepos
                     { "course_project", LearningPlanDisciplineSemester.course_project ? "1" : "0" },
                     { "course_task", LearningPlanDisciplineSemester.course_task ? "1" : "0" },
                     { "control_task", LearningPlanDisciplineSemester.control_task ? "1" : "0" },
+                    { "referat", LearningPlanDisciplineSemester.referat ? "1" : "0" },
+                    { "essay", LearningPlanDisciplineSemester.essay ? "1" : "0" },
+                    { "individual_hours", LearningPlanDisciplineSemester.individual_hours.ToString() },
                     { "learning_plan_discipline_id", LearningPlanDisciplineSemester.learning_plan_discipline_id.ToString() }
                 });
 
