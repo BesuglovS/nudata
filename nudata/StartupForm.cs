@@ -45,6 +45,9 @@ namespace nudata
         bool _learningPlanFormOpened;
         public LearningPlanList LearningPlanForm;
 
+        bool _studentLearningPlanOpened;
+        public StudentLearningPlanList StudentLearningPlanForm;
+
         public StartupForm()
         {
             InitializeComponent();
@@ -72,6 +75,9 @@ namespace nudata
 
             // Учебные планы - Alt-L
             HotKeyManager.RegisterHotKey(Keys.L, (uint)KeyModifiers.Alt);
+
+            // Учебные планы студентов - Ctrl-Alt-L
+            HotKeyManager.RegisterHotKey(Keys.L, (uint)(KeyModifiers.Control | KeyModifiers.Alt));
 
             HotKeyManager.HotKeyPressed += ManageHotKeys;
 
@@ -125,7 +131,7 @@ namespace nudata
                 if (e.Key == Keys.L)
                 {
                     ShowLearningPlanForm();
-                }
+                }                
             }
 
             if (e.Modifiers == (KeyModifiers.Control | KeyModifiers.Alt))
@@ -139,7 +145,34 @@ namespace nudata
                 {
                     ShowTeacherForm();
                 }
+
+                if (e.Key == Keys.L)
+                {
+                    ShowStudentLearningPlanForm();
+                }
             }
+        }
+
+        private void ShowStudentLearningPlanForm()
+        {
+            if (!AppPermissions.Check("StudentLearningPlanList"))
+            {
+                MessageBox.Show("У вас нет разрешения на использование этой части приложения.");
+
+                return;
+            }
+
+            if (_studentLearningPlanOpened)
+            {
+                StudentLearningPlanForm.Activate();
+                StudentLearningPlanForm.Focus();
+                return;
+            }
+
+            StudentLearningPlanForm = new StudentLearningPlanList(ApiEndpoint);
+            _studentLearningPlanOpened = true;
+            StudentLearningPlanForm.Show();
+            _studentLearningPlanOpened = false;
         }
 
         private void ShowPhoneForm()
@@ -381,6 +414,11 @@ namespace nudata
             _learningPlanFormOpened = true;
             LearningPlanForm.Show();
             _learningPlanFormOpened = false;
+        }
+
+        private void учебныеПланыСтудентовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowStudentLearningPlanForm();
         }
     }
 }

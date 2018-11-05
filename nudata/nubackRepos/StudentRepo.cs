@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using nudata.Core;
 using nudata.DomainClasses.Main;
 using nudata.Net;
 using System;
@@ -60,6 +61,24 @@ namespace nudata.nubackRepos
             try
             {
                 result = JsonConvert.DeserializeObject<List<StudentGroup>>(StringResult);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+            return result;
+        }
+
+        public List<LearningPlanWithPeriod> learningPlans(int studentId)
+        {
+            var StringResult = ApiHelper.Get(ApiEndpoint + "/student/learningPlans/" + studentId.ToString());
+
+            List<LearningPlanWithPeriod> result;
+
+            try
+            {
+                result = JsonConvert.DeserializeObject<List<LearningPlanWithPeriod>>(StringResult);
             }
             catch (Exception)
             {
