@@ -42,6 +42,7 @@ namespace nudata.nubackRepos
                 ApiHelper.Post(ApiEndpoint + "/learningPlan/add",
                 new Dictionary<string, string>
                 {
+                    { "name", LearningPlan.name },
                     { "speciality_code", LearningPlan.speciality_code },
                     { "speciality_name", LearningPlan.speciality_name },
                     { "profile", LearningPlan.profile },
@@ -77,6 +78,7 @@ namespace nudata.nubackRepos
                 ApiHelper.Post(ApiEndpoint + "/learningPlan/" + id.ToString(),
                 new Dictionary<string, string>
                 {
+                    { "name", LearningPlan.name },
                     { "speciality_code", LearningPlan.speciality_code },
                     { "speciality_name", LearningPlan.speciality_name },
                     { "profile", LearningPlan.profile },

@@ -39,8 +39,10 @@ namespace nudata.Forms
 
             LearningPlanGridView.DataSource = LearningPlans;
             LearningPlanGridView.Columns["id"].Visible = false;
-            LearningPlanGridView.Columns["speciality_code"].HeaderText = "Код направления/специальности";
-            LearningPlanGridView.Columns["speciality_name"].HeaderText = "Название направления/специальности";
+            LearningPlanGridView.Columns["name"].HeaderText = "Название";
+            LearningPlanGridView.Columns["speciality_code"].HeaderText = "Код направления / специальности";
+            LearningPlanGridView.Columns["speciality_code"].Width = 60;
+            LearningPlanGridView.Columns["speciality_name"].HeaderText = "Название направления / специальности";
             LearningPlanGridView.Columns["profile"].Visible = false;
             LearningPlanGridView.Columns["starting_year"].HeaderText = "Год начала обучения";
             LearningPlanGridView.Columns["education_standard"].Visible = false;
@@ -76,6 +78,7 @@ namespace nudata.Forms
 
             var newLearningPlan = new LearningPlan()
             {
+                name = lpName.Text,
                 speciality_code = lpSpecialityCode.Text,
                 speciality_name = lpSpecialityName.Text,
                 profile = lpProfile.Text,
@@ -101,7 +104,7 @@ namespace nudata.Forms
 
                 var plan = ((List<LearningPlan>)LearningPlanGridView.DataSource)[LearningPlanGridView.SelectedCells[0].RowIndex];
 
-
+                plan.name = lpName.Text;
                 plan.speciality_code = lpSpecialityCode.Text;
                 plan.speciality_name = lpSpecialityName.Text;
                 plan.profile = lpProfile.Text;
@@ -131,6 +134,7 @@ namespace nudata.Forms
         {
             var plan = ((List<LearningPlan>)LearningPlanGridView.DataSource)[LearningPlanGridView.SelectedCells[0].RowIndex];
 
+            lpName.Text = plan.name;
             lpSpecialityCode.Text = plan.speciality_code;
             lpSpecialityName.Text = plan.speciality_name;
             lpProfile.Text = plan.profile;

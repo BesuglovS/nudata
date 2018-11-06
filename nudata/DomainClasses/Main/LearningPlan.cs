@@ -9,6 +9,7 @@ namespace nudata.DomainClasses.Main
     public class LearningPlan
     {
         public int id { get; set; }
+        public string name { get; set; }
         public string speciality_code { get; set; }
         public string speciality_name { get; set; }
         public string profile { get; set; }

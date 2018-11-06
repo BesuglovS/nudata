@@ -52,6 +52,10 @@
             this.disciplineSemestersViewPanel = new System.Windows.Forms.Panel();
             this.DisciplineSemestersDataGrid = new System.Windows.Forms.DataGridView();
             this.disciplineSemestersControlsPanel = new System.Windows.Forms.Panel();
+            this.lpdsIndividualHours = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.lpdsEssay = new System.Windows.Forms.CheckBox();
+            this.lpdsReferat = new System.Windows.Forms.CheckBox();
             this.removeLPDS = new System.Windows.Forms.Button();
             this.updateLPDS = new System.Windows.Forms.Button();
             this.addLPDS = new System.Windows.Forms.Button();
@@ -79,6 +83,10 @@
             this.disciplinesViewPanel = new System.Windows.Forms.Panel();
             this.DisciplinesDataGrid = new System.Windows.Forms.DataGridView();
             this.disciplineControlsPanel = new System.Windows.Forms.Panel();
+            this.lawDM = new System.Windows.Forms.CheckBox();
+            this.EssayExists = new System.Windows.Forms.CheckBox();
+            this.importXLSPlanSpec = new System.Windows.Forms.Button();
+            this.importXLSPlanMag = new System.Windows.Forms.Button();
             this.ControlTaskExists = new System.Windows.Forms.CheckBox();
             this.importXLSPlanDisciplines = new System.Windows.Forms.Button();
             this.removeLPD = new System.Windows.Forms.Button();
@@ -99,14 +107,8 @@
             this.lpdCode = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.openXmlFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.importXLSPlanMag = new System.Windows.Forms.Button();
-            this.importXLSPlanSpec = new System.Windows.Forms.Button();
-            this.lpdsReferat = new System.Windows.Forms.CheckBox();
-            this.EssayExists = new System.Windows.Forms.CheckBox();
-            this.lpdsEssay = new System.Windows.Forms.CheckBox();
-            this.lawDM = new System.Windows.Forms.CheckBox();
-            this.lpdsIndividualHours = new System.Windows.Forms.TextBox();
-            this.label21 = new System.Windows.Forms.Label();
+            this.lpName = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
             this.LeftPanel.SuspendLayout();
             this.leftBottomPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LearningPlanGridView)).BeginInit();
@@ -136,9 +138,9 @@
             // 
             this.leftBottomPanel.Controls.Add(this.LearningPlanGridView);
             this.leftBottomPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.leftBottomPanel.Location = new System.Drawing.Point(0, 292);
+            this.leftBottomPanel.Location = new System.Drawing.Point(0, 342);
             this.leftBottomPanel.Name = "leftBottomPanel";
-            this.leftBottomPanel.Size = new System.Drawing.Size(360, 492);
+            this.leftBottomPanel.Size = new System.Drawing.Size(360, 442);
             this.leftBottomPanel.TabIndex = 1;
             // 
             // LearningPlanGridView
@@ -149,12 +151,14 @@
             this.LearningPlanGridView.Name = "LearningPlanGridView";
             this.LearningPlanGridView.ReadOnly = true;
             this.LearningPlanGridView.RowHeadersVisible = false;
-            this.LearningPlanGridView.Size = new System.Drawing.Size(360, 492);
+            this.LearningPlanGridView.Size = new System.Drawing.Size(360, 442);
             this.LearningPlanGridView.TabIndex = 0;
             this.LearningPlanGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.LearningPlanGridView_CellClick);
             // 
             // leftTopPanel
             // 
+            this.leftTopPanel.Controls.Add(this.lpName);
+            this.leftTopPanel.Controls.Add(this.label22);
             this.leftTopPanel.Controls.Add(this.removeLP);
             this.leftTopPanel.Controls.Add(this.updateLP);
             this.leftTopPanel.Controls.Add(this.addLP);
@@ -173,12 +177,12 @@
             this.leftTopPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.leftTopPanel.Location = new System.Drawing.Point(0, 0);
             this.leftTopPanel.Name = "leftTopPanel";
-            this.leftTopPanel.Size = new System.Drawing.Size(360, 292);
+            this.leftTopPanel.Size = new System.Drawing.Size(360, 342);
             this.leftTopPanel.TabIndex = 0;
             // 
             // removeLP
             // 
-            this.removeLP.Location = new System.Drawing.Point(168, 247);
+            this.removeLP.Location = new System.Drawing.Point(168, 288);
             this.removeLP.Name = "removeLP";
             this.removeLP.Size = new System.Drawing.Size(75, 23);
             this.removeLP.TabIndex = 26;
@@ -188,7 +192,7 @@
             // 
             // updateLP
             // 
-            this.updateLP.Location = new System.Drawing.Point(87, 247);
+            this.updateLP.Location = new System.Drawing.Point(87, 288);
             this.updateLP.Name = "updateLP";
             this.updateLP.Size = new System.Drawing.Size(75, 23);
             this.updateLP.TabIndex = 25;
@@ -198,7 +202,7 @@
             // 
             // addLP
             // 
-            this.addLP.Location = new System.Drawing.Point(6, 247);
+            this.addLP.Location = new System.Drawing.Point(6, 288);
             this.addLP.Name = "addLP";
             this.addLP.Size = new System.Drawing.Size(75, 23);
             this.addLP.TabIndex = 24;
@@ -209,7 +213,7 @@
             // lpFaculty
             // 
             this.lpFaculty.FormattingEnabled = true;
-            this.lpFaculty.Location = new System.Drawing.Point(6, 220);
+            this.lpFaculty.Location = new System.Drawing.Point(6, 261);
             this.lpFaculty.Name = "lpFaculty";
             this.lpFaculty.Size = new System.Drawing.Size(325, 21);
             this.lpFaculty.TabIndex = 23;
@@ -217,7 +221,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 204);
+            this.label6.Location = new System.Drawing.Point(3, 245);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(63, 13);
             this.label6.TabIndex = 22;
@@ -225,7 +229,7 @@
             // 
             // lpEducationStandard
             // 
-            this.lpEducationStandard.Location = new System.Drawing.Point(6, 181);
+            this.lpEducationStandard.Location = new System.Drawing.Point(6, 222);
             this.lpEducationStandard.Name = "lpEducationStandard";
             this.lpEducationStandard.Size = new System.Drawing.Size(325, 20);
             this.lpEducationStandard.TabIndex = 21;
@@ -233,7 +237,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 165);
+            this.label5.Location = new System.Drawing.Point(3, 206);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(149, 13);
             this.label5.TabIndex = 20;
@@ -241,7 +245,7 @@
             // 
             // lpStartingYear
             // 
-            this.lpStartingYear.Location = new System.Drawing.Point(6, 142);
+            this.lpStartingYear.Location = new System.Drawing.Point(6, 183);
             this.lpStartingYear.Name = "lpStartingYear";
             this.lpStartingYear.Size = new System.Drawing.Size(325, 20);
             this.lpStartingYear.TabIndex = 19;
@@ -249,7 +253,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 126);
+            this.label4.Location = new System.Drawing.Point(3, 167);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(112, 13);
             this.label4.TabIndex = 18;
@@ -257,7 +261,7 @@
             // 
             // lpProfile
             // 
-            this.lpProfile.Location = new System.Drawing.Point(6, 103);
+            this.lpProfile.Location = new System.Drawing.Point(6, 144);
             this.lpProfile.Name = "lpProfile";
             this.lpProfile.Size = new System.Drawing.Size(325, 20);
             this.lpProfile.TabIndex = 17;
@@ -265,7 +269,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 87);
+            this.label3.Location = new System.Drawing.Point(3, 128);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(114, 13);
             this.label3.TabIndex = 16;
@@ -273,7 +277,7 @@
             // 
             // lpSpecialityName
             // 
-            this.lpSpecialityName.Location = new System.Drawing.Point(6, 64);
+            this.lpSpecialityName.Location = new System.Drawing.Point(6, 105);
             this.lpSpecialityName.Name = "lpSpecialityName";
             this.lpSpecialityName.Size = new System.Drawing.Size(325, 20);
             this.lpSpecialityName.TabIndex = 15;
@@ -281,7 +285,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 48);
+            this.label2.Location = new System.Drawing.Point(3, 89);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(208, 13);
             this.label2.TabIndex = 14;
@@ -289,7 +293,7 @@
             // 
             // lpSpecialityCode
             // 
-            this.lpSpecialityCode.Location = new System.Drawing.Point(6, 25);
+            this.lpSpecialityCode.Location = new System.Drawing.Point(6, 66);
             this.lpSpecialityCode.Name = "lpSpecialityCode";
             this.lpSpecialityCode.Size = new System.Drawing.Size(325, 20);
             this.lpSpecialityCode.TabIndex = 13;
@@ -297,7 +301,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 9);
+            this.label1.Location = new System.Drawing.Point(3, 50);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(177, 13);
             this.label1.TabIndex = 12;
@@ -378,6 +382,42 @@
             this.disciplineSemestersControlsPanel.Name = "disciplineSemestersControlsPanel";
             this.disciplineSemestersControlsPanel.Size = new System.Drawing.Size(896, 141);
             this.disciplineSemestersControlsPanel.TabIndex = 0;
+            // 
+            // lpdsIndividualHours
+            // 
+            this.lpdsIndividualHours.Location = new System.Drawing.Point(584, 30);
+            this.lpdsIndividualHours.Name = "lpdsIndividualHours";
+            this.lpdsIndividualHours.Size = new System.Drawing.Size(156, 20);
+            this.lpdsIndividualHours.TabIndex = 45;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(581, 14);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(122, 13);
+            this.label21.TabIndex = 44;
+            this.label21.Text = "Индивидуальные часы";
+            // 
+            // lpdsEssay
+            // 
+            this.lpdsEssay.AutoSize = true;
+            this.lpdsEssay.Location = new System.Drawing.Point(457, 110);
+            this.lpdsEssay.Name = "lpdsEssay";
+            this.lpdsEssay.Size = new System.Drawing.Size(51, 17);
+            this.lpdsEssay.TabIndex = 43;
+            this.lpdsEssay.Text = "Эссе";
+            this.lpdsEssay.UseVisualStyleBackColor = true;
+            // 
+            // lpdsReferat
+            // 
+            this.lpdsReferat.AutoSize = true;
+            this.lpdsReferat.Location = new System.Drawing.Point(457, 88);
+            this.lpdsReferat.Name = "lpdsReferat";
+            this.lpdsReferat.Size = new System.Drawing.Size(70, 17);
+            this.lpdsReferat.TabIndex = 42;
+            this.lpdsReferat.Text = "Реферат";
+            this.lpdsReferat.UseVisualStyleBackColor = true;
             // 
             // removeLPDS
             // 
@@ -643,6 +683,46 @@
             this.disciplineControlsPanel.Size = new System.Drawing.Size(896, 178);
             this.disciplineControlsPanel.TabIndex = 0;
             // 
+            // lawDM
+            // 
+            this.lawDM.AutoSize = true;
+            this.lawDM.Location = new System.Drawing.Point(831, 5);
+            this.lawDM.Name = "lawDM";
+            this.lawDM.Size = new System.Drawing.Size(44, 17);
+            this.lawDM.TabIndex = 36;
+            this.lawDM.Text = "ДМ";
+            this.lawDM.UseVisualStyleBackColor = true;
+            // 
+            // EssayExists
+            // 
+            this.EssayExists.AutoSize = true;
+            this.EssayExists.Location = new System.Drawing.Point(774, 5);
+            this.EssayExists.Name = "EssayExists";
+            this.EssayExists.Size = new System.Drawing.Size(51, 17);
+            this.EssayExists.TabIndex = 35;
+            this.EssayExists.Text = "Эссе";
+            this.EssayExists.UseVisualStyleBackColor = true;
+            // 
+            // importXLSPlanSpec
+            // 
+            this.importXLSPlanSpec.Location = new System.Drawing.Point(674, 103);
+            this.importXLSPlanSpec.Name = "importXLSPlanSpec";
+            this.importXLSPlanSpec.Size = new System.Drawing.Size(210, 33);
+            this.importXLSPlanSpec.TabIndex = 34;
+            this.importXLSPlanSpec.Text = "Импорт XML план (специалисты)";
+            this.importXLSPlanSpec.UseVisualStyleBackColor = true;
+            this.importXLSPlanSpec.Click += new System.EventHandler(this.importXLSPlanSpec_Click);
+            // 
+            // importXLSPlanMag
+            // 
+            this.importXLSPlanMag.Location = new System.Drawing.Point(674, 64);
+            this.importXLSPlanMag.Name = "importXLSPlanMag";
+            this.importXLSPlanMag.Size = new System.Drawing.Size(210, 33);
+            this.importXLSPlanMag.TabIndex = 33;
+            this.importXLSPlanMag.Text = "Импорт XML план (магистры)";
+            this.importXLSPlanMag.UseVisualStyleBackColor = true;
+            this.importXLSPlanMag.Click += new System.EventHandler(this.importXLSPlanMag_Click);
+            // 
             // ControlTaskExists
             // 
             this.ControlTaskExists.AutoSize = true;
@@ -811,81 +891,21 @@
             this.openXmlFileDialog.Filter = "Excel files|*.xls";
             this.openXmlFileDialog.InitialDirectory = "D:\\Планы из битрикса\\Excel\\";
             // 
-            // importXLSPlanMag
+            // lpName
             // 
-            this.importXLSPlanMag.Location = new System.Drawing.Point(674, 64);
-            this.importXLSPlanMag.Name = "importXLSPlanMag";
-            this.importXLSPlanMag.Size = new System.Drawing.Size(210, 33);
-            this.importXLSPlanMag.TabIndex = 33;
-            this.importXLSPlanMag.Text = "Импорт XML план (магистры)";
-            this.importXLSPlanMag.UseVisualStyleBackColor = true;
-            this.importXLSPlanMag.Click += new System.EventHandler(this.importXLSPlanMag_Click);
+            this.lpName.Location = new System.Drawing.Point(6, 25);
+            this.lpName.Name = "lpName";
+            this.lpName.Size = new System.Drawing.Size(325, 20);
+            this.lpName.TabIndex = 28;
             // 
-            // importXLSPlanSpec
+            // label22
             // 
-            this.importXLSPlanSpec.Location = new System.Drawing.Point(674, 103);
-            this.importXLSPlanSpec.Name = "importXLSPlanSpec";
-            this.importXLSPlanSpec.Size = new System.Drawing.Size(210, 33);
-            this.importXLSPlanSpec.TabIndex = 34;
-            this.importXLSPlanSpec.Text = "Импорт XML план (специалисты)";
-            this.importXLSPlanSpec.UseVisualStyleBackColor = true;
-            this.importXLSPlanSpec.Click += new System.EventHandler(this.importXLSPlanSpec_Click);
-            // 
-            // lpdsReferat
-            // 
-            this.lpdsReferat.AutoSize = true;
-            this.lpdsReferat.Location = new System.Drawing.Point(457, 88);
-            this.lpdsReferat.Name = "lpdsReferat";
-            this.lpdsReferat.Size = new System.Drawing.Size(70, 17);
-            this.lpdsReferat.TabIndex = 42;
-            this.lpdsReferat.Text = "Реферат";
-            this.lpdsReferat.UseVisualStyleBackColor = true;
-            // 
-            // EssayExists
-            // 
-            this.EssayExists.AutoSize = true;
-            this.EssayExists.Location = new System.Drawing.Point(774, 5);
-            this.EssayExists.Name = "EssayExists";
-            this.EssayExists.Size = new System.Drawing.Size(51, 17);
-            this.EssayExists.TabIndex = 35;
-            this.EssayExists.Text = "Эссе";
-            this.EssayExists.UseVisualStyleBackColor = true;
-            // 
-            // lpdsEssay
-            // 
-            this.lpdsEssay.AutoSize = true;
-            this.lpdsEssay.Location = new System.Drawing.Point(457, 110);
-            this.lpdsEssay.Name = "lpdsEssay";
-            this.lpdsEssay.Size = new System.Drawing.Size(51, 17);
-            this.lpdsEssay.TabIndex = 43;
-            this.lpdsEssay.Text = "Эссе";
-            this.lpdsEssay.UseVisualStyleBackColor = true;
-            // 
-            // lawDM
-            // 
-            this.lawDM.AutoSize = true;
-            this.lawDM.Location = new System.Drawing.Point(831, 5);
-            this.lawDM.Name = "lawDM";
-            this.lawDM.Size = new System.Drawing.Size(44, 17);
-            this.lawDM.TabIndex = 36;
-            this.lawDM.Text = "ДМ";
-            this.lawDM.UseVisualStyleBackColor = true;
-            // 
-            // lpdsIndividualHours
-            // 
-            this.lpdsIndividualHours.Location = new System.Drawing.Point(584, 30);
-            this.lpdsIndividualHours.Name = "lpdsIndividualHours";
-            this.lpdsIndividualHours.Size = new System.Drawing.Size(156, 20);
-            this.lpdsIndividualHours.TabIndex = 45;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(581, 14);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(122, 13);
-            this.label21.TabIndex = 44;
-            this.label21.Text = "Индивидуальные часы";
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(3, 9);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(57, 13);
+            this.label22.TabIndex = 27;
+            this.label22.Text = "Название";
             // 
             // LearningPlanList
             // 
@@ -998,5 +1018,7 @@
         private System.Windows.Forms.CheckBox lawDM;
         private System.Windows.Forms.TextBox lpdsIndividualHours;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox lpName;
+        private System.Windows.Forms.Label label22;
     }
 }
