@@ -48,6 +48,9 @@ namespace nudata
         bool _studentLearningPlanOpened;
         public StudentLearningPlanList StudentLearningPlanForm;
 
+        bool _teacherCardsListOpened;
+        public TeacherCardsList TeacherCardsForm;
+
         public StartupForm()
         {
             InitializeComponent();
@@ -78,6 +81,9 @@ namespace nudata
 
             // Учебные планы студентов - Ctrl-Alt-L
             HotKeyManager.RegisterHotKey(Keys.L, (uint)(KeyModifiers.Control | KeyModifiers.Alt));
+
+            // Карточки учебных поручений - Alt-C
+            HotKeyManager.RegisterHotKey(Keys.C, (uint)KeyModifiers.Alt);
 
             HotKeyManager.HotKeyPressed += ManageHotKeys;
 
@@ -131,7 +137,12 @@ namespace nudata
                 if (e.Key == Keys.L)
                 {
                     ShowLearningPlanForm();
-                }                
+                }
+
+                if (e.Key == Keys.C)
+                {
+                    ShowTeacherCardsForm();
+                }
             }
 
             if (e.Modifiers == (KeyModifiers.Control | KeyModifiers.Alt))
@@ -151,6 +162,28 @@ namespace nudata
                     ShowStudentLearningPlanForm();
                 }
             }
+        }
+
+        private void ShowTeacherCardsForm()
+        {
+            if (!AppPermissions.Check("TeacherCardsList"))
+            {
+                MessageBox.Show("У вас нет разрешения на использование этой части приложения.");
+
+                return;
+            }
+
+            if (_teacherCardsListOpened)
+            {
+                TeacherCardsForm.Activate();
+                TeacherCardsForm.Focus();
+                return;
+            }
+
+            TeacherCardsForm = new TeacherCardsList(ApiEndpoint);
+            _teacherCardsListOpened = true;
+            TeacherCardsForm.Show();
+            _teacherCardsListOpened = false;
         }
 
         private void ShowStudentLearningPlanForm()
@@ -419,6 +452,11 @@ namespace nudata
         private void учебныеПланыСтудентовToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowStudentLearningPlanForm();
+        }
+
+        private void карточкиУчебныхПорученийToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowTeacherCardsForm();
         }
     }
 }

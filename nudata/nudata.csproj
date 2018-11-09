@@ -122,6 +122,8 @@
     <Compile Include="DomainClasses\Main\StudentLearningPlan.cs" />
     <Compile Include="DomainClasses\Main\StudentStudentGroup.cs" />
     <Compile Include="DomainClasses\Main\Teacher.cs" />
+    <Compile Include="DomainClasses\Main\TeacherCard.cs" />
+    <Compile Include="DomainClasses\Main\TeacherCardItem.cs" />
     <Compile Include="DomainClasses\Schedule\Auditorium.cs" />
     <Compile Include="DomainClasses\Schedule\AuditoriumEvent.cs" />
     <Compile Include="DomainClasses\Schedule\Building.cs" />
@@ -209,6 +211,12 @@
     <Compile Include="Forms\StudentProperties.Designer.cs">
       <DependentUpon>StudentProperties.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\TeacherCardsList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TeacherCardsList.Designer.cs">
+      <DependentUpon>TeacherCardsList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\TeacherList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -233,6 +241,8 @@
     <Compile Include="nubackRepos\StudentLearningPlanRepo.cs" />
     <Compile Include="nubackRepos\StudentRepo.cs" />
     <Compile Include="nubackRepos\StudentStudentGroupRepo.cs" />
+    <Compile Include="nubackRepos\TeacherCardItemRepo.cs" />
+    <Compile Include="nubackRepos\TeacherCardRepo.cs" />
     <Compile Include="nubackRepos\TeacherRepo.cs" />
     <Compile Include="nubackRepos\UserPermissionRepo.cs" />
     <Compile Include="AccessPps\PpsDataSet.Designer.cs">
@@ -254,7 +264,9 @@
     <Compile Include="Views\StudentLearningPlanWithPeriodsView.cs" />
     <Compile Include="Views\StudentListView.cs" />
     <Compile Include="Views\StudentView.cs" />
+    <Compile Include="Views\TeacherCardJoined.cs" />
     <Compile Include="Views\TeacherView.cs" />
+    <Compile Include="Views\YearView.cs" />
     <EmbeddedResource Include="Forms\AuthForm.resx">
       <DependentUpon>AuthForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -281,6 +293,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\StudentProperties.resx">
       <DependentUpon>StudentProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TeacherCardsList.resx">
+      <DependentUpon>TeacherCardsList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TeacherList.resx">
       <DependentUpon>TeacherList.cs</DependentUpon>
@@ -396,6 +411,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\slp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cards.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

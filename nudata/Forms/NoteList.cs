@@ -75,6 +75,11 @@ namespace nudata.Forms
             NotesGridView.Columns["id"].Visible = false;
             NotesGridView.Columns["text"].HeaderText = "Текст заметки";
             NotesGridView.Columns["text"].Width = NotesGridView.Width - 10;
+
+            if (noteFilter.Text.Trim() != "")
+            {
+                noteFilter_TextChanged(this, null);
+            }
         }
 
         private void update_Click(object sender, EventArgs e)
