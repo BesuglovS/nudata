@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.leftPanel = new System.Windows.Forms.Panel();
             this.departmentViewPanel = new System.Windows.Forms.Panel();
             this.departmentGridView = new System.Windows.Forms.DataGridView();
@@ -38,6 +38,7 @@
             this.cardItemsViewPanel = new System.Windows.Forms.Panel();
             this.cardItemsGridView = new System.Windows.Forms.DataGridView();
             this.cardItemControlPanel = new System.Windows.Forms.Panel();
+            this.clearFields = new System.Windows.Forms.Button();
             this.tciRemove = new System.Windows.Forms.Button();
             this.tciUpdate = new System.Windows.Forms.Button();
             this.tciAdd = new System.Windows.Forms.Button();
@@ -108,7 +109,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.teacherList = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.clearFields = new System.Windows.Forms.Button();
             this.leftPanel.SuspendLayout();
             this.departmentViewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.departmentGridView)).BeginInit();
@@ -167,14 +167,14 @@
             // yearsGridView
             // 
             this.yearsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.yearsGridView.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.yearsGridView.DefaultCellStyle = dataGridViewCellStyle1;
             this.yearsGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.yearsGridView.Location = new System.Drawing.Point(0, 0);
             this.yearsGridView.Name = "yearsGridView";
@@ -273,6 +273,16 @@
             this.cardItemControlPanel.Name = "cardItemControlPanel";
             this.cardItemControlPanel.Size = new System.Drawing.Size(980, 171);
             this.cardItemControlPanel.TabIndex = 1;
+            // 
+            // clearFields
+            // 
+            this.clearFields.Location = new System.Drawing.Point(737, 133);
+            this.clearFields.Name = "clearFields";
+            this.clearFields.Size = new System.Drawing.Size(75, 23);
+            this.clearFields.TabIndex = 51;
+            this.clearFields.Text = "Очистить";
+            this.clearFields.UseVisualStyleBackColor = true;
+            this.clearFields.Click += new System.EventHandler(this.clearFields_Click);
             // 
             // tciRemove
             // 
@@ -779,7 +789,7 @@
             this.positionType.Location = new System.Drawing.Point(396, 104);
             this.positionType.Name = "positionType";
             this.positionType.Size = new System.Drawing.Size(366, 21);
-            this.positionType.TabIndex = 15;
+            this.positionType.TabIndex = 10;
             // 
             // tcRemove
             // 
@@ -900,16 +910,6 @@
             this.label1.Size = new System.Drawing.Size(86, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Преподаватель";
-            // 
-            // clearFields
-            // 
-            this.clearFields.Location = new System.Drawing.Point(737, 133);
-            this.clearFields.Name = "clearFields";
-            this.clearFields.Size = new System.Drawing.Size(75, 23);
-            this.clearFields.TabIndex = 51;
-            this.clearFields.Text = "Очистить";
-            this.clearFields.UseVisualStyleBackColor = true;
-            this.clearFields.Click += new System.EventHandler(this.clearFields_Click);
             // 
             // TeacherCardsList
             // 

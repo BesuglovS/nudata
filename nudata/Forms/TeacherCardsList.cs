@@ -24,6 +24,7 @@ namespace nudata.Forms
 
         int currentYear = -1;
         List<int> currentYears = new List<int>();
+        List<Department> currentDepartments = new List<Department>();
         Department currentDepartment = null;
         TeacherCardJoined currectCardJoined = null;
 
@@ -46,11 +47,34 @@ namespace nudata.Forms
             LoadTeacherList();
 
             LoadDepartmentList();
+
+            GrayOutControls();
+        }
+
+        private void GrayOutControls()
+        {
+            tciLecture_hours_TextChanged(null, null);
+            tciLab_hours_TextChanged(null, null);
+            tciPractice_hours_TextChanged(null, null);
+            tciExam_hours_TextChanged(null, null);
+            tciZach_hours_TextChanged(null, null);
+            tciZach_with_mark_hours_TextChanged(null, null);
+            tciCourse_project_hours_TextChanged(null, null);
+            tciCourse_task_hours_TextChanged(null, null);
+            tciControl_task_hours_TextChanged(null, null);
+            tciReferat_hours_TextChanged(null, null);
+            tciEssay_hours_TextChanged(null, null);
+            tciHead_of_practice_hours_TextChanged(null, null);
+            tciHead_of_vkr_hours_TextChanged(null, null);
+            tciIga_hours_TextChanged(null, null);
+            tciNra_hours_TextChanged(null, null);
+            tciNrm_hours_TextChanged(null, null);
+
         }
 
         private void LoadDepartmentList()
         {
-            var departments = dRepo.all();
+            var departments = dRepo.all().OrderBy(d => d.name).ToList();
 
             departmentList.DataSource = departments;
             departmentList.ValueMember = "id";
@@ -90,13 +114,27 @@ namespace nudata.Forms
         private void yearsGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             currentYear = ((List<YearView>)yearsGridView.DataSource)[e.RowIndex].year;
-            
+
+            UpdateDepartmentList();
+        }
+
+        private void UpdateDepartmentList()
+        {
+            var departmentSelected = false;
+            var departmentId = -1;
+            if (departmentGridView.SelectedCells.Count > 0)
+            {
+                departmentSelected = true;
+                departmentId = ((List<Department>)departmentGridView.DataSource)[departmentGridView.SelectedCells[0].RowIndex].id;
+            }
+
             var departmentIds = tcRepo.yearDepartmentIds(currentYear);
 
-            var allDepartments = dRepo.all();
+            currentDepartments = dRepo.all();
 
-            var departments = allDepartments
+            var departments = currentDepartments
                 .Where(d => departmentIds.Contains(d.id))
+                .OrderBy(d => d.name)
                 .ToList();
 
             departmentGridView.DataSource = departments;
@@ -104,6 +142,19 @@ namespace nudata.Forms
             departmentGridView.Columns["id"].Visible = false;
             departmentGridView.Columns["name"].Width = departmentGridView.Width - 20;
             departmentGridView.Columns["name"].HeaderText = "Кафедры";
+
+            if (departmentSelected)
+            {
+                for (int i = 0; i < departments.Count; i++)
+                {
+                    if (departments[i].id == departmentId)
+                    {
+                        departmentGridView.ClearSelection();
+                        departmentGridView.Rows[i].Cells[0].Selected = true;
+                        break;
+                    }
+                }
+            }
         }
 
         private void departmentGridView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -137,6 +188,7 @@ namespace nudata.Forms
         private void add_Click(object sender, EventArgs e)
         {
             var newYear = ParseIntOrZero(startingYear.Text.Split('-')[0]);
+            var newDepartmentId = (int)departmentList.SelectedValue;
 
             var newTeacherCard = new TeacherCard {
                 teacher_id = (int)teacherList.SelectedValue,
@@ -145,7 +197,7 @@ namespace nudata.Forms
                 academic_rank = academicRank.Text,
                 department_rank = departmentRank.Text,
                 position_type = positionType.Text,
-                department_id = (int)departmentList.SelectedValue,
+                department_id = newDepartmentId,
                 starting_year = newYear
             };
 
@@ -157,6 +209,11 @@ namespace nudata.Forms
             {
                 LoadYearsList();
             }
+
+            if (!currentDepartments.Select(d => d.id).Contains(newDepartmentId))
+            {
+                UpdateDepartmentList();
+            }
         }
 
         private void update_Click(object sender, EventArgs e)
@@ -166,6 +223,7 @@ namespace nudata.Forms
                 var cardJoined = ((List<TeacherCardJoined>)cardsGridView.DataSource)[cardsGridView.SelectedCells[0].RowIndex];
 
                 var newYear = ParseIntOrZero(startingYear.Text.Split('-')[0]);
+                var newDepartmentId = (int)departmentList.SelectedValue;
 
                 var TeacherCardUpdated = new TeacherCard
                 {
@@ -176,7 +234,7 @@ namespace nudata.Forms
                     academic_rank = academicRank.Text,
                     department_rank = departmentRank.Text,
                     position_type = positionType.Text,
-                    department_id = (int)departmentList.SelectedValue,
+                    department_id = newDepartmentId,
                     starting_year = newYear
                 };
 
@@ -188,6 +246,8 @@ namespace nudata.Forms
                 {
                     LoadYearsList();
                 }
+
+                UpdateDepartmentList();
             }
         }
 
@@ -202,6 +262,8 @@ namespace nudata.Forms
                 UpdateTeacherCardsList();
 
                 LoadYearsList();
+
+                UpdateDepartmentList();
             }
         }
 
@@ -235,7 +297,7 @@ namespace nudata.Forms
             cardItemsGridView.Columns["semester"].Width = 60;
 
             cardItemsGridView.Columns["code"].HeaderText = "Код";
-            cardItemsGridView.Columns["code"].Width = 60;
+            cardItemsGridView.Columns["code"].Width = 80;
 
             cardItemsGridView.Columns["discipline_name"].HeaderText = "Название дисциплины";
             cardItemsGridView.Columns["discipline_name"].Width = 150;
@@ -456,6 +518,11 @@ namespace nudata.Forms
             if (stringValue == "0" ||  stringValue == "0.00" || stringValue == "0,00")
             {
                 e.CellStyle.ForeColor = Color.FromArgb(200, 200, 200);
+            }
+
+            if (e.ColumnIndex != 2 && e.ColumnIndex != 3)
+            {
+                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             }
         }
 
