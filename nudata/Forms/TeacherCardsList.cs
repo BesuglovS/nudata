@@ -23,6 +23,7 @@ namespace nudata.Forms
         TeacherRepo tRepo;
 
         int currentYear = -1;
+        List<int> currentYears = new List<int>();
         Department currentDepartment = null;
         TeacherCardJoined currectCardJoined = null;
 
@@ -43,6 +44,17 @@ namespace nudata.Forms
             LoadYearsList();
 
             LoadTeacherList();
+
+            LoadDepartmentList();
+        }
+
+        private void LoadDepartmentList()
+        {
+            var departments = dRepo.all();
+
+            departmentList.DataSource = departments;
+            departmentList.ValueMember = "id";
+            departmentList.DisplayMember = "name";
         }
 
         private void LoadTeacherList()
@@ -61,12 +73,14 @@ namespace nudata.Forms
 
         private void LoadYearsList()
         {
-            var years = tcRepo.allYears()
+            currentYears = tcRepo.allYears();
+
+            var yearViews = currentYears
                 .OrderBy(y => y)
                 .Select(year => new YearView { year = year })
                 .ToList();
 
-            yearsGridView.DataSource = years;
+            yearsGridView.DataSource = yearViews;
 
             yearsGridView.Columns["year"].Visible = false;
             yearsGridView.Columns["yearString"].Width = yearsGridView.Width - 20;
@@ -122,6 +136,8 @@ namespace nudata.Forms
 
         private void add_Click(object sender, EventArgs e)
         {
+            var newYear = ParseIntOrZero(startingYear.Text.Split('-')[0]);
+
             var newTeacherCard = new TeacherCard {
                 teacher_id = (int)teacherList.SelectedValue,
                 position = position.Text,
@@ -129,13 +145,18 @@ namespace nudata.Forms
                 academic_rank = academicRank.Text,
                 department_rank = departmentRank.Text,
                 position_type = positionType.Text,
-                department_id = currentDepartment.id,
-                starting_year = currentYear
+                department_id = (int)departmentList.SelectedValue,
+                starting_year = newYear
             };
 
             tcRepo.add(newTeacherCard);
 
             UpdateTeacherCardsList();
+
+            if (!currentYears.Contains(newYear))
+            {
+                LoadYearsList();
+            }
         }
 
         private void update_Click(object sender, EventArgs e)
@@ -143,6 +164,8 @@ namespace nudata.Forms
             if (cardsGridView.SelectedCells.Count > 0)
             {
                 var cardJoined = ((List<TeacherCardJoined>)cardsGridView.DataSource)[cardsGridView.SelectedCells[0].RowIndex];
+
+                var newYear = ParseIntOrZero(startingYear.Text.Split('-')[0]);
 
                 var TeacherCardUpdated = new TeacherCard
                 {
@@ -153,13 +176,18 @@ namespace nudata.Forms
                     academic_rank = academicRank.Text,
                     department_rank = departmentRank.Text,
                     position_type = positionType.Text,
-                    department_id = cardJoined.department_id,
-                    starting_year = cardJoined.starting_year
+                    department_id = (int)departmentList.SelectedValue,
+                    starting_year = newYear
                 };
 
                 tcRepo.update(TeacherCardUpdated, TeacherCardUpdated.id);
 
                 UpdateTeacherCardsList();
+
+                if (!currentYears.Contains(newYear))
+                {
+                    LoadYearsList();
+                }
             }
         }
 
@@ -172,6 +200,8 @@ namespace nudata.Forms
                 tcRepo.delete(cardJoined.id);
 
                 UpdateTeacherCardsList();
+
+                LoadYearsList();
             }
         }
 
@@ -185,6 +215,9 @@ namespace nudata.Forms
             academicRank.Text = currectCardJoined.academic_rank;
             departmentRank.Text = currectCardJoined.department_rank;
             positionType.Text = currectCardJoined.position_type;
+
+            startingYear.Text = currectCardJoined.starting_year.ToString() + " - " + (currectCardJoined.starting_year + 1).ToString();
+            departmentList.SelectedValue = currectCardJoined.department_id;
 
             UpdateTeacherCardItemsList();
         }
@@ -306,7 +339,8 @@ namespace nudata.Forms
                 head_of_vkr_hours = ParseDecOrZero(tciHead_of_vkr_hours.Text),
                 iga_hours = ParseDecOrZero(tciIga_hours.Text),
                 nra_hours = ParseDecOrZero(tciNra_hours.Text),
-                nrm_hours = ParseDecOrZero(tciNrm_hours.Text)
+                nrm_hours = ParseDecOrZero(tciNrm_hours.Text),
+                teacher_card_id = currectCardJoined.id
             };
 
             tciRepo.add(newTeacherCardItem);
@@ -387,6 +421,136 @@ namespace nudata.Forms
             tciIga_hours.Text = cardItem.iga_hours.ToString();
             tciNra_hours.Text = cardItem.nra_hours.ToString();
             tciNrm_hours.Text = cardItem.nrm_hours.ToString();
+        }
+
+        private void clearFields_Click(object sender, EventArgs e)
+        {
+            tciSemester.Text = "";
+            tciCode.Text = "";
+            tciDiscipline_name.Text = "";
+            tciGroup_name.Text = "";
+            tciGroup_count.Text = "";
+            tciGroup_students_count.Text = "";
+            tciLecture_hours.Text = "";
+            tciLab_hours.Text = "";
+            tciPractice_hours.Text = "";
+            tciExam_hours.Text = "";
+            tciZach_hours.Text = "";
+            tciZach_with_mark_hours.Text = "";
+            tciCourse_project_hours.Text = "";
+            tciCourse_task_hours.Text = "";
+            tciControl_task_hours.Text = "";
+            tciReferat_hours.Text = "";
+            tciEssay_hours.Text = "";
+            tciHead_of_practice_hours.Text = "";
+            tciHead_of_vkr_hours.Text = "";
+            tciIga_hours.Text = "";
+            tciNra_hours.Text = "";
+            tciNrm_hours.Text = "";
+        }
+
+        private void cardItemsGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            string stringValue = e.Value.ToString();
+
+            if (stringValue == "0" ||  stringValue == "0.00" || stringValue == "0,00")
+            {
+                e.CellStyle.ForeColor = Color.FromArgb(200, 200, 200);
+            }
+        }
+
+        private void tciLecture_hours_TextChanged(object sender, EventArgs e)
+        {
+            ChangeGroupColor(tciLecture_hours, LtciLecture_hours);
+        }
+
+        private void ChangeGroupColor(TextBox textBox, Label labelForTextBox)
+        {
+            if (ParseDecOrZero(textBox.Text) == 0)
+            {
+                textBox.ForeColor = Color.FromArgb(200, 200, 200);
+                labelForTextBox.ForeColor = Color.FromArgb(200, 200, 200);
+            }
+            else
+            {
+                textBox.ForeColor = Color.FromArgb(0, 0, 0);
+                labelForTextBox.ForeColor = Color.FromArgb(0, 0, 0);
+            }
+        }
+
+        private void tciLab_hours_TextChanged(object sender, EventArgs e)
+        {
+            ChangeGroupColor(tciLab_hours, LtciLab_hours);
+        }
+
+        private void tciPractice_hours_TextChanged(object sender, EventArgs e)
+        {
+            ChangeGroupColor(tciPractice_hours, LtciPractice_hours);
+        }
+
+        private void tciExam_hours_TextChanged(object sender, EventArgs e)
+        {
+            ChangeGroupColor(tciExam_hours, LtciExam_hours);
+        }
+
+        private void tciZach_hours_TextChanged(object sender, EventArgs e)
+        {
+            ChangeGroupColor(tciZach_hours, LtciZach_hours);
+        }
+
+        private void tciZach_with_mark_hours_TextChanged(object sender, EventArgs e)
+        {
+            ChangeGroupColor(tciZach_with_mark_hours, LtciZach_with_mark_hours);
+        }
+
+        private void tciCourse_project_hours_TextChanged(object sender, EventArgs e)
+        {
+            ChangeGroupColor(tciCourse_project_hours, LtciCourse_project_hours);
+        }
+
+        private void tciCourse_task_hours_TextChanged(object sender, EventArgs e)
+        {
+            ChangeGroupColor(tciCourse_task_hours, LtciCourse_task_hours);
+        }
+
+        private void tciControl_task_hours_TextChanged(object sender, EventArgs e)
+        {
+            ChangeGroupColor(tciControl_task_hours, LtciControl_task_hours);
+        }
+
+        private void tciReferat_hours_TextChanged(object sender, EventArgs e)
+        {
+            ChangeGroupColor(tciReferat_hours, LtciReferat_hours);
+        }
+
+        private void tciEssay_hours_TextChanged(object sender, EventArgs e)
+        {
+            ChangeGroupColor(tciEssay_hours, LtciEssay_hours);
+        }
+
+        private void tciHead_of_practice_hours_TextChanged(object sender, EventArgs e)
+        {
+            ChangeGroupColor(tciHead_of_practice_hours, LtciHead_of_practice_hours);
+        }
+
+        private void tciHead_of_vkr_hours_TextChanged(object sender, EventArgs e)
+        {
+            ChangeGroupColor(tciHead_of_vkr_hours, LtciHead_of_vkr_hours);
+        }
+
+        private void tciIga_hours_TextChanged(object sender, EventArgs e)
+        {
+            ChangeGroupColor(tciIga_hours, LtciIga_hours);
+        }
+
+        private void tciNra_hours_TextChanged(object sender, EventArgs e)
+        {
+            ChangeGroupColor(tciNra_hours, LtciNra_hours);
+        }
+
+        private void tciNrm_hours_TextChanged(object sender, EventArgs e)
+        {
+            ChangeGroupColor(tciNrm_hours, LtciNrm_hours);
         }
     }
 }
