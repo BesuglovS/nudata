@@ -31,6 +31,7 @@ namespace nudata.DomainClasses.Main
         public decimal iga_hours { get; set; }
         public decimal nra_hours { get; set; }
         public decimal nrm_hours { get; set; }
+        public decimal individual_hours { get; set; }
         public int teacher_card_id { get; set; }
     }
 }

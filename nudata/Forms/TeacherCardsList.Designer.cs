@@ -109,6 +109,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.teacherList = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.tciIndividual_hours = new System.Windows.Forms.TextBox();
+            this.LtciIndividual_hours = new System.Windows.Forms.Label();
             this.leftPanel.SuspendLayout();
             this.departmentViewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.departmentGridView)).BeginInit();
@@ -220,6 +222,8 @@
             // 
             // cardItemControlPanel
             // 
+            this.cardItemControlPanel.Controls.Add(this.tciIndividual_hours);
+            this.cardItemControlPanel.Controls.Add(this.LtciIndividual_hours);
             this.cardItemControlPanel.Controls.Add(this.clearFields);
             this.cardItemControlPanel.Controls.Add(this.tciRemove);
             this.cardItemControlPanel.Controls.Add(this.tciUpdate);
@@ -276,9 +280,9 @@
             // 
             // clearFields
             // 
-            this.clearFields.Location = new System.Drawing.Point(737, 133);
+            this.clearFields.Location = new System.Drawing.Point(819, 55);
             this.clearFields.Name = "clearFields";
-            this.clearFields.Size = new System.Drawing.Size(75, 23);
+            this.clearFields.Size = new System.Drawing.Size(72, 101);
             this.clearFields.TabIndex = 51;
             this.clearFields.Text = "Очистить";
             this.clearFields.UseVisualStyleBackColor = true;
@@ -286,7 +290,7 @@
             // 
             // tciRemove
             // 
-            this.tciRemove.Location = new System.Drawing.Point(737, 95);
+            this.tciRemove.Location = new System.Drawing.Point(738, 135);
             this.tciRemove.Name = "tciRemove";
             this.tciRemove.Size = new System.Drawing.Size(75, 23);
             this.tciRemove.TabIndex = 50;
@@ -296,7 +300,7 @@
             // 
             // tciUpdate
             // 
-            this.tciUpdate.Location = new System.Drawing.Point(737, 55);
+            this.tciUpdate.Location = new System.Drawing.Point(738, 95);
             this.tciUpdate.Name = "tciUpdate";
             this.tciUpdate.Size = new System.Drawing.Size(75, 23);
             this.tciUpdate.TabIndex = 49;
@@ -306,7 +310,7 @@
             // 
             // tciAdd
             // 
-            this.tciAdd.Location = new System.Drawing.Point(737, 16);
+            this.tciAdd.Location = new System.Drawing.Point(738, 56);
             this.tciAdd.Name = "tciAdd";
             this.tciAdd.Size = new System.Drawing.Size(75, 23);
             this.tciAdd.TabIndex = 48;
@@ -911,6 +915,23 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Преподаватель";
             // 
+            // tciIndividual_hours
+            // 
+            this.tciIndividual_hours.Location = new System.Drawing.Point(738, 19);
+            this.tciIndividual_hours.Name = "tciIndividual_hours";
+            this.tciIndividual_hours.Size = new System.Drawing.Size(153, 20);
+            this.tciIndividual_hours.TabIndex = 53;
+            this.tciIndividual_hours.TextChanged += new System.EventHandler(this.tciIndividual_hours_TextChanged);
+            // 
+            // LtciIndividual_hours
+            // 
+            this.LtciIndividual_hours.AutoSize = true;
+            this.LtciIndividual_hours.Location = new System.Drawing.Point(735, 3);
+            this.LtciIndividual_hours.Name = "LtciIndividual_hours";
+            this.LtciIndividual_hours.Size = new System.Drawing.Size(138, 13);
+            this.LtciIndividual_hours.TabIndex = 52;
+            this.LtciIndividual_hours.Text = "Индивидуальные занятия";
+            // 
             // TeacherCardsList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1022,5 +1043,7 @@
         private System.Windows.Forms.TextBox startingYear;
         private System.Windows.Forms.Label label153;
         private System.Windows.Forms.Button clearFields;
+        private System.Windows.Forms.TextBox tciIndividual_hours;
+        private System.Windows.Forms.Label LtciIndividual_hours;
     }
 }

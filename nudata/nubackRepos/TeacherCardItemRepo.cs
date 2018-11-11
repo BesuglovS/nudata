@@ -64,6 +64,7 @@ namespace nudata.nubackRepos
                     { "iga_hours", TeacherCardItem.iga_hours.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
                     { "nra_hours", TeacherCardItem.nra_hours.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
                     { "nrm_hours", TeacherCardItem.nrm_hours.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
+                    { "individual_hours", TeacherCardItem.individual_hours.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
                     { "teacher_card_id", TeacherCardItem.teacher_card_id.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
                 });
 
@@ -116,6 +117,7 @@ namespace nudata.nubackRepos
                     { "iga_hours", TeacherCardItem.iga_hours.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
                     { "nra_hours", TeacherCardItem.nra_hours.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
                     { "nrm_hours", TeacherCardItem.nrm_hours.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
+                    { "individual_hours", TeacherCardItem.individual_hours.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
                     { "teacher_card_id", TeacherCardItem.teacher_card_id.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
                 });
 

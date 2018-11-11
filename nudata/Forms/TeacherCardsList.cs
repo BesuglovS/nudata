@@ -69,7 +69,7 @@ namespace nudata.Forms
             tciIga_hours_TextChanged(null, null);
             tciNra_hours_TextChanged(null, null);
             tciNrm_hours_TextChanged(null, null);
-
+            tciIndividual_hours_TextChanged(null, null);
         }
 
         private void LoadDepartmentList()
@@ -303,7 +303,7 @@ namespace nudata.Forms
             cardItemsGridView.Columns["discipline_name"].Width = 150;
 
             cardItemsGridView.Columns["group_name"].HeaderText = "Группа";
-            cardItemsGridView.Columns["group_name"].Width = 60;
+            cardItemsGridView.Columns["group_name"].Width = 50;
                         
             cardItemsGridView.Columns["group_count"].HeaderText = "Количество групп";
             cardItemsGridView.Columns["group_count"].Width = 70;
@@ -351,13 +351,16 @@ namespace nudata.Forms
             cardItemsGridView.Columns["head_of_vkr_hours"].Width = 80;
 
             cardItemsGridView.Columns["iga_hours"].HeaderText = "ИГА";
-            cardItemsGridView.Columns["iga_hours"].Width = 60;
+            cardItemsGridView.Columns["iga_hours"].Width = 50;
 
             cardItemsGridView.Columns["nra_hours"].HeaderText = "НРА";
-            cardItemsGridView.Columns["nra_hours"].Width = 60;
+            cardItemsGridView.Columns["nra_hours"].Width = 50;
 
             cardItemsGridView.Columns["nrm_hours"].HeaderText = "НРМ";
-            cardItemsGridView.Columns["nrm_hours"].Width = 60;
+            cardItemsGridView.Columns["nrm_hours"].Width = 50;
+
+            cardItemsGridView.Columns["individual_hours"].HeaderText = "Индивидуальные занятия";
+            cardItemsGridView.Columns["individual_hours"].Width = 100;
         }
 
         private int ParseIntOrZero(string str)
@@ -402,6 +405,7 @@ namespace nudata.Forms
                 iga_hours = ParseDecOrZero(tciIga_hours.Text),
                 nra_hours = ParseDecOrZero(tciNra_hours.Text),
                 nrm_hours = ParseDecOrZero(tciNrm_hours.Text),
+                individual_hours = ParseDecOrZero(tciIndividual_hours.Text),
                 teacher_card_id = currectCardJoined.id
             };
 
@@ -438,6 +442,7 @@ namespace nudata.Forms
                 cardItem.iga_hours = ParseDecOrZero(tciIga_hours.Text);
                 cardItem.nra_hours = ParseDecOrZero(tciNra_hours.Text);
                 cardItem.nrm_hours = ParseDecOrZero(tciNrm_hours.Text);
+                cardItem.individual_hours = ParseDecOrZero(tciIndividual_hours.Text);
 
                 tciRepo.update(cardItem, cardItem.id);
 
@@ -483,6 +488,7 @@ namespace nudata.Forms
             tciIga_hours.Text = cardItem.iga_hours.ToString();
             tciNra_hours.Text = cardItem.nra_hours.ToString();
             tciNrm_hours.Text = cardItem.nrm_hours.ToString();
+            tciIndividual_hours.Text = cardItem.individual_hours.ToString();
         }
 
         private void clearFields_Click(object sender, EventArgs e)
@@ -618,6 +624,11 @@ namespace nudata.Forms
         private void tciNrm_hours_TextChanged(object sender, EventArgs e)
         {
             ChangeGroupColor(tciNrm_hours, LtciNrm_hours);
+        }
+
+        private void tciIndividual_hours_TextChanged(object sender, EventArgs e)
+        {
+            ChangeGroupColor(tciIndividual_hours, LtciIndividual_hours);
         }
     }
 }
