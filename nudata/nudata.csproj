@@ -26,7 +26,7 @@
     <InstallUrl>http://wiki.nayanova.edu/nudata/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>27</ApplicationRevision>
+    <ApplicationRevision>28</ApplicationRevision>
     <ApplicationVersion>0.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -273,6 +273,7 @@
     <Compile Include="Views\StudentLearningPlanWithPeriodsView.cs" />
     <Compile Include="Views\StudentListView.cs" />
     <Compile Include="Views\StudentView.cs" />
+    <Compile Include="Views\TeacherCardItemView.cs" />
     <Compile Include="Views\TeacherCardJoined.cs" />
     <Compile Include="Views\TeacherView.cs" />
     <Compile Include="Views\YearView.cs" />

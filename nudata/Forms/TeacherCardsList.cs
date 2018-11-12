@@ -22,6 +22,7 @@ namespace nudata.Forms
         TeacherCardItemRepo tciRepo;
         DepartmentRepo dRepo;
         TeacherRepo tRepo;
+        PositionYearRateHoursRepo pyrhRepo;
 
         int currentYear = -1;
         List<int> currentYears = new List<int>();
@@ -39,6 +40,7 @@ namespace nudata.Forms
             tciRepo = new TeacherCardItemRepo(ApiEndpoint);
             dRepo = new DepartmentRepo(ApiEndpoint);
             tRepo = new TeacherRepo(ApiEndpoint);
+            pyrhRepo = new PositionYearRateHoursRepo(ApiEndpoint);
         }
         
         private void TeacherCardsList_Load(object sender, EventArgs e)
@@ -289,13 +291,29 @@ namespace nudata.Forms
         {
             var cardItems = tciRepo.teacherCardAll(currectCardJoined.id);
 
-            cardItemsGridView.DataSource = cardItems;
+            var cardItemViews = TeacherCardItemView.FromList(cardItems);
+
+            var tcTotalHours = cardItemViews.Select(civ => civ.total_hours).Sum();
+            LtcTotalHours.Text = tcTotalHours.ToString("0.00");
+
+            var rateHoursList = pyrhRepo.year(currectCardJoined.starting_year);
+            var rateHours = rateHoursList.FirstOrDefault(rhi => rhi.position == currectCardJoined.position);
+            if (rateHours != null)
+            {
+                decimal rateMultiplier = tcTotalHours / rateHours.rate_hours;
+                var rateMultiplier2 = Math.Round(rateMultiplier, 2);
+                var rateMultiplier3 = Math.Round(rateMultiplier, 3);
+                LtcRateMultiplier3.Text = rateMultiplier3.ToString("0.000");
+                LtcRateMultiplier2.Text = rateMultiplier2.ToString("0.00");
+            }
+
+            cardItemsGridView.DataSource = cardItemViews;
 
             cardItemsGridView.Columns["id"].Visible = false;
             cardItemsGridView.Columns["teacher_card_id"].Visible = false;
 
             cardItemsGridView.Columns["semester"].HeaderText = "Семестр";
-            cardItemsGridView.Columns["semester"].Width = 60;
+            cardItemsGridView.Columns["semester"].Width = 50;
 
             cardItemsGridView.Columns["code"].HeaderText = "Код";
             cardItemsGridView.Columns["code"].Width = 80;
@@ -325,7 +343,7 @@ namespace nudata.Forms
             cardItemsGridView.Columns["exam_hours"].Width = 60;
 
             cardItemsGridView.Columns["zach_hours"].HeaderText = "Зачёт";
-            cardItemsGridView.Columns["zach_hours"].Width = 60;
+            cardItemsGridView.Columns["zach_hours"].Width = 50;
 
             cardItemsGridView.Columns["zach_with_mark_hours"].HeaderText = "Зачёт с оценкой";
             cardItemsGridView.Columns["zach_with_mark_hours"].Width = 60;
@@ -343,7 +361,7 @@ namespace nudata.Forms
             cardItemsGridView.Columns["referat_hours"].Width = 60;
 
             cardItemsGridView.Columns["essay_hours"].HeaderText = "Эссе";
-            cardItemsGridView.Columns["essay_hours"].Width = 60;
+            cardItemsGridView.Columns["essay_hours"].Width = 50;
 
             cardItemsGridView.Columns["head_of_practice_hours"].HeaderText = "Руководство практикой";
             cardItemsGridView.Columns["head_of_practice_hours"].Width = 80;
@@ -352,16 +370,19 @@ namespace nudata.Forms
             cardItemsGridView.Columns["head_of_vkr_hours"].Width = 80;
 
             cardItemsGridView.Columns["iga_hours"].HeaderText = "ИГА";
-            cardItemsGridView.Columns["iga_hours"].Width = 50;
+            cardItemsGridView.Columns["iga_hours"].Width = 40;
 
             cardItemsGridView.Columns["nra_hours"].HeaderText = "НРА";
-            cardItemsGridView.Columns["nra_hours"].Width = 50;
+            cardItemsGridView.Columns["nra_hours"].Width = 40;
 
             cardItemsGridView.Columns["nrm_hours"].HeaderText = "НРМ";
-            cardItemsGridView.Columns["nrm_hours"].Width = 50;
+            cardItemsGridView.Columns["nrm_hours"].Width = 40;
 
             cardItemsGridView.Columns["individual_hours"].HeaderText = "Индивидуальные занятия";
             cardItemsGridView.Columns["individual_hours"].Width = 100;
+
+            cardItemsGridView.Columns["total_hours"].HeaderText = "Итого";
+            cardItemsGridView.Columns["total_hours"].Width = 60;
         }
         
         private void tciAdd_Click(object sender, EventArgs e)
@@ -403,7 +424,9 @@ namespace nudata.Forms
         {
             if (cardItemsGridView.SelectedCells.Count > 0)
             {
-                var cardItem = ((List<TeacherCardItem>)cardItemsGridView.DataSource)[cardItemsGridView.SelectedCells[0].RowIndex];
+                var cardItemView = ((List<TeacherCardItemView>)cardItemsGridView.DataSource)[cardItemsGridView.SelectedCells[0].RowIndex];
+
+                var cardItem = new TeacherCardItem { id = cardItemView.id, teacher_card_id = cardItemView.teacher_card_id };
 
                 cardItem.semester = Utilities.ParseIntOrZero(tciSemester.Text);
                 cardItem.code = tciCode.Text;
@@ -439,9 +462,9 @@ namespace nudata.Forms
         {
             if (cardItemsGridView.SelectedCells.Count > 0)
             {
-                var cardItem = ((List<TeacherCardItem>)cardItemsGridView.DataSource)[cardItemsGridView.SelectedCells[0].RowIndex];
+                var cardItemView = ((List<TeacherCardItemView>)cardItemsGridView.DataSource)[cardItemsGridView.SelectedCells[0].RowIndex];
 
-                tciRepo.delete(cardItem.id);
+                tciRepo.delete(cardItemView.id);
 
                 UpdateTeacherCardItemsList();
             }
@@ -449,31 +472,33 @@ namespace nudata.Forms
 
         private void cardItemsGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            var cardItem = ((List<TeacherCardItem>)cardItemsGridView.DataSource)[e.RowIndex];
+            var cardItemView = ((List<TeacherCardItemView>)cardItemsGridView.DataSource)[e.RowIndex];
 
-            tciSemester.Text = cardItem.semester.ToString();
-            tciCode.Text = cardItem.code;
-            tciDiscipline_name.Text = cardItem.discipline_name;
-            tciGroup_name.Text = cardItem.group_name;
-            tciGroup_count.Text = cardItem.group_count.ToString();
-            tciGroup_students_count.Text = cardItem.group_students_count.ToString();
-            tciLecture_hours.Text = cardItem.lecture_hours.ToString();
-            tciLab_hours.Text = cardItem.lab_hours.ToString();
-            tciPractice_hours.Text = cardItem.practice_hours.ToString();
-            tciExam_hours.Text = cardItem.exam_hours.ToString();
-            tciZach_hours.Text = cardItem.zach_hours.ToString();
-            tciZach_with_mark_hours.Text = cardItem.zach_with_mark_hours.ToString();
-            tciCourse_project_hours.Text = cardItem.course_project_hours.ToString();
-            tciCourse_task_hours.Text = cardItem.course_task_hours.ToString();
-            tciControl_task_hours.Text = cardItem.control_task_hours.ToString();
-            tciReferat_hours.Text = cardItem.referat_hours.ToString();
-            tciEssay_hours.Text = cardItem.essay_hours.ToString();
-            tciHead_of_practice_hours.Text = cardItem.head_of_practice_hours.ToString();
-            tciHead_of_vkr_hours.Text = cardItem.head_of_vkr_hours.ToString();
-            tciIga_hours.Text = cardItem.iga_hours.ToString();
-            tciNra_hours.Text = cardItem.nra_hours.ToString();
-            tciNrm_hours.Text = cardItem.nrm_hours.ToString();
-            tciIndividual_hours.Text = cardItem.individual_hours.ToString();
+            tciSemester.Text = cardItemView.semester.ToString();
+            tciCode.Text = cardItemView.code;
+            tciDiscipline_name.Text = cardItemView.discipline_name;
+            tciGroup_name.Text = cardItemView.group_name;
+            tciGroup_count.Text = cardItemView.group_count.ToString();
+            tciGroup_students_count.Text = cardItemView.group_students_count.ToString();
+            tciLecture_hours.Text = cardItemView.lecture_hours.ToString();
+            tciLab_hours.Text = cardItemView.lab_hours.ToString();
+            tciPractice_hours.Text = cardItemView.practice_hours.ToString();
+            tciExam_hours.Text = cardItemView.exam_hours.ToString();
+            tciZach_hours.Text = cardItemView.zach_hours.ToString();
+            tciZach_with_mark_hours.Text = cardItemView.zach_with_mark_hours.ToString();
+            tciCourse_project_hours.Text = cardItemView.course_project_hours.ToString();
+            tciCourse_task_hours.Text = cardItemView.course_task_hours.ToString();
+            tciControl_task_hours.Text = cardItemView.control_task_hours.ToString();
+            tciReferat_hours.Text = cardItemView.referat_hours.ToString();
+            tciEssay_hours.Text = cardItemView.essay_hours.ToString();
+            tciHead_of_practice_hours.Text = cardItemView.head_of_practice_hours.ToString();
+            tciHead_of_vkr_hours.Text = cardItemView.head_of_vkr_hours.ToString();
+            tciIga_hours.Text = cardItemView.iga_hours.ToString();
+            tciNra_hours.Text = cardItemView.nra_hours.ToString();
+            tciNrm_hours.Text = cardItemView.nrm_hours.ToString();
+            tciIndividual_hours.Text = cardItemView.individual_hours.ToString();
+
+            LtciTotalHours.Text = cardItemView.total_hours.ToString("0.00");
         }
 
         private void clearFields_Click(object sender, EventArgs e)
