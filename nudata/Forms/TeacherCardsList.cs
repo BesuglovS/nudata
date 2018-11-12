@@ -1,4 +1,5 @@
-﻿using nudata.DomainClasses.Main;
+﻿using nudata.Core;
+using nudata.DomainClasses.Main;
 using nudata.nubackRepos;
 using nudata.Views;
 using System;
@@ -187,7 +188,7 @@ namespace nudata.Forms
 
         private void add_Click(object sender, EventArgs e)
         {
-            var newYear = ParseIntOrZero(startingYear.Text.Split('-')[0]);
+            var newYear = Utilities.ParseIntOrZero(startingYear.Text.Split('-')[0]);
             var newDepartmentId = (int)departmentList.SelectedValue;
 
             var newTeacherCard = new TeacherCard {
@@ -222,7 +223,7 @@ namespace nudata.Forms
             {
                 var cardJoined = ((List<TeacherCardJoined>)cardsGridView.DataSource)[cardsGridView.SelectedCells[0].RowIndex];
 
-                var newYear = ParseIntOrZero(startingYear.Text.Split('-')[0]);
+                var newYear = Utilities.ParseIntOrZero(startingYear.Text.Split('-')[0]);
                 var newDepartmentId = (int)departmentList.SelectedValue;
 
                 var TeacherCardUpdated = new TeacherCard
@@ -362,50 +363,34 @@ namespace nudata.Forms
             cardItemsGridView.Columns["individual_hours"].HeaderText = "Индивидуальные занятия";
             cardItemsGridView.Columns["individual_hours"].Width = 100;
         }
-
-        private int ParseIntOrZero(string str)
-        {
-            int result = 0;
-            int.TryParse(str, out result);
-
-            return result;
-        }
-
-        private decimal ParseDecOrZero(string str)
-        {
-            decimal result = 0;
-            decimal.TryParse(str, out result);
-
-            return result;
-        }
-
+        
         private void tciAdd_Click(object sender, EventArgs e)
         {
             var newTeacherCardItem = new TeacherCardItem
             {
-                semester = ParseIntOrZero(tciSemester.Text),
+                semester = Utilities.ParseIntOrZero(tciSemester.Text),
                 code = tciCode.Text,
                 discipline_name = tciDiscipline_name.Text,
                 group_name = tciGroup_name.Text,
-                group_count = ParseIntOrZero(tciGroup_count.Text),
-                group_students_count = ParseIntOrZero(tciGroup_students_count.Text),
-                lecture_hours = ParseDecOrZero(tciLecture_hours.Text),
-                lab_hours = ParseDecOrZero(tciLab_hours.Text),
-                practice_hours = ParseDecOrZero(tciPractice_hours.Text),
-                exam_hours = ParseDecOrZero(tciExam_hours.Text),
-                zach_hours = ParseDecOrZero(tciZach_hours.Text),
-                zach_with_mark_hours = ParseDecOrZero(tciZach_with_mark_hours.Text),
-                course_project_hours = ParseDecOrZero(tciCourse_project_hours.Text),
-                course_task_hours = ParseDecOrZero(tciCourse_task_hours.Text),
-                control_task_hours = ParseDecOrZero(tciControl_task_hours.Text),
-                referat_hours = ParseDecOrZero(tciReferat_hours.Text),
-                essay_hours = ParseDecOrZero(tciEssay_hours.Text),
-                head_of_practice_hours = ParseDecOrZero(tciHead_of_practice_hours.Text),
-                head_of_vkr_hours = ParseDecOrZero(tciHead_of_vkr_hours.Text),
-                iga_hours = ParseDecOrZero(tciIga_hours.Text),
-                nra_hours = ParseDecOrZero(tciNra_hours.Text),
-                nrm_hours = ParseDecOrZero(tciNrm_hours.Text),
-                individual_hours = ParseDecOrZero(tciIndividual_hours.Text),
+                group_count = Utilities.ParseIntOrZero(tciGroup_count.Text),
+                group_students_count = Utilities.ParseIntOrZero(tciGroup_students_count.Text),
+                lecture_hours = Utilities.ParseDecOrZero(tciLecture_hours.Text),
+                lab_hours = Utilities.ParseDecOrZero(tciLab_hours.Text),
+                practice_hours = Utilities.ParseDecOrZero(tciPractice_hours.Text),
+                exam_hours = Utilities.ParseDecOrZero(tciExam_hours.Text),
+                zach_hours = Utilities.ParseDecOrZero(tciZach_hours.Text),
+                zach_with_mark_hours = Utilities.ParseDecOrZero(tciZach_with_mark_hours.Text),
+                course_project_hours = Utilities.ParseDecOrZero(tciCourse_project_hours.Text),
+                course_task_hours = Utilities.ParseDecOrZero(tciCourse_task_hours.Text),
+                control_task_hours = Utilities.ParseDecOrZero(tciControl_task_hours.Text),
+                referat_hours = Utilities.ParseDecOrZero(tciReferat_hours.Text),
+                essay_hours = Utilities.ParseDecOrZero(tciEssay_hours.Text),
+                head_of_practice_hours = Utilities.ParseDecOrZero(tciHead_of_practice_hours.Text),
+                head_of_vkr_hours = Utilities.ParseDecOrZero(tciHead_of_vkr_hours.Text),
+                iga_hours = Utilities.ParseDecOrZero(tciIga_hours.Text),
+                nra_hours = Utilities.ParseDecOrZero(tciNra_hours.Text),
+                nrm_hours = Utilities.ParseDecOrZero(tciNrm_hours.Text),
+                individual_hours = Utilities.ParseDecOrZero(tciIndividual_hours.Text),
                 teacher_card_id = currectCardJoined.id
             };
 
@@ -420,29 +405,29 @@ namespace nudata.Forms
             {
                 var cardItem = ((List<TeacherCardItem>)cardItemsGridView.DataSource)[cardItemsGridView.SelectedCells[0].RowIndex];
 
-                cardItem.semester = ParseIntOrZero(tciSemester.Text);
+                cardItem.semester = Utilities.ParseIntOrZero(tciSemester.Text);
                 cardItem.code = tciCode.Text;
                 cardItem.discipline_name = tciDiscipline_name.Text;
                 cardItem.group_name = tciGroup_name.Text;
-                cardItem.group_count = ParseIntOrZero(tciGroup_count.Text);
-                cardItem.group_students_count = ParseIntOrZero(tciGroup_students_count.Text);
-                cardItem.lecture_hours = ParseDecOrZero(tciLecture_hours.Text);
-                cardItem.lab_hours = ParseDecOrZero(tciLab_hours.Text);
-                cardItem.practice_hours = ParseDecOrZero(tciPractice_hours.Text);
-                cardItem.exam_hours = ParseDecOrZero(tciExam_hours.Text);
-                cardItem.zach_hours = ParseDecOrZero(tciZach_hours.Text);
-                cardItem.zach_with_mark_hours = ParseDecOrZero(tciZach_with_mark_hours.Text);
-                cardItem.course_project_hours = ParseDecOrZero(tciCourse_project_hours.Text);
-                cardItem.course_task_hours = ParseDecOrZero(tciCourse_task_hours.Text);
-                cardItem.control_task_hours = ParseDecOrZero(tciControl_task_hours.Text);
-                cardItem.referat_hours = ParseDecOrZero(tciReferat_hours.Text);
-                cardItem.essay_hours = ParseDecOrZero(tciEssay_hours.Text);
-                cardItem.head_of_practice_hours = ParseDecOrZero(tciHead_of_practice_hours.Text);
-                cardItem.head_of_vkr_hours = ParseDecOrZero(tciHead_of_vkr_hours.Text);
-                cardItem.iga_hours = ParseDecOrZero(tciIga_hours.Text);
-                cardItem.nra_hours = ParseDecOrZero(tciNra_hours.Text);
-                cardItem.nrm_hours = ParseDecOrZero(tciNrm_hours.Text);
-                cardItem.individual_hours = ParseDecOrZero(tciIndividual_hours.Text);
+                cardItem.group_count = Utilities.ParseIntOrZero(tciGroup_count.Text);
+                cardItem.group_students_count = Utilities.ParseIntOrZero(tciGroup_students_count.Text);
+                cardItem.lecture_hours = Utilities.ParseDecOrZero(tciLecture_hours.Text);
+                cardItem.lab_hours = Utilities.ParseDecOrZero(tciLab_hours.Text);
+                cardItem.practice_hours = Utilities.ParseDecOrZero(tciPractice_hours.Text);
+                cardItem.exam_hours = Utilities.ParseDecOrZero(tciExam_hours.Text);
+                cardItem.zach_hours = Utilities.ParseDecOrZero(tciZach_hours.Text);
+                cardItem.zach_with_mark_hours = Utilities.ParseDecOrZero(tciZach_with_mark_hours.Text);
+                cardItem.course_project_hours = Utilities.ParseDecOrZero(tciCourse_project_hours.Text);
+                cardItem.course_task_hours = Utilities.ParseDecOrZero(tciCourse_task_hours.Text);
+                cardItem.control_task_hours = Utilities.ParseDecOrZero(tciControl_task_hours.Text);
+                cardItem.referat_hours = Utilities.ParseDecOrZero(tciReferat_hours.Text);
+                cardItem.essay_hours = Utilities.ParseDecOrZero(tciEssay_hours.Text);
+                cardItem.head_of_practice_hours = Utilities.ParseDecOrZero(tciHead_of_practice_hours.Text);
+                cardItem.head_of_vkr_hours = Utilities.ParseDecOrZero(tciHead_of_vkr_hours.Text);
+                cardItem.iga_hours = Utilities.ParseDecOrZero(tciIga_hours.Text);
+                cardItem.nra_hours = Utilities.ParseDecOrZero(tciNra_hours.Text);
+                cardItem.nrm_hours = Utilities.ParseDecOrZero(tciNrm_hours.Text);
+                cardItem.individual_hours = Utilities.ParseDecOrZero(tciIndividual_hours.Text);
 
                 tciRepo.update(cardItem, cardItem.id);
 
@@ -539,7 +524,7 @@ namespace nudata.Forms
 
         private void ChangeGroupColor(TextBox textBox, Label labelForTextBox)
         {
-            if (ParseDecOrZero(textBox.Text) == 0)
+            if (Utilities.ParseDecOrZero(textBox.Text) == 0)
             {
                 textBox.ForeColor = Color.FromArgb(200, 200, 200);
                 labelForTextBox.ForeColor = Color.FromArgb(200, 200, 200);

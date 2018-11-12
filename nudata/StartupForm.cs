@@ -51,6 +51,9 @@ namespace nudata
         bool _teacherCardsListOpened;
         public TeacherCardsList TeacherCardsForm;
 
+        bool _positionYearRateHoursListOpened;
+        public PositionYearRateHoursList PositionYearRateHoursForm;
+
         public StartupForm()
         {
             InitializeComponent();
@@ -84,6 +87,9 @@ namespace nudata
 
             // Карточки учебных поручений - Alt-C
             HotKeyManager.RegisterHotKey(Keys.C, (uint)KeyModifiers.Alt);
+
+            // Карточки учебных поручений - Ctrl-Alt-H
+            HotKeyManager.RegisterHotKey(Keys.H, (uint)(KeyModifiers.Control | KeyModifiers.Alt));
 
             HotKeyManager.HotKeyPressed += ManageHotKeys;
 
@@ -161,7 +167,34 @@ namespace nudata
                 {
                     ShowStudentLearningPlanForm();
                 }
+
+                if (e.Key == Keys.H)
+                {
+                    ShowPositionYearRateHoursForm();
+                }
             }
+        }
+
+        private void ShowPositionYearRateHoursForm()
+        {
+            if (!AppPermissions.Check("PositionYearRateHoursList"))
+            {
+                MessageBox.Show("У вас нет разрешения на использование этой части приложения.");
+
+                return;
+            }
+
+            if (_positionYearRateHoursListOpened)
+            {
+                PositionYearRateHoursForm.Activate();
+                PositionYearRateHoursForm.Focus();
+                return;
+            }
+
+            PositionYearRateHoursForm = new PositionYearRateHoursList(ApiEndpoint);
+            _positionYearRateHoursListOpened = true;
+            PositionYearRateHoursForm.Show();
+            _positionYearRateHoursListOpened = false;
         }
 
         private void ShowTeacherCardsForm()
@@ -457,6 +490,11 @@ namespace nudata
         private void карточкиУчебныхПорученийToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowTeacherCardsForm();
+        }
+
+        private void количествоЧасовНаСтавкуToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowPositionYearRateHoursForm();
         }
     }
 }

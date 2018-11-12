@@ -100,6 +100,7 @@
     <Compile Include="Core\AppPermissions.cs" />
     <Compile Include="Core\LearningPlanWithPeriod.cs" />
     <Compile Include="Core\PhoneType.cs" />
+    <Compile Include="Core\Utilities.cs" />
     <Compile Include="DomainClasses\Extra\DepartmentHeadWithTeacherFio.cs" />
     <Compile Include="DomainClasses\Extra\StudentDetailsMode.cs" />
     <Compile Include="DomainClasses\Extra\UserPermission.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="DomainClasses\Main\LearningPlanDisciplineSemester.cs" />
     <Compile Include="DomainClasses\Main\Note.cs" />
     <Compile Include="DomainClasses\Main\Position.cs" />
+    <Compile Include="DomainClasses\Main\PositionYearRateHours.cs" />
     <Compile Include="DomainClasses\Main\Student.cs" />
     <Compile Include="DomainClasses\Main\StudentGroup.cs" />
     <Compile Include="DomainClasses\Main\StudentInGroup.cs" />
@@ -187,6 +189,12 @@
     <Compile Include="Forms\PhoneForm.Designer.cs">
       <DependentUpon>PhoneForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\PositionYearRateHoursList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PositionYearRateHoursList.Designer.cs">
+      <DependentUpon>PositionYearRateHoursList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\StudentGroupList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -237,6 +245,7 @@
     <Compile Include="nubackRepos\LearningPlanRepo.cs" />
     <Compile Include="nubackRepos\NoteRepo.cs" />
     <Compile Include="nubackRepos\PositionRepo.cs" />
+    <Compile Include="nubackRepos\PositionYearRateHoursRepo.cs" />
     <Compile Include="nubackRepos\StudentGroupRepo.cs" />
     <Compile Include="nubackRepos\StudentLearningPlanRepo.cs" />
     <Compile Include="nubackRepos\StudentRepo.cs" />
@@ -284,6 +293,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PhoneForm.resx">
       <DependentUpon>PhoneForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PositionYearRateHoursList.resx">
+      <DependentUpon>PositionYearRateHoursList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\StudentGroupList.resx">
       <DependentUpon>StudentGroupList.cs</DependentUpon>
@@ -414,6 +426,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\cards.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hours.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
