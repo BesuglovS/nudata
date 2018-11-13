@@ -11,11 +11,12 @@ namespace nudata.DomainClasses.Main
         public int id { get; set; }
         public int teacher_id { get; set; }
         public string position { get; set; }
+        public string rate_multiplier { get; set; }
         public string academic_degree { get; set; }
         public string academic_rank { get; set; }
         public string department_rank { get; set; }
         public int department_id { get; set; }
         public string position_type { get; set; }
-        public int starting_year { get; set; }
+        public int starting_year { get; set; }        
     }
 }

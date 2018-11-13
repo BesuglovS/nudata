@@ -50,7 +50,8 @@ namespace nudata.nubackRepos
                     { "department_rank", TeacherCard.department_rank },
                     { "department_id", TeacherCard.department_id.ToString() },
                     { "position_type", TeacherCard.position_type },
-                    { "starting_year", TeacherCard.starting_year.ToString() }
+                    { "starting_year", TeacherCard.starting_year.ToString() },
+                    { "rate_multiplier", TeacherCard.rate_multiplier }
                 });
 
             return response;
@@ -87,7 +88,8 @@ namespace nudata.nubackRepos
                     { "department_rank", TeacherCard.department_rank },
                     { "department_id", TeacherCard.department_id.ToString() },
                     { "position_type", TeacherCard.position_type },
-                    { "starting_year", TeacherCard.starting_year.ToString() }
+                    { "starting_year", TeacherCard.starting_year.ToString() },
+                    { "rate_multiplier", TeacherCard.rate_multiplier }
                 });
 
             return response;

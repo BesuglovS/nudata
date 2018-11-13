@@ -28,15 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.leftPanel = new System.Windows.Forms.Panel();
             this.departmentViewPanel = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.departmentGridView = new System.Windows.Forms.DataGridView();
+            this.departmentInfoPanel = new System.Windows.Forms.Panel();
+            this.departmentDataGrid = new System.Windows.Forms.DataGridView();
             this.leftTopPanel = new System.Windows.Forms.Panel();
             this.yearsGridView = new System.Windows.Forms.DataGridView();
             this.rightPanel = new System.Windows.Forms.Panel();
             this.cardItemsViewPanel = new System.Windows.Forms.Panel();
             this.cardItemsGridView = new System.Windows.Forms.DataGridView();
             this.cardItemControlPanel = new System.Windows.Forms.Panel();
+            this.LtciTotalHours = new System.Windows.Forms.Label();
             this.tciIndividual_hours = new System.Windows.Forms.TextBox();
             this.LtciIndividual_hours = new System.Windows.Forms.Label();
             this.clearFields = new System.Windows.Forms.Button();
@@ -91,6 +96,9 @@
             this.cardViewPanel = new System.Windows.Forms.Panel();
             this.cardsGridView = new System.Windows.Forms.DataGridView();
             this.cardControlsPanel = new System.Windows.Forms.Panel();
+            this.LtcRateMultiplier2 = new System.Windows.Forms.Label();
+            this.LtcRateMultiplier3 = new System.Windows.Forms.Label();
+            this.LtcTotalHours = new System.Windows.Forms.Label();
             this.departmentList = new System.Windows.Forms.ComboBox();
             this.label30 = new System.Windows.Forms.Label();
             this.startingYear = new System.Windows.Forms.TextBox();
@@ -110,16 +118,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.teacherList = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.LtciTotalHours = new System.Windows.Forms.Label();
-            this.LtcTotalHours = new System.Windows.Forms.Label();
-            this.LtcRateMultiplier3 = new System.Windows.Forms.Label();
-            this.LtcRateMultiplier2 = new System.Windows.Forms.Label();
-            this.departmentInfoPanel = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.departmentGridView = new System.Windows.Forms.DataGridView();
-            this.departmentDataGrid = new System.Windows.Forms.DataGridView();
+            this.rateMultiplier = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.leftPanel.SuspendLayout();
             this.departmentViewPanel.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.departmentGridView)).BeginInit();
+            this.departmentInfoPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.departmentDataGrid)).BeginInit();
             this.leftTopPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.yearsGridView)).BeginInit();
             this.rightPanel.SuspendLayout();
@@ -130,10 +136,6 @@
             this.cardViewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cardsGridView)).BeginInit();
             this.cardControlsPanel.SuspendLayout();
-            this.departmentInfoPanel.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.departmentGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.departmentDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // leftPanel
@@ -156,6 +158,47 @@
             this.departmentViewPanel.Size = new System.Drawing.Size(322, 588);
             this.departmentViewPanel.TabIndex = 1;
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.departmentGridView);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(322, 438);
+            this.panel2.TabIndex = 1;
+            // 
+            // departmentGridView
+            // 
+            this.departmentGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.departmentGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.departmentGridView.Location = new System.Drawing.Point(0, 0);
+            this.departmentGridView.Name = "departmentGridView";
+            this.departmentGridView.ReadOnly = true;
+            this.departmentGridView.RowHeadersVisible = false;
+            this.departmentGridView.Size = new System.Drawing.Size(322, 438);
+            this.departmentGridView.TabIndex = 1;
+            this.departmentGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.departmentGridView_CellClick);
+            // 
+            // departmentInfoPanel
+            // 
+            this.departmentInfoPanel.Controls.Add(this.departmentDataGrid);
+            this.departmentInfoPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.departmentInfoPanel.Location = new System.Drawing.Point(0, 438);
+            this.departmentInfoPanel.Name = "departmentInfoPanel";
+            this.departmentInfoPanel.Size = new System.Drawing.Size(322, 150);
+            this.departmentInfoPanel.TabIndex = 0;
+            // 
+            // departmentDataGrid
+            // 
+            this.departmentDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.departmentDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.departmentDataGrid.Location = new System.Drawing.Point(0, 0);
+            this.departmentDataGrid.Name = "departmentDataGrid";
+            this.departmentDataGrid.ReadOnly = true;
+            this.departmentDataGrid.RowHeadersVisible = false;
+            this.departmentDataGrid.Size = new System.Drawing.Size(322, 150);
+            this.departmentDataGrid.TabIndex = 0;
+            // 
             // leftTopPanel
             // 
             this.leftTopPanel.Controls.Add(this.yearsGridView);
@@ -168,14 +211,14 @@
             // yearsGridView
             // 
             this.yearsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.yearsGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.yearsGridView.DefaultCellStyle = dataGridViewCellStyle1;
             this.yearsGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.yearsGridView.Location = new System.Drawing.Point(0, 0);
             this.yearsGridView.Name = "yearsGridView";
@@ -277,6 +320,16 @@
             this.cardItemControlPanel.Name = "cardItemControlPanel";
             this.cardItemControlPanel.Size = new System.Drawing.Size(980, 171);
             this.cardItemControlPanel.TabIndex = 1;
+            // 
+            // LtciTotalHours
+            // 
+            this.LtciTotalHours.AutoSize = true;
+            this.LtciTotalHours.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.LtciTotalHours.Location = new System.Drawing.Point(114, 5);
+            this.LtciTotalHours.Name = "LtciTotalHours";
+            this.LtciTotalHours.Size = new System.Drawing.Size(116, 37);
+            this.LtciTotalHours.TabIndex = 54;
+            this.LtciTotalHours.Text = "000.00";
             // 
             // tciIndividual_hours
             // 
@@ -736,6 +789,8 @@
             // 
             // cardControlsPanel
             // 
+            this.cardControlsPanel.Controls.Add(this.rateMultiplier);
+            this.cardControlsPanel.Controls.Add(this.label13);
             this.cardControlsPanel.Controls.Add(this.LtcRateMultiplier2);
             this.cardControlsPanel.Controls.Add(this.LtcRateMultiplier3);
             this.cardControlsPanel.Controls.Add(this.LtcTotalHours);
@@ -763,6 +818,36 @@
             this.cardControlsPanel.Name = "cardControlsPanel";
             this.cardControlsPanel.Size = new System.Drawing.Size(980, 181);
             this.cardControlsPanel.TabIndex = 0;
+            // 
+            // LtcRateMultiplier2
+            // 
+            this.LtcRateMultiplier2.AutoSize = true;
+            this.LtcRateMultiplier2.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.LtcRateMultiplier2.Location = new System.Drawing.Point(768, 110);
+            this.LtcRateMultiplier2.Name = "LtcRateMultiplier2";
+            this.LtcRateMultiplier2.Size = new System.Drawing.Size(80, 37);
+            this.LtcRateMultiplier2.TabIndex = 57;
+            this.LtcRateMultiplier2.Text = "0.00";
+            // 
+            // LtcRateMultiplier3
+            // 
+            this.LtcRateMultiplier3.AutoSize = true;
+            this.LtcRateMultiplier3.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.LtcRateMultiplier3.Location = new System.Drawing.Point(768, 73);
+            this.LtcRateMultiplier3.Name = "LtcRateMultiplier3";
+            this.LtcRateMultiplier3.Size = new System.Drawing.Size(98, 37);
+            this.LtcRateMultiplier3.TabIndex = 56;
+            this.LtcRateMultiplier3.Text = "0.000";
+            // 
+            // LtcTotalHours
+            // 
+            this.LtcTotalHours.AutoSize = true;
+            this.LtcTotalHours.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.LtcTotalHours.Location = new System.Drawing.Point(768, 36);
+            this.LtcTotalHours.Name = "LtcTotalHours";
+            this.LtcTotalHours.Size = new System.Drawing.Size(134, 37);
+            this.LtcTotalHours.TabIndex = 55;
+            this.LtcTotalHours.Text = "0000.00";
             // 
             // departmentList
             // 
@@ -817,7 +902,7 @@
             // 
             // tcRemove
             // 
-            this.tcRemove.Location = new System.Drawing.Point(899, 107);
+            this.tcRemove.Location = new System.Drawing.Point(901, 107);
             this.tcRemove.Name = "tcRemove";
             this.tcRemove.Size = new System.Drawing.Size(75, 23);
             this.tcRemove.TabIndex = 14;
@@ -827,7 +912,7 @@
             // 
             // tcUpdate
             // 
-            this.tcUpdate.Location = new System.Drawing.Point(899, 79);
+            this.tcUpdate.Location = new System.Drawing.Point(901, 79);
             this.tcUpdate.Name = "tcUpdate";
             this.tcUpdate.Size = new System.Drawing.Size(75, 23);
             this.tcUpdate.TabIndex = 13;
@@ -837,7 +922,7 @@
             // 
             // tcAdd
             // 
-            this.tcAdd.Location = new System.Drawing.Point(899, 49);
+            this.tcAdd.Location = new System.Drawing.Point(901, 49);
             this.tcAdd.Name = "tcAdd";
             this.tcAdd.Size = new System.Drawing.Size(74, 24);
             this.tcAdd.TabIndex = 12;
@@ -906,7 +991,7 @@
             // 
             this.position.Location = new System.Drawing.Point(9, 65);
             this.position.Name = "position";
-            this.position.Size = new System.Drawing.Size(366, 20);
+            this.position.Size = new System.Drawing.Size(160, 20);
             this.position.TabIndex = 3;
             // 
             // label2
@@ -935,86 +1020,21 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Преподаватель";
             // 
-            // LtciTotalHours
+            // rateMultiplier
             // 
-            this.LtciTotalHours.AutoSize = true;
-            this.LtciTotalHours.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LtciTotalHours.Location = new System.Drawing.Point(114, 5);
-            this.LtciTotalHours.Name = "LtciTotalHours";
-            this.LtciTotalHours.Size = new System.Drawing.Size(116, 37);
-            this.LtciTotalHours.TabIndex = 54;
-            this.LtciTotalHours.Text = "000.00";
+            this.rateMultiplier.Location = new System.Drawing.Point(211, 64);
+            this.rateMultiplier.Name = "rateMultiplier";
+            this.rateMultiplier.Size = new System.Drawing.Size(164, 20);
+            this.rateMultiplier.TabIndex = 59;
             // 
-            // LtcTotalHours
+            // label13
             // 
-            this.LtcTotalHours.AutoSize = true;
-            this.LtcTotalHours.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LtcTotalHours.Location = new System.Drawing.Point(766, 42);
-            this.LtcTotalHours.Name = "LtcTotalHours";
-            this.LtcTotalHours.Size = new System.Drawing.Size(134, 37);
-            this.LtcTotalHours.TabIndex = 55;
-            this.LtcTotalHours.Text = "0000.00";
-            // 
-            // LtcRateMultiplier3
-            // 
-            this.LtcRateMultiplier3.AutoSize = true;
-            this.LtcRateMultiplier3.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LtcRateMultiplier3.Location = new System.Drawing.Point(766, 79);
-            this.LtcRateMultiplier3.Name = "LtcRateMultiplier3";
-            this.LtcRateMultiplier3.Size = new System.Drawing.Size(98, 37);
-            this.LtcRateMultiplier3.TabIndex = 56;
-            this.LtcRateMultiplier3.Text = "0.000";
-            // 
-            // LtcRateMultiplier2
-            // 
-            this.LtcRateMultiplier2.AutoSize = true;
-            this.LtcRateMultiplier2.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LtcRateMultiplier2.Location = new System.Drawing.Point(766, 116);
-            this.LtcRateMultiplier2.Name = "LtcRateMultiplier2";
-            this.LtcRateMultiplier2.Size = new System.Drawing.Size(80, 37);
-            this.LtcRateMultiplier2.TabIndex = 57;
-            this.LtcRateMultiplier2.Text = "0.00";
-            // 
-            // departmentInfoPanel
-            // 
-            this.departmentInfoPanel.Controls.Add(this.departmentDataGrid);
-            this.departmentInfoPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.departmentInfoPanel.Location = new System.Drawing.Point(0, 375);
-            this.departmentInfoPanel.Name = "departmentInfoPanel";
-            this.departmentInfoPanel.Size = new System.Drawing.Size(322, 213);
-            this.departmentInfoPanel.TabIndex = 0;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.departmentGridView);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(322, 375);
-            this.panel2.TabIndex = 1;
-            // 
-            // departmentGridView
-            // 
-            this.departmentGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.departmentGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.departmentGridView.Location = new System.Drawing.Point(0, 0);
-            this.departmentGridView.Name = "departmentGridView";
-            this.departmentGridView.ReadOnly = true;
-            this.departmentGridView.RowHeadersVisible = false;
-            this.departmentGridView.Size = new System.Drawing.Size(322, 375);
-            this.departmentGridView.TabIndex = 1;
-            this.departmentGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.departmentGridView_CellClick);
-            // 
-            // departmentDataGrid
-            // 
-            this.departmentDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.departmentDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.departmentDataGrid.Location = new System.Drawing.Point(0, 0);
-            this.departmentDataGrid.Name = "departmentDataGrid";
-            this.departmentDataGrid.ReadOnly = true;
-            this.departmentDataGrid.RowHeadersVisible = false;
-            this.departmentDataGrid.Size = new System.Drawing.Size(322, 213);
-            this.departmentDataGrid.TabIndex = 0;
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(208, 49);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(72, 13);
+            this.label13.TabIndex = 58;
+            this.label13.Text = "Доля ставки";
             // 
             // TeacherCardsList
             // 
@@ -1028,6 +1048,10 @@
             this.Load += new System.EventHandler(this.TeacherCardsList_Load);
             this.leftPanel.ResumeLayout(false);
             this.departmentViewPanel.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.departmentGridView)).EndInit();
+            this.departmentInfoPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.departmentDataGrid)).EndInit();
             this.leftTopPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.yearsGridView)).EndInit();
             this.rightPanel.ResumeLayout(false);
@@ -1040,10 +1064,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.cardsGridView)).EndInit();
             this.cardControlsPanel.ResumeLayout(false);
             this.cardControlsPanel.PerformLayout();
-            this.departmentInfoPanel.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.departmentGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.departmentDataGrid)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1139,5 +1159,7 @@
         private System.Windows.Forms.DataGridView departmentGridView;
         private System.Windows.Forms.Panel departmentInfoPanel;
         private System.Windows.Forms.DataGridView departmentDataGrid;
+        private System.Windows.Forms.TextBox rateMultiplier;
+        private System.Windows.Forms.Label label13;
     }
 }

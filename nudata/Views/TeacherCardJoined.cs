@@ -17,9 +17,10 @@ namespace nudata.Views
         public string i { get; set; }
         public string o { get; set; }
         public string position { get; set; }
+        public string rate_multiplier { get; set; }
         public string academic_degree { get; set; }
         public string academic_rank { get; set; }
         public string department_rank { get; set; }
-        public string position_type { get; set; } 
+        public string position_type { get; set; }        
     }
 }

@@ -164,6 +164,23 @@ namespace nudata.Forms
         {
             currentDepartment = ((List<Department>)departmentGridView.DataSource)[e.RowIndex];
             UpdateTeacherCardsList();
+            UpdateRatesList();
+        }
+
+        private void UpdateRatesList()
+        {
+            var rates = dRepo.rateHours(currentYear, currentDepartment.id);
+
+            departmentDataGrid.DataSource = rates.rate_values;
+
+            departmentDataGrid.Columns["position"].HeaderText = "Должность";
+            departmentDataGrid.Columns["position"].Width = 130;
+            departmentDataGrid.Columns["r2"].HeaderText = "Ставки" + Environment.NewLine + "(2 знака)";
+            departmentDataGrid.Columns["r2"].Width = 60;
+            departmentDataGrid.Columns["r3"].HeaderText = "Ставки" + Environment.NewLine + "(3 знака)";
+            departmentDataGrid.Columns["r3"].Width = 60;
+            departmentDataGrid.Columns["rCard"].HeaderText = "По карточкам";
+            departmentDataGrid.Columns["rCard"].Width = 65;
         }
 
         private void UpdateTeacherCardsList()
@@ -186,6 +203,7 @@ namespace nudata.Forms
             cardsGridView.Columns["academic_rank"].HeaderText = "Учёное звание";
             cardsGridView.Columns["department_rank"].HeaderText = "Должность на кафедре";
             cardsGridView.Columns["position_type"].HeaderText = "Условие привлечения";
+            cardsGridView.Columns["rate_multiplier"].HeaderText = "Доля ставки";
         }
 
         private void add_Click(object sender, EventArgs e)
@@ -201,7 +219,8 @@ namespace nudata.Forms
                 department_rank = departmentRank.Text,
                 position_type = positionType.Text,
                 department_id = newDepartmentId,
-                starting_year = newYear
+                starting_year = newYear,
+                rate_multiplier = rateMultiplier.Text
             };
 
             tcRepo.add(newTeacherCard);
@@ -238,7 +257,9 @@ namespace nudata.Forms
                     department_rank = departmentRank.Text,
                     position_type = positionType.Text,
                     department_id = newDepartmentId,
-                    starting_year = newYear
+                    starting_year = newYear,
+                    rate_multiplier = rateMultiplier.Text
+
                 };
 
                 tcRepo.update(TeacherCardUpdated, TeacherCardUpdated.id);
@@ -280,6 +301,7 @@ namespace nudata.Forms
             academicRank.Text = currectCardJoined.academic_rank;
             departmentRank.Text = currectCardJoined.department_rank;
             positionType.Text = currectCardJoined.position_type;
+            rateMultiplier.Text = currectCardJoined.rate_multiplier;
 
             startingYear.Text = currectCardJoined.starting_year.ToString() + " - " + (currectCardJoined.starting_year + 1).ToString();
             departmentList.SelectedValue = currectCardJoined.department_id;

@@ -26,7 +26,7 @@
     <InstallUrl>http://wiki.nayanova.edu/nudata/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>28</ApplicationRevision>
+    <ApplicationRevision>29</ApplicationRevision>
     <ApplicationVersion>0.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -102,6 +102,8 @@
     <Compile Include="Core\PhoneType.cs" />
     <Compile Include="Core\Utilities.cs" />
     <Compile Include="DomainClasses\Extra\DepartmentHeadWithTeacherFio.cs" />
+    <Compile Include="DomainClasses\Extra\DepartmentYearPositionRate.cs" />
+    <Compile Include="DomainClasses\Extra\DepartmentYearPositionRates.cs" />
     <Compile Include="DomainClasses\Extra\StudentDetailsMode.cs" />
     <Compile Include="DomainClasses\Extra\UserPermission.cs" />
     <Compile Include="DomainClasses\Main\AcademicDegree.cs" />

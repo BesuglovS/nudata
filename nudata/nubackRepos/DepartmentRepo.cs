@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using nudata.DomainClasses.Extra;
 using nudata.DomainClasses.Main;
 using nudata.Net;
 using System;
@@ -82,6 +83,24 @@ namespace nudata.nubackRepos
                 new Dictionary<string, string>());
 
             return response;
+        }
+
+        public DepartmentYearPositionRates rateHours(int year, int departmentId)
+        {
+            var StringResult = ApiHelper.Get(ApiEndpoint + "/department/rateHours/" + year.ToString() + "/" + departmentId.ToString());
+
+            DepartmentYearPositionRates result;
+
+            try
+            {
+                result = JsonConvert.DeserializeObject<DepartmentYearPositionRates>(StringResult);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+            return result;
         }
     }
 }
