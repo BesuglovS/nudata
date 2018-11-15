@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.leftPanel = new System.Windows.Forms.Panel();
             this.departmentViewPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -96,6 +96,11 @@
             this.cardViewPanel = new System.Windows.Forms.Panel();
             this.cardsGridView = new System.Windows.Forms.DataGridView();
             this.cardControlsPanel = new System.Windows.Forms.Panel();
+            this.departmentRank = new System.Windows.Forms.ComboBox();
+            this.academicRank = new System.Windows.Forms.ComboBox();
+            this.position = new System.Windows.Forms.ComboBox();
+            this.rateMultiplier = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.LtcRateMultiplier2 = new System.Windows.Forms.Label();
             this.LtcRateMultiplier3 = new System.Windows.Forms.Label();
             this.LtcTotalHours = new System.Windows.Forms.Label();
@@ -108,18 +113,15 @@
             this.tcUpdate = new System.Windows.Forms.Button();
             this.tcAdd = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
-            this.departmentRank = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.academicRank = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.academicDegree = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.position = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.teacherList = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.rateMultiplier = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
+            this.LtcTotalHours1 = new System.Windows.Forms.Label();
+            this.LtcTotalHours2 = new System.Windows.Forms.Label();
             this.leftPanel.SuspendLayout();
             this.departmentViewPanel.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -211,14 +213,14 @@
             // yearsGridView
             // 
             this.yearsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.yearsGridView.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.yearsGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.yearsGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.yearsGridView.Location = new System.Drawing.Point(0, 0);
             this.yearsGridView.Name = "yearsGridView";
@@ -338,6 +340,7 @@
             this.tciIndividual_hours.Size = new System.Drawing.Size(153, 20);
             this.tciIndividual_hours.TabIndex = 53;
             this.tciIndividual_hours.TextChanged += new System.EventHandler(this.tciIndividual_hours_TextChanged);
+            this.tciIndividual_hours.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDown_Add_Click);
             // 
             // LtciIndividual_hours
             // 
@@ -395,6 +398,7 @@
             this.tciNrm_hours.Size = new System.Drawing.Size(117, 20);
             this.tciNrm_hours.TabIndex = 47;
             this.tciNrm_hours.TextChanged += new System.EventHandler(this.tciNrm_hours_TextChanged);
+            this.tciNrm_hours.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDown_Add_Click);
             // 
             // LtciNrm_hours
             // 
@@ -412,6 +416,7 @@
             this.tciNra_hours.Size = new System.Drawing.Size(117, 20);
             this.tciNra_hours.TabIndex = 45;
             this.tciNra_hours.TextChanged += new System.EventHandler(this.tciNra_hours_TextChanged);
+            this.tciNra_hours.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDown_Add_Click);
             // 
             // LtciNra_hours
             // 
@@ -429,6 +434,7 @@
             this.tciIga_hours.Size = new System.Drawing.Size(117, 20);
             this.tciIga_hours.TabIndex = 43;
             this.tciIga_hours.TextChanged += new System.EventHandler(this.tciIga_hours_TextChanged);
+            this.tciIga_hours.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDown_Add_Click);
             // 
             // LtciIga_hours
             // 
@@ -446,6 +452,7 @@
             this.tciHead_of_vkr_hours.Size = new System.Drawing.Size(117, 20);
             this.tciHead_of_vkr_hours.TabIndex = 41;
             this.tciHead_of_vkr_hours.TextChanged += new System.EventHandler(this.tciHead_of_vkr_hours_TextChanged);
+            this.tciHead_of_vkr_hours.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDown_Add_Click);
             // 
             // LtciHead_of_vkr_hours
             // 
@@ -463,6 +470,7 @@
             this.tciHead_of_practice_hours.Size = new System.Drawing.Size(117, 20);
             this.tciHead_of_practice_hours.TabIndex = 39;
             this.tciHead_of_practice_hours.TextChanged += new System.EventHandler(this.tciHead_of_practice_hours_TextChanged);
+            this.tciHead_of_practice_hours.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDown_Add_Click);
             // 
             // LtciHead_of_practice_hours
             // 
@@ -480,6 +488,7 @@
             this.tciEssay_hours.Size = new System.Drawing.Size(117, 20);
             this.tciEssay_hours.TabIndex = 37;
             this.tciEssay_hours.TextChanged += new System.EventHandler(this.tciEssay_hours_TextChanged);
+            this.tciEssay_hours.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDown_Add_Click);
             // 
             // LtciEssay_hours
             // 
@@ -497,6 +506,7 @@
             this.tciReferat_hours.Size = new System.Drawing.Size(117, 20);
             this.tciReferat_hours.TabIndex = 35;
             this.tciReferat_hours.TextChanged += new System.EventHandler(this.tciReferat_hours_TextChanged);
+            this.tciReferat_hours.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDown_Add_Click);
             // 
             // LtciReferat_hours
             // 
@@ -514,6 +524,7 @@
             this.tciControl_task_hours.Size = new System.Drawing.Size(117, 20);
             this.tciControl_task_hours.TabIndex = 33;
             this.tciControl_task_hours.TextChanged += new System.EventHandler(this.tciControl_task_hours_TextChanged);
+            this.tciControl_task_hours.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDown_Add_Click);
             // 
             // LtciControl_task_hours
             // 
@@ -531,6 +542,7 @@
             this.tciCourse_task_hours.Size = new System.Drawing.Size(117, 20);
             this.tciCourse_task_hours.TabIndex = 31;
             this.tciCourse_task_hours.TextChanged += new System.EventHandler(this.tciCourse_task_hours_TextChanged);
+            this.tciCourse_task_hours.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDown_Add_Click);
             // 
             // LtciCourse_task_hours
             // 
@@ -548,6 +560,7 @@
             this.tciCourse_project_hours.Size = new System.Drawing.Size(117, 20);
             this.tciCourse_project_hours.TabIndex = 29;
             this.tciCourse_project_hours.TextChanged += new System.EventHandler(this.tciCourse_project_hours_TextChanged);
+            this.tciCourse_project_hours.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDown_Add_Click);
             // 
             // LtciCourse_project_hours
             // 
@@ -565,6 +578,7 @@
             this.tciZach_with_mark_hours.Size = new System.Drawing.Size(117, 20);
             this.tciZach_with_mark_hours.TabIndex = 27;
             this.tciZach_with_mark_hours.TextChanged += new System.EventHandler(this.tciZach_with_mark_hours_TextChanged);
+            this.tciZach_with_mark_hours.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDown_Add_Click);
             // 
             // LtciZach_with_mark_hours
             // 
@@ -582,6 +596,7 @@
             this.tciZach_hours.Size = new System.Drawing.Size(117, 20);
             this.tciZach_hours.TabIndex = 25;
             this.tciZach_hours.TextChanged += new System.EventHandler(this.tciZach_hours_TextChanged);
+            this.tciZach_hours.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDown_Add_Click);
             // 
             // LtciZach_hours
             // 
@@ -599,6 +614,7 @@
             this.tciExam_hours.Size = new System.Drawing.Size(117, 20);
             this.tciExam_hours.TabIndex = 23;
             this.tciExam_hours.TextChanged += new System.EventHandler(this.tciExam_hours_TextChanged);
+            this.tciExam_hours.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDown_Add_Click);
             // 
             // LtciExam_hours
             // 
@@ -616,6 +632,7 @@
             this.tciPractice_hours.Size = new System.Drawing.Size(117, 20);
             this.tciPractice_hours.TabIndex = 21;
             this.tciPractice_hours.TextChanged += new System.EventHandler(this.tciPractice_hours_TextChanged);
+            this.tciPractice_hours.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDown_Add_Click);
             // 
             // LtciPractice_hours
             // 
@@ -633,6 +650,7 @@
             this.tciLab_hours.Size = new System.Drawing.Size(117, 20);
             this.tciLab_hours.TabIndex = 19;
             this.tciLab_hours.TextChanged += new System.EventHandler(this.tciLab_hours_TextChanged);
+            this.tciLab_hours.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDown_Add_Click);
             // 
             // LtciLab_hours
             // 
@@ -650,6 +668,7 @@
             this.tciLecture_hours.Size = new System.Drawing.Size(117, 20);
             this.tciLecture_hours.TabIndex = 17;
             this.tciLecture_hours.TextChanged += new System.EventHandler(this.tciLecture_hours_TextChanged);
+            this.tciLecture_hours.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDown_Add_Click);
             // 
             // LtciLecture_hours
             // 
@@ -789,6 +808,11 @@
             // 
             // cardControlsPanel
             // 
+            this.cardControlsPanel.Controls.Add(this.LtcTotalHours2);
+            this.cardControlsPanel.Controls.Add(this.LtcTotalHours1);
+            this.cardControlsPanel.Controls.Add(this.departmentRank);
+            this.cardControlsPanel.Controls.Add(this.academicRank);
+            this.cardControlsPanel.Controls.Add(this.position);
             this.cardControlsPanel.Controls.Add(this.rateMultiplier);
             this.cardControlsPanel.Controls.Add(this.label13);
             this.cardControlsPanel.Controls.Add(this.LtcRateMultiplier2);
@@ -803,13 +827,10 @@
             this.cardControlsPanel.Controls.Add(this.tcUpdate);
             this.cardControlsPanel.Controls.Add(this.tcAdd);
             this.cardControlsPanel.Controls.Add(this.label6);
-            this.cardControlsPanel.Controls.Add(this.departmentRank);
             this.cardControlsPanel.Controls.Add(this.label5);
-            this.cardControlsPanel.Controls.Add(this.academicRank);
             this.cardControlsPanel.Controls.Add(this.label4);
             this.cardControlsPanel.Controls.Add(this.academicDegree);
             this.cardControlsPanel.Controls.Add(this.label3);
-            this.cardControlsPanel.Controls.Add(this.position);
             this.cardControlsPanel.Controls.Add(this.label2);
             this.cardControlsPanel.Controls.Add(this.teacherList);
             this.cardControlsPanel.Controls.Add(this.label1);
@@ -819,11 +840,66 @@
             this.cardControlsPanel.Size = new System.Drawing.Size(980, 181);
             this.cardControlsPanel.TabIndex = 0;
             // 
+            // departmentRank
+            // 
+            this.departmentRank.FormattingEnabled = true;
+            this.departmentRank.Items.AddRange(new object[] {
+            "Заведующий кафедрой",
+            "Профессор",
+            "Доцент",
+            "Старший преподаватель",
+            "Ассистент"});
+            this.departmentRank.Location = new System.Drawing.Point(396, 63);
+            this.departmentRank.Name = "departmentRank";
+            this.departmentRank.Size = new System.Drawing.Size(366, 21);
+            this.departmentRank.TabIndex = 9;
+            // 
+            // academicRank
+            // 
+            this.academicRank.FormattingEnabled = true;
+            this.academicRank.Items.AddRange(new object[] {
+            "Профессор",
+            "Доцент"});
+            this.academicRank.Location = new System.Drawing.Point(396, 25);
+            this.academicRank.Name = "academicRank";
+            this.academicRank.Size = new System.Drawing.Size(366, 21);
+            this.academicRank.TabIndex = 7;
+            // 
+            // position
+            // 
+            this.position.FormattingEnabled = true;
+            this.position.Items.AddRange(new object[] {
+            "Заведующий кафедрой",
+            "Профессор",
+            "Доцент",
+            "Старший преподаватель",
+            "Ассистент"});
+            this.position.Location = new System.Drawing.Point(9, 65);
+            this.position.Name = "position";
+            this.position.Size = new System.Drawing.Size(181, 21);
+            this.position.TabIndex = 2;
+            // 
+            // rateMultiplier
+            // 
+            this.rateMultiplier.Location = new System.Drawing.Point(211, 65);
+            this.rateMultiplier.Name = "rateMultiplier";
+            this.rateMultiplier.Size = new System.Drawing.Size(164, 20);
+            this.rateMultiplier.TabIndex = 3;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(208, 49);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(72, 13);
+            this.label13.TabIndex = 58;
+            this.label13.Text = "Доля ставки";
+            // 
             // LtcRateMultiplier2
             // 
             this.LtcRateMultiplier2.AutoSize = true;
             this.LtcRateMultiplier2.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LtcRateMultiplier2.Location = new System.Drawing.Point(768, 110);
+            this.LtcRateMultiplier2.Location = new System.Drawing.Point(768, 141);
             this.LtcRateMultiplier2.Name = "LtcRateMultiplier2";
             this.LtcRateMultiplier2.Size = new System.Drawing.Size(80, 37);
             this.LtcRateMultiplier2.TabIndex = 57;
@@ -833,7 +909,7 @@
             // 
             this.LtcRateMultiplier3.AutoSize = true;
             this.LtcRateMultiplier3.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LtcRateMultiplier3.Location = new System.Drawing.Point(768, 73);
+            this.LtcRateMultiplier3.Location = new System.Drawing.Point(768, 104);
             this.LtcRateMultiplier3.Name = "LtcRateMultiplier3";
             this.LtcRateMultiplier3.Size = new System.Drawing.Size(98, 37);
             this.LtcRateMultiplier3.TabIndex = 56;
@@ -843,7 +919,7 @@
             // 
             this.LtcTotalHours.AutoSize = true;
             this.LtcTotalHours.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LtcTotalHours.Location = new System.Drawing.Point(768, 36);
+            this.LtcTotalHours.Location = new System.Drawing.Point(768, 2);
             this.LtcTotalHours.Name = "LtcTotalHours";
             this.LtcTotalHours.Size = new System.Drawing.Size(134, 37);
             this.LtcTotalHours.TabIndex = 55;
@@ -939,13 +1015,6 @@
             this.label6.TabIndex = 10;
             this.label6.Text = "Условие привлечения";
             // 
-            // departmentRank
-            // 
-            this.departmentRank.Location = new System.Drawing.Point(396, 64);
-            this.departmentRank.Name = "departmentRank";
-            this.departmentRank.Size = new System.Drawing.Size(366, 20);
-            this.departmentRank.TabIndex = 9;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -954,13 +1023,6 @@
             this.label5.Size = new System.Drawing.Size(127, 13);
             this.label5.TabIndex = 8;
             this.label5.Text = "Должность на кафедре";
-            // 
-            // academicRank
-            // 
-            this.academicRank.Location = new System.Drawing.Point(396, 25);
-            this.academicRank.Name = "academicRank";
-            this.academicRank.Size = new System.Drawing.Size(366, 20);
-            this.academicRank.TabIndex = 7;
             // 
             // label4
             // 
@@ -986,13 +1048,6 @@
             this.label3.Size = new System.Drawing.Size(88, 13);
             this.label3.TabIndex = 4;
             this.label3.Text = "Учёная степень";
-            // 
-            // position
-            // 
-            this.position.Location = new System.Drawing.Point(9, 65);
-            this.position.Name = "position";
-            this.position.Size = new System.Drawing.Size(160, 20);
-            this.position.TabIndex = 3;
             // 
             // label2
             // 
@@ -1020,21 +1075,25 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Преподаватель";
             // 
-            // rateMultiplier
+            // LtcTotalHours1
             // 
-            this.rateMultiplier.Location = new System.Drawing.Point(211, 64);
-            this.rateMultiplier.Name = "rateMultiplier";
-            this.rateMultiplier.Size = new System.Drawing.Size(164, 20);
-            this.rateMultiplier.TabIndex = 59;
+            this.LtcTotalHours1.AutoSize = true;
+            this.LtcTotalHours1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.LtcTotalHours1.Location = new System.Drawing.Point(768, 35);
+            this.LtcTotalHours1.Name = "LtcTotalHours1";
+            this.LtcTotalHours1.Size = new System.Drawing.Size(134, 37);
+            this.LtcTotalHours1.TabIndex = 59;
+            this.LtcTotalHours1.Text = "0000.00";
             // 
-            // label13
+            // LtcTotalHours2
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(208, 49);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(72, 13);
-            this.label13.TabIndex = 58;
-            this.label13.Text = "Доля ставки";
+            this.LtcTotalHours2.AutoSize = true;
+            this.LtcTotalHours2.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.LtcTotalHours2.Location = new System.Drawing.Point(768, 70);
+            this.LtcTotalHours2.Name = "LtcTotalHours2";
+            this.LtcTotalHours2.Size = new System.Drawing.Size(134, 37);
+            this.LtcTotalHours2.TabIndex = 60;
+            this.LtcTotalHours2.Text = "0000.00";
             // 
             // TeacherCardsList
             // 
@@ -1084,12 +1143,9 @@
         private System.Windows.Forms.Panel cardControlsPanel;
         private System.Windows.Forms.ComboBox teacherList;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox position;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox departmentRank;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox academicRank;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox academicDegree;
         private System.Windows.Forms.Label label3;
@@ -1161,5 +1217,10 @@
         private System.Windows.Forms.DataGridView departmentDataGrid;
         private System.Windows.Forms.TextBox rateMultiplier;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox academicRank;
+        private System.Windows.Forms.ComboBox position;
+        private System.Windows.Forms.ComboBox departmentRank;
+        private System.Windows.Forms.Label LtcTotalHours2;
+        private System.Windows.Forms.Label LtcTotalHours1;
     }
 }

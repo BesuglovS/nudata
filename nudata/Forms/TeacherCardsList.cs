@@ -29,6 +29,7 @@ namespace nudata.Forms
         List<Department> currentDepartments = new List<Department>();
         Department currentDepartment = null;
         TeacherCardJoined currectCardJoined = null;
+        List<PositionYearRateHours> rates;
 
         public TeacherCardsList(string apiEndpoint)
         {
@@ -52,6 +53,8 @@ namespace nudata.Forms
             LoadDepartmentList();
 
             GrayOutControls();
+
+            rates = pyrhRepo.year(currentYear);
         }
 
         private void GrayOutControls()
@@ -163,15 +166,23 @@ namespace nudata.Forms
         private void departmentGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             currentDepartment = ((List<Department>)departmentGridView.DataSource)[e.RowIndex];
-            UpdateTeacherCardsList();
-            UpdateRatesList();
+
+            rates = pyrhRepo.year(currentYear);
+
+            UpdateTeacherCardsList(rates);
+            UpdateRatesList(rates);
         }
 
-        private void UpdateRatesList()
+        private void UpdateRatesList(List<PositionYearRateHours> yearRates)
         {
             var rates = dRepo.rateHours(currentYear, currentDepartment.id);
+            var ratesDict = yearRates.ToDictionary(r => r.position, r => r.rate_hours);
 
-            departmentDataGrid.DataSource = rates.rate_values;
+            var sortedRates = rates.rate_values
+                .OrderBy(r => ratesDict.ContainsKey(r.position) ? ratesDict[r.position] : 0)
+                .ToList();
+
+            departmentDataGrid.DataSource = sortedRates;
 
             departmentDataGrid.Columns["position"].HeaderText = "Должность";
             departmentDataGrid.Columns["position"].Width = 130;
@@ -183,9 +194,32 @@ namespace nudata.Forms
             departmentDataGrid.Columns["rCard"].Width = 65;
         }
 
-        private void UpdateTeacherCardsList()
+        private void UpdateTeacherCardsList(List<PositionYearRateHours> rates)
         {
-            var departmentYearCards = tcRepo.yearDepartmentIdJoined(currentYear, currentDepartment.id);
+            var currentDepartmentId = -1;
+            if (currentYear == -1)
+            {
+                currentYear = Utilities.ParseIntOrZero(startingYear.Text.Split('-')[0]);
+            }
+
+            if (currentDepartment == null)
+            {                
+                currentDepartmentId = (int)departmentList.SelectedValue;
+            } else
+            {
+                currentDepartmentId = currentDepartment.id;
+            }
+
+            var departmentYearCards = tcRepo.yearDepartmentIdJoined(currentYear, currentDepartmentId);
+            
+            var positionRates = rates.ToDictionary(r => r.position, r => r.rate_hours);
+
+            departmentYearCards = departmentYearCards
+                .OrderBy(tc => positionRates.ContainsKey(tc.position) ? positionRates[tc.position] : 0)
+                .ThenBy(tc => tc.f)
+                .ThenBy(tc => tc.i)
+                .ThenBy(tc => tc.o)
+                .ToList();
 
             cardsGridView.DataSource = departmentYearCards;
 
@@ -225,7 +259,7 @@ namespace nudata.Forms
 
             tcRepo.add(newTeacherCard);
 
-            UpdateTeacherCardsList();
+            UpdateTeacherCardsList(rates);
 
             if (!currentYears.Contains(newYear))
             {
@@ -264,7 +298,7 @@ namespace nudata.Forms
 
                 tcRepo.update(TeacherCardUpdated, TeacherCardUpdated.id);
 
-                UpdateTeacherCardsList();
+                UpdateTeacherCardsList(rates);
 
                 if (!currentYears.Contains(newYear))
                 {
@@ -283,7 +317,7 @@ namespace nudata.Forms
 
                 tcRepo.delete(cardJoined.id);
 
-                UpdateTeacherCardsList();
+                UpdateTeacherCardsList(rates);
 
                 LoadYearsList();
 
@@ -315,8 +349,20 @@ namespace nudata.Forms
 
             var cardItemViews = TeacherCardItemView.FromList(cardItems);
 
+            cardItemViews = cardItemViews
+                .OrderBy(tci => tci.semester)
+                .ThenBy(tci => tci.code)
+                .ThenBy(tci => tci.discipline_name)
+                .ToList();
+
             var tcTotalHours = cardItemViews.Select(civ => civ.total_hours).Sum();
             LtcTotalHours.Text = tcTotalHours.ToString("0.00");
+
+            var tcTotalHours1 = cardItemViews.Where(civ => civ.semester == 1).Select(civ => civ.total_hours).Sum();
+            LtcTotalHours1.Text = tcTotalHours1.ToString("0.00");
+
+            var tcTotalHours2 = cardItemViews.Where(civ => civ.semester == 2).Select(civ => civ.total_hours).Sum();
+            LtcTotalHours2.Text = tcTotalHours2.ToString("0.00");
 
             var rateHoursList = pyrhRepo.year(currectCardJoined.starting_year);
             var rateHours = rateHoursList.FirstOrDefault(rhi => rhi.position == currectCardJoined.position);
@@ -547,6 +593,9 @@ namespace nudata.Forms
             tciIga_hours.Text = "";
             tciNra_hours.Text = "";
             tciNrm_hours.Text = "";
+            LtciTotalHours.Text = "000.00";
+
+            tciSemester.Focus();
         }
 
         private void cardItemsGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -661,6 +710,15 @@ namespace nudata.Forms
         private void tciIndividual_hours_TextChanged(object sender, EventArgs e)
         {
             ChangeGroupColor(tciIndividual_hours, LtciIndividual_hours);
+        }
+
+        private void KeyDown_Add_Click(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                tciAdd.PerformClick();
+                clearFields.Focus();
+            }
         }
     }
 }
