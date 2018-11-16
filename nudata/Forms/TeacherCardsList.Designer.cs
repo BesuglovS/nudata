@@ -41,6 +41,8 @@
             this.cardItemsViewPanel = new System.Windows.Forms.Panel();
             this.cardItemsGridView = new System.Windows.Forms.DataGridView();
             this.cardItemControlPanel = new System.Windows.Forms.Panel();
+            this.tciRealTeacher = new System.Windows.Forms.ComboBox();
+            this.LtciRealTeacher = new System.Windows.Forms.Label();
             this.LtciTotalHours = new System.Windows.Forms.Label();
             this.tciIndividual_hours = new System.Windows.Forms.TextBox();
             this.LtciIndividual_hours = new System.Windows.Forms.Label();
@@ -122,8 +124,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.teacherList = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.tciRealTeacher = new System.Windows.Forms.ComboBox();
             this.leftPanel.SuspendLayout();
             this.departmentViewPanel.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -269,7 +269,7 @@
             // cardItemControlPanel
             // 
             this.cardItemControlPanel.Controls.Add(this.tciRealTeacher);
-            this.cardItemControlPanel.Controls.Add(this.label14);
+            this.cardItemControlPanel.Controls.Add(this.LtciRealTeacher);
             this.cardItemControlPanel.Controls.Add(this.LtciTotalHours);
             this.cardItemControlPanel.Controls.Add(this.tciIndividual_hours);
             this.cardItemControlPanel.Controls.Add(this.LtciIndividual_hours);
@@ -326,6 +326,24 @@
             this.cardItemControlPanel.Name = "cardItemControlPanel";
             this.cardItemControlPanel.Size = new System.Drawing.Size(980, 171);
             this.cardItemControlPanel.TabIndex = 1;
+            // 
+            // tciRealTeacher
+            // 
+            this.tciRealTeacher.FormattingEnabled = true;
+            this.tciRealTeacher.Location = new System.Drawing.Point(738, 58);
+            this.tciRealTeacher.Name = "tciRealTeacher";
+            this.tciRealTeacher.Size = new System.Drawing.Size(152, 21);
+            this.tciRealTeacher.TabIndex = 56;
+            this.tciRealTeacher.SelectedValueChanged += new System.EventHandler(this.tciRealTeacher_SelectedValueChanged);
+            // 
+            // LtciRealTeacher
+            // 
+            this.LtciRealTeacher.AutoSize = true;
+            this.LtciRealTeacher.Location = new System.Drawing.Point(735, 42);
+            this.LtciRealTeacher.Name = "LtciRealTeacher";
+            this.LtciRealTeacher.Size = new System.Drawing.Size(138, 13);
+            this.LtciRealTeacher.TabIndex = 55;
+            this.LtciRealTeacher.Text = "Реальный преподаватель";
             // 
             // LtciTotalHours
             // 
@@ -1099,23 +1117,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Преподаватель";
             // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(735, 42);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(138, 13);
-            this.label14.TabIndex = 55;
-            this.label14.Text = "Реальный преподаватель";
-            // 
-            // tciRealTeacher
-            // 
-            this.tciRealTeacher.FormattingEnabled = true;
-            this.tciRealTeacher.Location = new System.Drawing.Point(738, 58);
-            this.tciRealTeacher.Name = "tciRealTeacher";
-            this.tciRealTeacher.Size = new System.Drawing.Size(152, 21);
-            this.tciRealTeacher.TabIndex = 56;
-            // 
             // TeacherCardsList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1244,6 +1245,6 @@
         private System.Windows.Forms.Label LtcTotalHours2;
         private System.Windows.Forms.Label LtcTotalHours1;
         private System.Windows.Forms.ComboBox tciRealTeacher;
-        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label LtciRealTeacher;
     }
 }

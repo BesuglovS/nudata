@@ -77,6 +77,7 @@ namespace nudata.Forms
             tciNra_hours_TextChanged(null, null);
             tciNrm_hours_TextChanged(null, null);
             tciIndividual_hours_TextChanged(null, null);
+            tciRealTeacher_SelectedValueChanged(null, null);
         }
 
         private void LoadDepartmentList()
@@ -109,9 +110,9 @@ namespace nudata.Forms
                 .OrderBy(tv => tv.fio)
                 .ToList();
 
-            tciRealTeacher.DataSource = teacherViews2;
             tciRealTeacher.DisplayMember = "fio";
             tciRealTeacher.ValueMember = "id";
+            tciRealTeacher.DataSource = teacherViews2;            
         }
 
         private void LoadYearsList()
@@ -740,6 +741,20 @@ namespace nudata.Forms
             {
                 tciAdd.PerformClick();
                 clearFields.Focus();
+            }
+        }
+
+        private void tciRealTeacher_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (tciRealTeacher.SelectedValue == null || (int)tciRealTeacher.SelectedValue == 0)
+            {
+                tciRealTeacher.ForeColor = Color.FromArgb(200, 200, 200);
+                LtciRealTeacher.ForeColor = Color.FromArgb(200, 200, 200);
+            }
+            else
+            {
+                tciRealTeacher.ForeColor = Color.FromArgb(0, 0, 0);
+                LtciRealTeacher.ForeColor = Color.FromArgb(0, 0, 0);
             }
         }
     }
