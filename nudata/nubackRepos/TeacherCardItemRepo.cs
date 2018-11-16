@@ -42,12 +42,12 @@ namespace nudata.nubackRepos
                 ApiHelper.Post(ApiEndpoint + "/teacherCardItem/add",
                 new Dictionary<string, string>
                 {
-                    { "semester", TeacherCardItem.semester.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
+                    { "semester", TeacherCardItem.semester.ToString() },
                     { "code", TeacherCardItem.code },
                     { "discipline_name", TeacherCardItem.discipline_name },
                     { "group_name", TeacherCardItem.group_name },
-                    { "group_count", TeacherCardItem.group_count.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
-                    { "group_students_count", TeacherCardItem.group_students_count.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
+                    { "group_count", TeacherCardItem.group_count.ToString() },
+                    { "group_students_count", TeacherCardItem.group_students_count.ToString() },
                     { "lecture_hours", TeacherCardItem.lecture_hours.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
                     { "lab_hours", TeacherCardItem.lab_hours.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
                     { "practice_hours", TeacherCardItem.practice_hours.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
@@ -65,7 +65,8 @@ namespace nudata.nubackRepos
                     { "nra_hours", TeacherCardItem.nra_hours.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
                     { "nrm_hours", TeacherCardItem.nrm_hours.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
                     { "individual_hours", TeacherCardItem.individual_hours.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
-                    { "teacher_card_id", TeacherCardItem.teacher_card_id.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
+                    { "teacher_card_id", TeacherCardItem.teacher_card_id.ToString() },
+                    { "real_teacher_id", TeacherCardItem.real_teacher_id.ToString() }
                 });
 
             return response;
@@ -95,12 +96,12 @@ namespace nudata.nubackRepos
                 ApiHelper.Post(ApiEndpoint + "/teacherCardItem/" + id.ToString(),
                 new Dictionary<string, string>
                 {
-                    { "semester", TeacherCardItem.semester.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
+                    { "semester", TeacherCardItem.semester.ToString() },
                     { "code", TeacherCardItem.code },
                     { "discipline_name", TeacherCardItem.discipline_name },
                     { "group_name", TeacherCardItem.group_name },
-                    { "group_count", TeacherCardItem.group_count.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
-                    { "group_students_count", TeacherCardItem.group_students_count.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
+                    { "group_count", TeacherCardItem.group_count.ToString() },
+                    { "group_students_count", TeacherCardItem.group_students_count.ToString() },
                     { "lecture_hours", TeacherCardItem.lecture_hours.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
                     { "lab_hours", TeacherCardItem.lab_hours.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
                     { "practice_hours", TeacherCardItem.practice_hours.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
@@ -118,7 +119,8 @@ namespace nudata.nubackRepos
                     { "nra_hours", TeacherCardItem.nra_hours.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
                     { "nrm_hours", TeacherCardItem.nrm_hours.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
                     { "individual_hours", TeacherCardItem.individual_hours.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
-                    { "teacher_card_id", TeacherCardItem.teacher_card_id.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) },
+                    { "teacher_card_id", TeacherCardItem.teacher_card_id.ToString() },
+                    { "real_teacher_id", TeacherCardItem.real_teacher_id.ToString() }
                 });
 
             return response;

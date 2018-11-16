@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.leftPanel = new System.Windows.Forms.Panel();
             this.departmentViewPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -96,6 +96,8 @@
             this.cardViewPanel = new System.Windows.Forms.Panel();
             this.cardsGridView = new System.Windows.Forms.DataGridView();
             this.cardControlsPanel = new System.Windows.Forms.Panel();
+            this.LtcTotalHours2 = new System.Windows.Forms.Label();
+            this.LtcTotalHours1 = new System.Windows.Forms.Label();
             this.departmentRank = new System.Windows.Forms.ComboBox();
             this.academicRank = new System.Windows.Forms.ComboBox();
             this.position = new System.Windows.Forms.ComboBox();
@@ -120,8 +122,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.teacherList = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.LtcTotalHours1 = new System.Windows.Forms.Label();
-            this.LtcTotalHours2 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.tciRealTeacher = new System.Windows.Forms.ComboBox();
             this.leftPanel.SuspendLayout();
             this.departmentViewPanel.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -213,14 +215,14 @@
             // yearsGridView
             // 
             this.yearsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.yearsGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.yearsGridView.DefaultCellStyle = dataGridViewCellStyle1;
             this.yearsGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.yearsGridView.Location = new System.Drawing.Point(0, 0);
             this.yearsGridView.Name = "yearsGridView";
@@ -266,6 +268,8 @@
             // 
             // cardItemControlPanel
             // 
+            this.cardItemControlPanel.Controls.Add(this.tciRealTeacher);
+            this.cardItemControlPanel.Controls.Add(this.label14);
             this.cardItemControlPanel.Controls.Add(this.LtciTotalHours);
             this.cardItemControlPanel.Controls.Add(this.tciIndividual_hours);
             this.cardItemControlPanel.Controls.Add(this.LtciIndividual_hours);
@@ -353,9 +357,9 @@
             // 
             // clearFields
             // 
-            this.clearFields.Location = new System.Drawing.Point(819, 55);
+            this.clearFields.Location = new System.Drawing.Point(896, 19);
             this.clearFields.Name = "clearFields";
-            this.clearFields.Size = new System.Drawing.Size(72, 101);
+            this.clearFields.Size = new System.Drawing.Size(72, 137);
             this.clearFields.TabIndex = 51;
             this.clearFields.Text = "Очистить";
             this.clearFields.UseVisualStyleBackColor = true;
@@ -365,7 +369,7 @@
             // 
             this.tciRemove.Location = new System.Drawing.Point(738, 135);
             this.tciRemove.Name = "tciRemove";
-            this.tciRemove.Size = new System.Drawing.Size(75, 23);
+            this.tciRemove.Size = new System.Drawing.Size(152, 23);
             this.tciRemove.TabIndex = 50;
             this.tciRemove.Text = "Удалить";
             this.tciRemove.UseVisualStyleBackColor = true;
@@ -373,7 +377,7 @@
             // 
             // tciUpdate
             // 
-            this.tciUpdate.Location = new System.Drawing.Point(738, 95);
+            this.tciUpdate.Location = new System.Drawing.Point(816, 97);
             this.tciUpdate.Name = "tciUpdate";
             this.tciUpdate.Size = new System.Drawing.Size(75, 23);
             this.tciUpdate.TabIndex = 49;
@@ -383,7 +387,7 @@
             // 
             // tciAdd
             // 
-            this.tciAdd.Location = new System.Drawing.Point(738, 56);
+            this.tciAdd.Location = new System.Drawing.Point(738, 97);
             this.tciAdd.Name = "tciAdd";
             this.tciAdd.Size = new System.Drawing.Size(75, 23);
             this.tciAdd.TabIndex = 48;
@@ -840,6 +844,26 @@
             this.cardControlsPanel.Size = new System.Drawing.Size(980, 181);
             this.cardControlsPanel.TabIndex = 0;
             // 
+            // LtcTotalHours2
+            // 
+            this.LtcTotalHours2.AutoSize = true;
+            this.LtcTotalHours2.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.LtcTotalHours2.Location = new System.Drawing.Point(768, 70);
+            this.LtcTotalHours2.Name = "LtcTotalHours2";
+            this.LtcTotalHours2.Size = new System.Drawing.Size(134, 37);
+            this.LtcTotalHours2.TabIndex = 60;
+            this.LtcTotalHours2.Text = "0000.00";
+            // 
+            // LtcTotalHours1
+            // 
+            this.LtcTotalHours1.AutoSize = true;
+            this.LtcTotalHours1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.LtcTotalHours1.Location = new System.Drawing.Point(768, 35);
+            this.LtcTotalHours1.Name = "LtcTotalHours1";
+            this.LtcTotalHours1.Size = new System.Drawing.Size(134, 37);
+            this.LtcTotalHours1.TabIndex = 59;
+            this.LtcTotalHours1.Text = "0000.00";
+            // 
             // departmentRank
             // 
             this.departmentRank.FormattingEnabled = true;
@@ -1075,25 +1099,22 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Преподаватель";
             // 
-            // LtcTotalHours1
+            // label14
             // 
-            this.LtcTotalHours1.AutoSize = true;
-            this.LtcTotalHours1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LtcTotalHours1.Location = new System.Drawing.Point(768, 35);
-            this.LtcTotalHours1.Name = "LtcTotalHours1";
-            this.LtcTotalHours1.Size = new System.Drawing.Size(134, 37);
-            this.LtcTotalHours1.TabIndex = 59;
-            this.LtcTotalHours1.Text = "0000.00";
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(735, 42);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(138, 13);
+            this.label14.TabIndex = 55;
+            this.label14.Text = "Реальный преподаватель";
             // 
-            // LtcTotalHours2
+            // tciRealTeacher
             // 
-            this.LtcTotalHours2.AutoSize = true;
-            this.LtcTotalHours2.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LtcTotalHours2.Location = new System.Drawing.Point(768, 70);
-            this.LtcTotalHours2.Name = "LtcTotalHours2";
-            this.LtcTotalHours2.Size = new System.Drawing.Size(134, 37);
-            this.LtcTotalHours2.TabIndex = 60;
-            this.LtcTotalHours2.Text = "0000.00";
+            this.tciRealTeacher.FormattingEnabled = true;
+            this.tciRealTeacher.Location = new System.Drawing.Point(738, 58);
+            this.tciRealTeacher.Name = "tciRealTeacher";
+            this.tciRealTeacher.Size = new System.Drawing.Size(152, 21);
+            this.tciRealTeacher.TabIndex = 56;
             // 
             // TeacherCardsList
             // 
@@ -1222,5 +1243,7 @@
         private System.Windows.Forms.ComboBox departmentRank;
         private System.Windows.Forms.Label LtcTotalHours2;
         private System.Windows.Forms.Label LtcTotalHours1;
+        private System.Windows.Forms.ComboBox tciRealTeacher;
+        private System.Windows.Forms.Label label14;
     }
 }

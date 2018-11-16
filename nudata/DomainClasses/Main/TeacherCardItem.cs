@@ -33,5 +33,6 @@ namespace nudata.DomainClasses.Main
         public decimal nrm_hours { get; set; }
         public decimal individual_hours { get; set; }
         public int teacher_card_id { get; set; }
+        public int real_teacher_id { get; set; }
     }
 }

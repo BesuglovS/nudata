@@ -30,6 +30,7 @@ namespace nudata.Forms
         Department currentDepartment = null;
         TeacherCardJoined currectCardJoined = null;
         List<PositionYearRateHours> rates;
+        List<Teacher> teacherOnLoad;
 
         public TeacherCardsList(string apiEndpoint)
         {
@@ -89,16 +90,28 @@ namespace nudata.Forms
 
         private void LoadTeacherList()
         {
-            var teachers = tRepo.all();
-
+            teacherOnLoad = tRepo.all();
+            
             var teacherViews = TeacherView
-                .TeachersToView(teachers)
+                .TeachersToView(teacherOnLoad)
                 .OrderBy(tv => tv.fio)
                 .ToList();
 
             teacherList.DataSource = teacherViews;
             teacherList.DisplayMember = "fio";
             teacherList.ValueMember = "id";
+
+            var teachers2 = new List<Teacher>(teacherOnLoad);
+            teachers2.Add(new Teacher { id = 0 });
+
+            var teacherViews2 = TeacherView
+                .TeachersToView(teachers2)
+                .OrderBy(tv => tv.fio)
+                .ToList();
+
+            tciRealTeacher.DataSource = teacherViews2;
+            tciRealTeacher.DisplayMember = "fio";
+            tciRealTeacher.ValueMember = "id";
         }
 
         private void LoadYearsList()
@@ -347,7 +360,7 @@ namespace nudata.Forms
         {
             var cardItems = tciRepo.teacherCardAll(currectCardJoined.id);
 
-            var cardItemViews = TeacherCardItemView.FromList(cardItems);
+            var cardItemViews = TeacherCardItemView.FromList(cardItems, teacherOnLoad);
 
             cardItemViews = cardItemViews
                 .OrderBy(tci => tci.semester)
@@ -380,8 +393,8 @@ namespace nudata.Forms
             cardItemsGridView.Columns["id"].Visible = false;
             cardItemsGridView.Columns["teacher_card_id"].Visible = false;
 
-            cardItemsGridView.Columns["semester"].HeaderText = "Семестр";
-            cardItemsGridView.Columns["semester"].Width = 50;
+            cardItemsGridView.Columns["semester"].HeaderText = "Семе" + Environment.NewLine + "стр";
+            cardItemsGridView.Columns["semester"].Width = 45;
 
             cardItemsGridView.Columns["code"].HeaderText = "Код";
             cardItemsGridView.Columns["code"].Width = 80;
@@ -392,50 +405,50 @@ namespace nudata.Forms
             cardItemsGridView.Columns["group_name"].HeaderText = "Группа";
             cardItemsGridView.Columns["group_name"].Width = 50;
                         
-            cardItemsGridView.Columns["group_count"].HeaderText = "Количество групп";
-            cardItemsGridView.Columns["group_count"].Width = 70;
+            cardItemsGridView.Columns["group_count"].HeaderText = "Коли" + Environment.NewLine + "чество групп";
+            cardItemsGridView.Columns["group_count"].Width = 45;
 
-            cardItemsGridView.Columns["group_students_count"].HeaderText = "Количество студентов";
-            cardItemsGridView.Columns["group_students_count"].Width = 70;
+            cardItemsGridView.Columns["group_students_count"].HeaderText = "Коли" + Environment.NewLine + "чество студе" + Environment.NewLine + "нтов";
+            cardItemsGridView.Columns["group_students_count"].Width = 45;
 
             cardItemsGridView.Columns["lecture_hours"].HeaderText = "Лекции";
-            cardItemsGridView.Columns["lecture_hours"].Width = 60;
+            cardItemsGridView.Columns["lecture_hours"].Width = 50;
 
-            cardItemsGridView.Columns["lab_hours"].HeaderText = "Лабораторные";
-            cardItemsGridView.Columns["lab_hours"].Width = 85;
+            cardItemsGridView.Columns["lab_hours"].HeaderText = "Лабора торные";
+            cardItemsGridView.Columns["lab_hours"].Width = 50;
 
-            cardItemsGridView.Columns["practice_hours"].HeaderText = "Практика";
-            cardItemsGridView.Columns["practice_hours"].Width = 60;
+            cardItemsGridView.Columns["practice_hours"].HeaderText = "Практи" + Environment.NewLine + "ка";
+            cardItemsGridView.Columns["practice_hours"].Width = 50;
 
-            cardItemsGridView.Columns["exam_hours"].HeaderText = "Экзамен";
-            cardItemsGridView.Columns["exam_hours"].Width = 60;
+            cardItemsGridView.Columns["exam_hours"].HeaderText = "Экза" + Environment.NewLine + "мен";
+            cardItemsGridView.Columns["exam_hours"].Width = 50;
 
             cardItemsGridView.Columns["zach_hours"].HeaderText = "Зачёт";
             cardItemsGridView.Columns["zach_hours"].Width = 50;
 
-            cardItemsGridView.Columns["zach_with_mark_hours"].HeaderText = "Зачёт с оценкой";
-            cardItemsGridView.Columns["zach_with_mark_hours"].Width = 60;
+            cardItemsGridView.Columns["zach_with_mark_hours"].HeaderText = "Зачёт с оцен" + Environment.NewLine + "кой";
+            cardItemsGridView.Columns["zach_with_mark_hours"].Width = 50;
 
-            cardItemsGridView.Columns["course_project_hours"].HeaderText = "Курсовой проект";
-            cardItemsGridView.Columns["course_project_hours"].Width = 60;
+            cardItemsGridView.Columns["course_project_hours"].HeaderText = "Курсо" + Environment.NewLine + "вой проект";
+            cardItemsGridView.Columns["course_project_hours"].Width = 50;
 
-            cardItemsGridView.Columns["course_task_hours"].HeaderText = "Курсовая работа";
-            cardItemsGridView.Columns["course_task_hours"].Width = 60;
+            cardItemsGridView.Columns["course_task_hours"].HeaderText = "Курсо" + Environment.NewLine + "вая работа";
+            cardItemsGridView.Columns["course_task_hours"].Width = 50;
 
-            cardItemsGridView.Columns["control_task_hours"].HeaderText = "Контрольная работа";
-            cardItemsGridView.Columns["control_task_hours"].Width = 80;
+            cardItemsGridView.Columns["control_task_hours"].HeaderText = "Контро" + Environment.NewLine + "льная работа";
+            cardItemsGridView.Columns["control_task_hours"].Width = 50;
 
-            cardItemsGridView.Columns["referat_hours"].HeaderText = "Реферат";
-            cardItemsGridView.Columns["referat_hours"].Width = 60;
+            cardItemsGridView.Columns["referat_hours"].HeaderText = "Рефе" + Environment.NewLine + "рат";
+            cardItemsGridView.Columns["referat_hours"].Width = 50;
 
             cardItemsGridView.Columns["essay_hours"].HeaderText = "Эссе";
             cardItemsGridView.Columns["essay_hours"].Width = 50;
 
-            cardItemsGridView.Columns["head_of_practice_hours"].HeaderText = "Руководство практикой";
-            cardItemsGridView.Columns["head_of_practice_hours"].Width = 80;
+            cardItemsGridView.Columns["head_of_practice_hours"].HeaderText = "Руково" + Environment.NewLine + "дство" + Environment.NewLine + "практи" + Environment.NewLine + "кой";
+            cardItemsGridView.Columns["head_of_practice_hours"].Width = 50;
 
-            cardItemsGridView.Columns["head_of_vkr_hours"].HeaderText = "Руководство ВКР";
-            cardItemsGridView.Columns["head_of_vkr_hours"].Width = 80;
+            cardItemsGridView.Columns["head_of_vkr_hours"].HeaderText = "Руково" + Environment.NewLine + "дство ВКР";
+            cardItemsGridView.Columns["head_of_vkr_hours"].Width = 50;
 
             cardItemsGridView.Columns["iga_hours"].HeaderText = "ИГА";
             cardItemsGridView.Columns["iga_hours"].Width = 40;
@@ -451,6 +464,11 @@ namespace nudata.Forms
 
             cardItemsGridView.Columns["total_hours"].HeaderText = "Итого";
             cardItemsGridView.Columns["total_hours"].Width = 60;
+
+            cardItemsGridView.Columns["real_teacher_id"].Visible = false;
+
+            cardItemsGridView.Columns["real_teacher_fio"].HeaderText = "Реальный преподаватель";
+            cardItemsGridView.Columns["real_teacher_fio"].Width = 120;
         }
         
         private void tciAdd_Click(object sender, EventArgs e)
@@ -480,7 +498,9 @@ namespace nudata.Forms
                 nra_hours = Utilities.ParseDecOrZero(tciNra_hours.Text),
                 nrm_hours = Utilities.ParseDecOrZero(tciNrm_hours.Text),
                 individual_hours = Utilities.ParseDecOrZero(tciIndividual_hours.Text),
+                real_teacher_id = (int)tciRealTeacher.SelectedValue,
                 teacher_card_id = currectCardJoined.id
+                
             };
 
             tciRepo.add(newTeacherCardItem);
@@ -519,6 +539,7 @@ namespace nudata.Forms
                 cardItem.nra_hours = Utilities.ParseDecOrZero(tciNra_hours.Text);
                 cardItem.nrm_hours = Utilities.ParseDecOrZero(tciNrm_hours.Text);
                 cardItem.individual_hours = Utilities.ParseDecOrZero(tciIndividual_hours.Text);
+                cardItem.real_teacher_id = (int)tciRealTeacher.SelectedValue;
 
                 tciRepo.update(cardItem, cardItem.id);
 
@@ -565,6 +586,7 @@ namespace nudata.Forms
             tciNra_hours.Text = cardItemView.nra_hours.ToString();
             tciNrm_hours.Text = cardItemView.nrm_hours.ToString();
             tciIndividual_hours.Text = cardItemView.individual_hours.ToString();
+            tciRealTeacher.SelectedValue = cardItemView.real_teacher_id;
 
             LtciTotalHours.Text = cardItemView.total_hours.ToString("0.00");
         }

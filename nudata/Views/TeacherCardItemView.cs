@@ -35,8 +35,10 @@ namespace nudata.Views
         public decimal individual_hours { get; set; }
         public int teacher_card_id { get; set; }
         public decimal total_hours { get; set; }
+        public int real_teacher_id { get; set; }
+        public string real_teacher_fio { get; set; }
 
-        public TeacherCardItemView(TeacherCardItem item)
+        public TeacherCardItemView(TeacherCardItem item, List<Teacher> teachers)
         {
             id = item.id;
             semester = item.semester;
@@ -63,6 +65,18 @@ namespace nudata.Views
             nrm_hours = item.nrm_hours;
             individual_hours = item.individual_hours;
             teacher_card_id = item.teacher_card_id;
+            real_teacher_id = item.real_teacher_id;
+
+            if (teachers.Select(t => t.id).ToList().Contains(item.real_teacher_id))
+            {
+                var teacher = teachers.FirstOrDefault(t => t.id == item.real_teacher_id);
+                real_teacher_fio = teacher.f + " " + teacher.i + " " + teacher.o;
+            }
+            else
+            {
+                real_teacher_fio = "";
+            }
+                
             total_hours = item.lecture_hours +
                 item.lab_hours +
                 item.practice_hours +
@@ -83,9 +97,9 @@ namespace nudata.Views
 
         }
 
-        public static List<TeacherCardItemView> FromList(List<TeacherCardItem> list)
+        public static List<TeacherCardItemView> FromList(List<TeacherCardItem> list, List<Teacher> teachers)
         {
-            return list.Select(item => new TeacherCardItemView(item)).ToList();
+            return list.Select(item => new TeacherCardItemView(item, teachers)).ToList();
         }
     }
 }
