@@ -93,7 +93,7 @@ namespace nudata.Forms
 
                 if (groupStudents != null)
                 {
-                    var studentsView = StudentView.StudentsInGroupToView(groupStudents);
+                    var studentsView = StudentInGroupView.StudentsInGroupToView(groupStudents);
                     studentsView = studentsView
                         .OrderBy(s => s.expelled)
                         .ThenBy(s => s.fio)
@@ -141,13 +141,21 @@ namespace nudata.Forms
 
             var groupStudents = sRepo.groupAll(group.id);
 
-            var studentsView = StudentView.StudentsInGroupToView(groupStudents);
+            var studentsView = StudentInGroupView.StudentsInGroupToView(groupStudents)
+                .OrderBy(s => s.fio)
+                .ThenBy(s => s.from)
+                .ToList();
 
             StudentsInGroupListView.DataSource = studentsView;
 
             StudentsInGroupListView.Columns["id"].Visible = false;
+            StudentsInGroupListView.Columns["student_id"].Visible = false;
             StudentsInGroupListView.Columns["fio"].Width = 200;
             StudentsInGroupListView.Columns["fio"].HeaderText = "Ф.И.О.";
+            StudentsInGroupListView.Columns["from"].Width = 80;
+            StudentsInGroupListView.Columns["from"].HeaderText = "Начало периода";
+            StudentsInGroupListView.Columns["to"].Width = 80;
+            StudentsInGroupListView.Columns["to"].HeaderText = "Конец периода";
             StudentsInGroupListView.Columns["zach_number"].Width = 80;
             StudentsInGroupListView.Columns["zach_number"].HeaderText = "№ зачётки";
             StudentsInGroupListView.Columns["birth_date"].Width = 80;
@@ -166,6 +174,7 @@ namespace nudata.Forms
             StudentsInGroupListView.Columns["paid_edu"].HeaderText = "Платное обучение";
             StudentsInGroupListView.Columns["expelled"].Width = 50;
             StudentsInGroupListView.Columns["expelled"].HeaderText = "Отчислен";
+            StudentsInGroupListView.Columns["summary"].Visible = false;
 
             StudentsInGroupListView.ClearSelection();
         }
@@ -239,7 +248,7 @@ namespace nudata.Forms
 
         private void StudentGroupList_Resize(object sender, EventArgs e)
         {
-            StudentsInGroupListView.Columns["Fio"].Width = StudentListPanel.Width - 20;
+            
         }
 
         private void addStudentToGroup_Click(object sender, EventArgs e)
@@ -272,7 +281,7 @@ namespace nudata.Forms
             }
         }
 
-        private void removeStudentFrunGroup_Click(object sender, EventArgs e)
+        private void removeStudentFromGroup_Click(object sender, EventArgs e)
         {
             if (StudentGroupListView.SelectedCells.Count == 0)
             {
@@ -281,8 +290,8 @@ namespace nudata.Forms
 
             if ((StudentsInGroupListView.SelectedCells.Count > 0) && (StudentGroupListView.SelectedCells.Count > 0))
             {
-                var studentView = ((List<StudentView>)StudentsInGroupListView.DataSource)[StudentsInGroupListView.SelectedCells[0].RowIndex];
-                var student = sRepo.get(studentView.id);
+                var studentInGroupView = ((List<StudentInGroupView>)StudentsInGroupListView.DataSource)[StudentsInGroupListView.SelectedCells[0].RowIndex];
+                var student = sRepo.get(studentInGroupView.id);
 
                 var studentGroup = ((List<StudentGroup>)StudentGroupListView.DataSource)[StudentGroupListView.SelectedCells[0].RowIndex];
 
@@ -339,6 +348,33 @@ namespace nudata.Forms
             if (e.KeyChar == (char)Keys.Return)
             {
                 add.PerformClick();
+            }
+        }
+
+        private void StudentsInGroupListView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var studentView = ((List<StudentInGroupView>)StudentsInGroupListView.DataSource)[e.RowIndex];
+
+            StudentList.SelectedValue = studentView.student_id;
+            fromPicker.Value = studentView.from;
+            toPicker.Value = studentView.to;
+        }
+
+        private void updateStudentInGroup_Click(object sender, EventArgs e)
+        {
+            if (StudentsInGroupListView.SelectedCells.Count > 0)
+            {
+                var studentView = ((List<StudentInGroupView>)StudentsInGroupListView.DataSource)
+                    [StudentsInGroupListView.SelectedCells[0].RowIndex];
+
+                var ssg = ssgRepo.get(studentView.id);
+                ssg.student_id = (int)StudentList.SelectedValue;
+                ssg.from = fromPicker.Value;
+                ssg.to = toPicker.Value;
+
+                ssgRepo.update(ssg, ssg.id);
+
+                RefreshView((int)RefreshType.StudentsOnly);
             }
         }
     }

@@ -43,7 +43,7 @@ namespace nudata.Forms
             this.addFromGroup = new System.Windows.Forms.Button();
             this.groupsList = new System.Windows.Forms.ComboBox();
             this.StudentList = new System.Windows.Forms.ComboBox();
-            this.removeStudentFrunGroup = new System.Windows.Forms.Button();
+            this.removeStudentFromGroup = new System.Windows.Forms.Button();
             this.addStudentToGroup = new System.Windows.Forms.Button();
             this.groupGroupbox = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -56,6 +56,7 @@ namespace nudata.Forms
             this.StudentGroupName = new System.Windows.Forms.TextBox();
             this.StudentListPanel = new System.Windows.Forms.Panel();
             this.StudentsInGroupListView = new System.Windows.Forms.DataGridView();
+            this.updateStudentInGroup = new System.Windows.Forms.Button();
             this.LeftPanel.SuspendLayout();
             this.GroupListPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StudentGroupListView)).BeginInit();
@@ -114,6 +115,7 @@ namespace nudata.Forms
             // 
             // studentGroupbox
             // 
+            this.studentGroupbox.Controls.Add(this.updateStudentInGroup);
             this.studentGroupbox.Controls.Add(this.label4);
             this.studentGroupbox.Controls.Add(this.toPicker);
             this.studentGroupbox.Controls.Add(this.label3);
@@ -121,7 +123,7 @@ namespace nudata.Forms
             this.studentGroupbox.Controls.Add(this.addFromGroup);
             this.studentGroupbox.Controls.Add(this.groupsList);
             this.studentGroupbox.Controls.Add(this.StudentList);
-            this.studentGroupbox.Controls.Add(this.removeStudentFrunGroup);
+            this.studentGroupbox.Controls.Add(this.removeStudentFromGroup);
             this.studentGroupbox.Controls.Add(this.addStudentToGroup);
             this.studentGroupbox.Location = new System.Drawing.Point(16, 158);
             this.studentGroupbox.Name = "studentGroupbox";
@@ -188,21 +190,21 @@ namespace nudata.Forms
             this.StudentList.Size = new System.Drawing.Size(237, 21);
             this.StudentList.TabIndex = 41;
             // 
-            // removeStudentFrunGroup
+            // removeStudentFromGroup
             // 
-            this.removeStudentFrunGroup.Location = new System.Drawing.Point(137, 106);
-            this.removeStudentFrunGroup.Name = "removeStudentFrunGroup";
-            this.removeStudentFrunGroup.Size = new System.Drawing.Size(112, 23);
-            this.removeStudentFrunGroup.TabIndex = 40;
-            this.removeStudentFrunGroup.Text = "Удалить";
-            this.removeStudentFrunGroup.UseVisualStyleBackColor = true;
-            this.removeStudentFrunGroup.Click += new System.EventHandler(this.removeStudentFrunGroup_Click);
+            this.removeStudentFromGroup.Location = new System.Drawing.Point(171, 106);
+            this.removeStudentFromGroup.Name = "removeStudentFromGroup";
+            this.removeStudentFromGroup.Size = new System.Drawing.Size(75, 23);
+            this.removeStudentFromGroup.TabIndex = 40;
+            this.removeStudentFromGroup.Text = "Удалить";
+            this.removeStudentFromGroup.UseVisualStyleBackColor = true;
+            this.removeStudentFromGroup.Click += new System.EventHandler(this.removeStudentFromGroup_Click);
             // 
             // addStudentToGroup
             // 
             this.addStudentToGroup.Location = new System.Drawing.Point(12, 106);
             this.addStudentToGroup.Name = "addStudentToGroup";
-            this.addStudentToGroup.Size = new System.Drawing.Size(119, 23);
+            this.addStudentToGroup.Size = new System.Drawing.Size(71, 23);
             this.addStudentToGroup.TabIndex = 39;
             this.addStudentToGroup.Text = "Добавить";
             this.addStudentToGroup.UseVisualStyleBackColor = true;
@@ -317,6 +319,17 @@ namespace nudata.Forms
             this.StudentsInGroupListView.RowHeadersVisible = false;
             this.StudentsInGroupListView.Size = new System.Drawing.Size(963, 679);
             this.StudentsInGroupListView.TabIndex = 2;
+            this.StudentsInGroupListView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.StudentsInGroupListView_CellClick);
+            // 
+            // updateStudentInGroup
+            // 
+            this.updateStudentInGroup.Location = new System.Drawing.Point(90, 107);
+            this.updateStudentInGroup.Name = "updateStudentInGroup";
+            this.updateStudentInGroup.Size = new System.Drawing.Size(75, 23);
+            this.updateStudentInGroup.TabIndex = 49;
+            this.updateStudentInGroup.Text = "Изменить";
+            this.updateStudentInGroup.UseVisualStyleBackColor = true;
+            this.updateStudentInGroup.Click += new System.EventHandler(this.updateStudentInGroup_Click);
             // 
             // StudentGroupList
             // 
@@ -359,7 +372,7 @@ namespace nudata.Forms
         private Button addFromGroup;
         private ComboBox groupsList;
         private ComboBox StudentList;
-        private Button removeStudentFrunGroup;
+        private Button removeStudentFromGroup;
         private Button addStudentToGroup;
         private GroupBox groupGroupbox;
         private Label label5;
@@ -370,5 +383,6 @@ namespace nudata.Forms
         private Button update;
         private Button add;
         private TextBox StudentGroupName;
+        private Button updateStudentInGroup;
     }
 }
