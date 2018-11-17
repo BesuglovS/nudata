@@ -618,6 +618,7 @@ namespace nudata.Forms
             tciNrm_hours.Text = "";
             LtciTotalHours.Text = "000.00";
             tciRealTeacher.SelectedValue = 0;
+            tciIndividual_hours.Text = "";
 
             tciSemester.Focus();
         }
