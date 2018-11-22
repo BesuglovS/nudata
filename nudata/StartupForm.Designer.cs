@@ -35,6 +35,8 @@
             this.учебныеПланыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.учебныеПланыСтудентовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.карточкиУчебныхПорученийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.количествоЧасовНаСтавкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.планИНагрузкаНаСтудентаCtrlAltPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.телефоныToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.заметкиAltNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,7 +51,6 @@
             this.аутентификацияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.количествоЧасовНаСтавкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trayIconMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,6 +67,7 @@
             this.учебныеПланыСтудентовToolStripMenuItem,
             this.карточкиУчебныхПорученийToolStripMenuItem,
             this.количествоЧасовНаСтавкуToolStripMenuItem,
+            this.планИНагрузкаНаСтудентаCtrlAltPToolStripMenuItem,
             this.toolStripMenuItem5,
             this.телефоныToolStripMenuItem,
             this.заметкиAltNToolStripMenuItem,
@@ -81,7 +83,7 @@
             this.toolStripMenuItem1,
             this.выходToolStripMenuItem});
             this.trayIconMenu.Name = "trayIconMenu";
-            this.trayIconMenu.Size = new System.Drawing.Size(299, 342);
+            this.trayIconMenu.Size = new System.Drawing.Size(299, 364);
             // 
             // учебныеПланыToolStripMenuItem
             // 
@@ -106,6 +108,22 @@
             this.карточкиУчебныхПорученийToolStripMenuItem.Size = new System.Drawing.Size(298, 22);
             this.карточкиУчебныхПорученийToolStripMenuItem.Text = "Карточки учебных поручений (Alt+C)";
             this.карточкиУчебныхПорученийToolStripMenuItem.Click += new System.EventHandler(this.карточкиУчебныхПорученийToolStripMenuItem_Click);
+            // 
+            // количествоЧасовНаСтавкуToolStripMenuItem
+            // 
+            this.количествоЧасовНаСтавкуToolStripMenuItem.Image = global::nudata.Properties.Resources.hours;
+            this.количествоЧасовНаСтавкуToolStripMenuItem.Name = "количествоЧасовНаСтавкуToolStripMenuItem";
+            this.количествоЧасовНаСтавкуToolStripMenuItem.Size = new System.Drawing.Size(298, 22);
+            this.количествоЧасовНаСтавкуToolStripMenuItem.Text = "Количество часов на ставку (Ctrl+Alt+H)";
+            this.количествоЧасовНаСтавкуToolStripMenuItem.Click += new System.EventHandler(this.количествоЧасовНаСтавкуToolStripMenuItem_Click);
+            // 
+            // планИНагрузкаНаСтудентаCtrlAltPToolStripMenuItem
+            // 
+            this.планИНагрузкаНаСтудентаCtrlAltPToolStripMenuItem.Image = global::nudata.Properties.Resources.student;
+            this.планИНагрузкаНаСтудентаCtrlAltPToolStripMenuItem.Name = "планИНагрузкаНаСтудентаCtrlAltPToolStripMenuItem";
+            this.планИНагрузкаНаСтудентаCtrlAltPToolStripMenuItem.Size = new System.Drawing.Size(298, 22);
+            this.планИНагрузкаНаСтудентаCtrlAltPToolStripMenuItem.Text = "План и нагрузка на студента (Ctrl+Alt+P)";
+            this.планИНагрузкаНаСтудентаCtrlAltPToolStripMenuItem.Click += new System.EventHandler(this.планИНагрузкаНаСтудентаCtrlAltPToolStripMenuItem_Click);
             // 
             // toolStripMenuItem5
             // 
@@ -204,14 +222,6 @@
             this.выходToolStripMenuItem.Text = "Выход";
             this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
             // 
-            // количествоЧасовНаСтавкуToolStripMenuItem
-            // 
-            this.количествоЧасовНаСтавкуToolStripMenuItem.Image = global::nudata.Properties.Resources.hours;
-            this.количествоЧасовНаСтавкуToolStripMenuItem.Name = "количествоЧасовНаСтавкуToolStripMenuItem";
-            this.количествоЧасовНаСтавкуToolStripMenuItem.Size = new System.Drawing.Size(298, 22);
-            this.количествоЧасовНаСтавкуToolStripMenuItem.Text = "Количество часов на ставку (Ctrl+Alt+H)";
-            this.количествоЧасовНаСтавкуToolStripMenuItem.Click += new System.EventHandler(this.количествоЧасовНаСтавкуToolStripMenuItem_Click);
-            // 
             // StartupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -246,6 +256,7 @@
         private System.Windows.Forms.ToolStripMenuItem учебныеПланыСтудентовToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem карточкиУчебныхПорученийToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem количествоЧасовНаСтавкуToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem планИНагрузкаНаСтудентаCtrlAltPToolStripMenuItem;
     }
 }
 

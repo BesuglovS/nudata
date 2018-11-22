@@ -277,7 +277,7 @@ namespace nudata.Forms
 
             DisciplineSemestersDataGrid.DataSource = semesters;
 
-            DisciplineSemestersDataGrid.Columns["id"].Visible = false;
+            DisciplineSemestersDataGrid.Columns["id"].Visible = false;            
             DisciplineSemestersDataGrid.Columns["semester"].HeaderText = "Семестр";
             DisciplineSemestersDataGrid.Columns["lecture_hours"].HeaderText = "Лекции";
             DisciplineSemestersDataGrid.Columns["lab_hours"].HeaderText = "Лабораторные";

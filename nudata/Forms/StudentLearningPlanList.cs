@@ -97,10 +97,10 @@ namespace nudata.Forms
             var planView = StudentLearningPlanWithPeriodsView.fromNetData(plans);
 
             StudentLearningPlanListView.DataSource = planView;
-            FromatPlansView();
+            FormatPlansView();
         }
 
-        private void FromatPlansView()
+        private void FormatPlansView()
         {
             StudentLearningPlanListView.Columns["id"].Visible = false;
             StudentLearningPlanListView.Columns["student_id"].Visible = false;
@@ -115,7 +115,7 @@ namespace nudata.Forms
 
         private void StudentLearningPlanList_Resize(object sender, EventArgs e)
         {
-            FromatPlansView();
+            FormatPlansView();
         }
 
         private void add_Click(object sender, EventArgs e)

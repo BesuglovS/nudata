@@ -136,5 +136,23 @@ namespace nudata.nubackRepos
 
             return result;
         }
+
+        public List<LearningPlanDisciplineSemester> learningPlanAll(int learningPlanId)
+        {
+            var StringResult = ApiHelper.Get(ApiEndpoint + "/learningPlanDisciplineSemester/learningPlan/" + learningPlanId.ToString());
+
+            List<LearningPlanDisciplineSemester> result;
+
+            try
+            {
+                result = JsonConvert.DeserializeObject<List<LearningPlanDisciplineSemester>>(StringResult);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+            return result;
+        }
     }
 }

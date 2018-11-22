@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using nudata.DomainClasses.Main;
 using nudata.Net;
+using nudata.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -162,6 +163,43 @@ namespace nudata.nubackRepos
             try
             {
                 result = JsonConvert.DeserializeObject<List<TeacherCardItem>>(StringResult);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+            return result;
+        }
+
+        public List<TeacherCardAndItem> yearAll(int year)
+        {
+            var StringResult = ApiHelper.Get(ApiEndpoint + "/teacherCardItem/year/" + year.ToString());
+
+            List<TeacherCardAndItem> result;
+
+            try
+            {
+                result = JsonConvert.DeserializeObject<List<TeacherCardAndItem>>(StringResult);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+            return result;
+        }
+
+        public List<TeacherCardAndItem> yearSemesterStudentIdAll(int year, int semester, int studentId)
+        {
+            var StringResult = ApiHelper.Get(ApiEndpoint + "/teacherCardItem/yearSemesterStudentId/" + 
+                year.ToString() + "/" + semester.ToString() + "/" + studentId.ToString());
+
+            List<TeacherCardAndItem> result;
+
+            try
+            {
+                result = JsonConvert.DeserializeObject<List<TeacherCardAndItem>>(StringResult);
             }
             catch (Exception)
             {

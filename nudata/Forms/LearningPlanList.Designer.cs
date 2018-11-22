@@ -32,6 +32,8 @@
             this.leftBottomPanel = new System.Windows.Forms.Panel();
             this.LearningPlanGridView = new System.Windows.Forms.DataGridView();
             this.leftTopPanel = new System.Windows.Forms.Panel();
+            this.lpName = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
             this.removeLP = new System.Windows.Forms.Button();
             this.updateLP = new System.Windows.Forms.Button();
             this.addLP = new System.Windows.Forms.Button();
@@ -107,8 +109,6 @@
             this.lpdCode = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.openXmlFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.lpName = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
             this.LeftPanel.SuspendLayout();
             this.leftBottomPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LearningPlanGridView)).BeginInit();
@@ -179,6 +179,22 @@
             this.leftTopPanel.Name = "leftTopPanel";
             this.leftTopPanel.Size = new System.Drawing.Size(360, 342);
             this.leftTopPanel.TabIndex = 0;
+            // 
+            // lpName
+            // 
+            this.lpName.Location = new System.Drawing.Point(6, 25);
+            this.lpName.Name = "lpName";
+            this.lpName.Size = new System.Drawing.Size(325, 20);
+            this.lpName.TabIndex = 28;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(3, 9);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(57, 13);
+            this.label22.TabIndex = 27;
+            this.label22.Text = "Название";
             // 
             // removeLP
             // 
@@ -346,7 +362,7 @@
             this.DisciplineSemestersDataGrid.RowHeadersVisible = false;
             this.DisciplineSemestersDataGrid.Size = new System.Drawing.Size(896, 109);
             this.DisciplineSemestersDataGrid.TabIndex = 0;
-            this.DisciplineSemestersDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DisciplineSemestersDataGrid_CellClick);
+            this.DisciplineSemestersDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.LearningPlanGridView_CellClick);
             // 
             // disciplineSemestersControlsPanel
             // 
@@ -890,22 +906,6 @@
             this.openXmlFileDialog.FileName = "openFileDialog1";
             this.openXmlFileDialog.Filter = "Excel files|*.xls";
             this.openXmlFileDialog.InitialDirectory = "D:\\Планы из битрикса\\Excel\\";
-            // 
-            // lpName
-            // 
-            this.lpName.Location = new System.Drawing.Point(6, 25);
-            this.lpName.Name = "lpName";
-            this.lpName.Size = new System.Drawing.Size(325, 20);
-            this.lpName.TabIndex = 28;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(3, 9);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(57, 13);
-            this.label22.TabIndex = 27;
-            this.label22.Text = "Название";
             // 
             // LearningPlanList
             // 

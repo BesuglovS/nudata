@@ -26,7 +26,7 @@
     <InstallUrl>http://wiki.nayanova.edu/nudata/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>35</ApplicationRevision>
+    <ApplicationRevision>37</ApplicationRevision>
     <ApplicationVersion>0.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -191,6 +191,12 @@
     <Compile Include="Forms\PhoneForm.Designer.cs">
       <DependentUpon>PhoneForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\PlanVsCardList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PlanVsCardList.Designer.cs">
+      <DependentUpon>PlanVsCardList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\PositionYearRateHoursList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -270,12 +276,14 @@
     <Compile Include="HotKeyManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\DisciplineSemesterView.cs" />
     <Compile Include="Views\LearningPlanView.cs" />
     <Compile Include="Views\PhoneItem.cs" />
     <Compile Include="Views\StudentInGroupView.cs" />
     <Compile Include="Views\StudentLearningPlanWithPeriodsView.cs" />
     <Compile Include="Views\StudentListView.cs" />
     <Compile Include="Views\StudentView.cs" />
+    <Compile Include="Views\TeacherCardAndItem.cs" />
     <Compile Include="Views\TeacherCardItemView.cs" />
     <Compile Include="Views\TeacherCardJoined.cs" />
     <Compile Include="Views\TeacherView.cs" />
@@ -297,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PhoneForm.resx">
       <DependentUpon>PhoneForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PlanVsCardList.resx">
+      <DependentUpon>PlanVsCardList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PositionYearRateHoursList.resx">
       <DependentUpon>PositionYearRateHoursList.cs</DependentUpon>
@@ -433,6 +444,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\hours.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\student-64.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

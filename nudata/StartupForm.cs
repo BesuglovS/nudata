@@ -54,6 +54,9 @@ namespace nudata
         bool _positionYearRateHoursListOpened;
         public PositionYearRateHoursList PositionYearRateHoursForm;
 
+        bool _planVsCardListOpened;
+        public PlanVsCardList PlanVsCardForm;
+
         public StartupForm()
         {
             InitializeComponent();
@@ -90,6 +93,9 @@ namespace nudata
 
             // Карточки учебных поручений - Ctrl-Alt-H
             HotKeyManager.RegisterHotKey(Keys.H, (uint)(KeyModifiers.Control | KeyModifiers.Alt));
+
+            // Карточки учебных поручений - Ctrl-Alt-P
+            HotKeyManager.RegisterHotKey(Keys.P, (uint)(KeyModifiers.Control | KeyModifiers.Alt));
 
             HotKeyManager.HotKeyPressed += ManageHotKeys;
 
@@ -172,7 +178,34 @@ namespace nudata
                 {
                     ShowPositionYearRateHoursForm();
                 }
+
+                if (e.Key == Keys.P)
+                {
+                    ShowPlanVsCardForm();
+                }
             }
+        }
+
+        private void ShowPlanVsCardForm()
+        {
+            if (!AppPermissions.Check("PlanVsCardList"))
+            {
+                MessageBox.Show("У вас нет разрешения на использование этой части приложения.");
+
+                return;
+            }
+
+            if (_planVsCardListOpened)
+            {
+                PlanVsCardForm.Activate();
+                PlanVsCardForm.Focus();
+                return;
+            }
+
+            PlanVsCardForm = new PlanVsCardList(ApiEndpoint);
+            _planVsCardListOpened = true;
+            PlanVsCardForm.Show();
+            _planVsCardListOpened = false;
         }
 
         private void ShowPositionYearRateHoursForm()
@@ -495,6 +528,11 @@ namespace nudata
         private void количествоЧасовНаСтавкуToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowPositionYearRateHoursForm();
+        }
+
+        private void планИНагрузкаНаСтудентаCtrlAltPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowPlanVsCardForm();
         }
     }
 }
