@@ -22,6 +22,7 @@ namespace nudata.Forms
         LearningPlanDisciplineRepo lpdRepo;
         LearningPlanDisciplineSemesterRepo lpdsRepo;
         TeacherCardItemRepo tciRepo;
+        TeacherRepo tRepo;
 
         LearningPlan currentLearningPlan;
         List<LearningPlanDiscipline> currentLearningPlanDisciplines;
@@ -38,6 +39,7 @@ namespace nudata.Forms
             lpdRepo = new LearningPlanDisciplineRepo(ApiEndpoint);
             lpdsRepo = new LearningPlanDisciplineSemesterRepo(ApiEndpoint);
             tciRepo = new TeacherCardItemRepo(ApiEndpoint);
+            tRepo = new TeacherRepo(ApiEndpoint);
         }
 
         private void PlanVsCardList_Load(object sender, EventArgs e)
@@ -160,9 +162,23 @@ namespace nudata.Forms
                 studentCardItems.AddRange(semesterStudentCardItems);
             }
 
+            var teachersDict = tRepo.all().ToDictionary(t => t.id, t => t);
+
             for (int i = 0; i < studentCardItems.Count; i++)
             {
                 studentCardItems[i].semester = studentCardItems[i].semester + (studentCardItems[i].starting_year - currentLearningPlan.starting_year) * 2;
+
+                if (teachersDict.ContainsKey(studentCardItems[i].teacher_id))
+                {
+                    var teacher = teachersDict[studentCardItems[i].teacher_id];
+                    studentCardItems[i].teacher_fio = teacher.f + " " + teacher.i + " " + teacher.o;
+                }
+
+                if (teachersDict.ContainsKey(studentCardItems[i].real_teacher_id))
+                {
+                    var realTeacher = teachersDict[studentCardItems[i].real_teacher_id];
+                    studentCardItems[i].real_teacher_fio = realTeacher.f + " " + realTeacher.i + " " + realTeacher.o;
+                }
             }
 
             studentCardItems = studentCardItems
@@ -279,6 +295,12 @@ namespace nudata.Forms
 
             CardsGridView.Columns["starting_year"].HeaderText = "Начало учебного года";
             CardsGridView.Columns["starting_year"].Width = 40;
+
+            CardsGridView.Columns["teacher_fio"].HeaderText = "ФИО";
+            CardsGridView.Columns["teacher_fio"].Width = 40;
+
+            CardsGridView.Columns["real_teacher_fio"].HeaderText = "ФИО реальное";
+            CardsGridView.Columns["real_teacher_fio"].Width = 40;
         }
 
         private void FormatSemesterView()
@@ -329,6 +351,11 @@ namespace nudata.Forms
 
         private void CardsGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            if (e.Value == null)
+            {
+                return;
+            }
+
             string stringValue = e.Value.ToString();
 
             if (stringValue == "0" || stringValue == "0.00" || stringValue == "0,00")

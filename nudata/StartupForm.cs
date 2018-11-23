@@ -57,6 +57,9 @@ namespace nudata
         bool _planVsCardListOpened;
         public PlanVsCardList PlanVsCardForm;
 
+        bool _markTypeListOpened;
+        public MarkTypeList MarkTypeForm;
+
         public StartupForm()
         {
             InitializeComponent();
@@ -94,8 +97,11 @@ namespace nudata
             // Карточки учебных поручений - Ctrl-Alt-H
             HotKeyManager.RegisterHotKey(Keys.H, (uint)(KeyModifiers.Control | KeyModifiers.Alt));
 
-            // Карточки учебных поручений - Ctrl-Alt-P
+            // План и нагрузка на студента - Ctrl-Alt-P
             HotKeyManager.RegisterHotKey(Keys.P, (uint)(KeyModifiers.Control | KeyModifiers.Alt));
+
+            // Виды оценок - Ctrl-Alt-M
+            HotKeyManager.RegisterHotKey(Keys.M, (uint)(KeyModifiers.Control | KeyModifiers.Alt));
 
             HotKeyManager.HotKeyPressed += ManageHotKeys;
 
@@ -183,7 +189,34 @@ namespace nudata
                 {
                     ShowPlanVsCardForm();
                 }
+
+                if (e.Key == Keys.M)
+                {
+                    ShowMarkTypeForm();
+                }
             }
+        }
+
+        private void ShowMarkTypeForm()
+        {
+            if (!AppPermissions.Check("MarkTypeList"))
+            {
+                MessageBox.Show("У вас нет разрешения на использование этой части приложения.");
+
+                return;
+            }
+
+            if (_markTypeListOpened)
+            {
+                MarkTypeForm.Activate();
+                MarkTypeForm.Focus();
+                return;
+            }
+
+            MarkTypeForm = new MarkTypeList(ApiEndpoint);
+            _markTypeListOpened = true;
+            MarkTypeForm.Show();
+            _markTypeListOpened = false;
         }
 
         private void ShowPlanVsCardForm()
@@ -533,6 +566,11 @@ namespace nudata
         private void планИНагрузкаНаСтудентаCtrlAltPToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowPlanVsCardForm();
+        }
+
+        private void видыОценокCtrlAlt9ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowMarkTypeForm();
         }
     }
 }

@@ -32,11 +32,8 @@ namespace nudata.Views
         public decimal nra_hours { get; set; }
         public decimal nrm_hours { get; set; }
         public decimal individual_hours { get; set; }
-        public int teacher_card_id { get; set; }
-        public int real_teacher_id { get; set; }
-
+        public int teacher_card_id { get; set; }                
         
-        public int teacher_id { get; set; }
         public string position { get; set; }
         public string rate_multiplier { get; set; }
         public string academic_degree { get; set; }
@@ -45,5 +42,10 @@ namespace nudata.Views
         public int department_id { get; set; }
         public string position_type { get; set; }
         public int starting_year { get; set; }
+
+        public int teacher_id { get; set; }
+        public int real_teacher_id { get; set; }
+        public string teacher_fio { get; set; }
+        public string real_teacher_fio { get; set; }
     }
 }

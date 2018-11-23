@@ -63,6 +63,16 @@ namespace nudata.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Aplus {
+            get {
+                object obj = ResourceManager.GetObject("Aplus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap applebooks {
             get {
                 object obj = ResourceManager.GetObject("applebooks", resourceCulture);
@@ -186,6 +196,16 @@ namespace nudata.Properties {
         internal static System.Drawing.Bitmap Login {
             get {
                 object obj = ResourceManager.GetObject("Login", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Marks {
+            get {
+                object obj = ResourceManager.GetObject("Marks", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -362,7 +362,7 @@
             this.DisciplineSemestersDataGrid.RowHeadersVisible = false;
             this.DisciplineSemestersDataGrid.Size = new System.Drawing.Size(896, 109);
             this.DisciplineSemestersDataGrid.TabIndex = 0;
-            this.DisciplineSemestersDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.LearningPlanGridView_CellClick);
+            this.DisciplineSemestersDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DisciplineSemestersDataGrid_CellClick);
             // 
             // disciplineSemestersControlsPanel
             // 
