@@ -37,6 +37,7 @@
             this.карточкиУчебныхПорученийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.количествоЧасовНаСтавкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.планИНагрузкаНаСтудентаCtrlAltPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.видыОценокCtrlAlt9ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.телефоныToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.заметкиAltNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,7 +51,8 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.аутентификацияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.видыОценокCtrlAlt9ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.оценкиСтудентовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trayIconMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,6 +71,7 @@
             this.количествоЧасовНаСтавкуToolStripMenuItem,
             this.планИНагрузкаНаСтудентаCtrlAltPToolStripMenuItem,
             this.видыОценокCtrlAlt9ToolStripMenuItem,
+            this.оценкиСтудентовToolStripMenuItem,
             this.toolStripMenuItem5,
             this.телефоныToolStripMenuItem,
             this.заметкиAltNToolStripMenuItem,
@@ -81,9 +84,10 @@
             this.факультетыToolStripMenuItem,
             this.toolStripMenuItem2,
             this.аутентификацияToolStripMenuItem,
-            this.toolStripMenuItem1});
+            this.toolStripMenuItem1,
+            this.выходToolStripMenuItem});
             this.trayIconMenu.Name = "trayIconMenu";
-            this.trayIconMenu.Size = new System.Drawing.Size(299, 364);
+            this.trayIconMenu.Size = new System.Drawing.Size(299, 408);
             // 
             // учебныеПланыToolStripMenuItem
             // 
@@ -124,6 +128,14 @@
             this.планИНагрузкаНаСтудентаCtrlAltPToolStripMenuItem.Size = new System.Drawing.Size(298, 22);
             this.планИНагрузкаНаСтудентаCtrlAltPToolStripMenuItem.Text = "План и нагрузка на студента (Ctrl+Alt+P)";
             this.планИНагрузкаНаСтудентаCtrlAltPToolStripMenuItem.Click += new System.EventHandler(this.планИНагрузкаНаСтудентаCtrlAltPToolStripMenuItem_Click);
+            // 
+            // видыОценокCtrlAlt9ToolStripMenuItem
+            // 
+            this.видыОценокCtrlAlt9ToolStripMenuItem.Image = global::nudata.Properties.Resources.Marks;
+            this.видыОценокCtrlAlt9ToolStripMenuItem.Name = "видыОценокCtrlAlt9ToolStripMenuItem";
+            this.видыОценокCtrlAlt9ToolStripMenuItem.Size = new System.Drawing.Size(298, 22);
+            this.видыОценокCtrlAlt9ToolStripMenuItem.Text = "Виды оценок (Ctrl+Alt+M)";
+            this.видыОценокCtrlAlt9ToolStripMenuItem.Click += new System.EventHandler(this.видыОценокCtrlAlt9ToolStripMenuItem_Click);
             // 
             // toolStripMenuItem5
             // 
@@ -214,13 +226,21 @@
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(295, 6);
             // 
-            // видыОценокCtrlAlt9ToolStripMenuItem
+            // выходToolStripMenuItem
             // 
-            this.видыОценокCtrlAlt9ToolStripMenuItem.Image = global::nudata.Properties.Resources.Marks;
-            this.видыОценокCtrlAlt9ToolStripMenuItem.Name = "видыОценокCtrlAlt9ToolStripMenuItem";
-            this.видыОценокCtrlAlt9ToolStripMenuItem.Size = new System.Drawing.Size(298, 22);
-            this.видыОценокCtrlAlt9ToolStripMenuItem.Text = "Виды оценок (Ctrl+Alt+M)";
-            this.видыОценокCtrlAlt9ToolStripMenuItem.Click += new System.EventHandler(this.видыОценокCtrlAlt9ToolStripMenuItem_Click);
+            this.выходToolStripMenuItem.Image = global::nudata.Properties.Resources.exit;
+            this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(298, 22);
+            this.выходToolStripMenuItem.Text = "Выход";
+            this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
+            // 
+            // оценкиСтудентовToolStripMenuItem
+            // 
+            this.оценкиСтудентовToolStripMenuItem.Image = global::nudata.Properties.Resources.five;
+            this.оценкиСтудентовToolStripMenuItem.Name = "оценкиСтудентовToolStripMenuItem";
+            this.оценкиСтудентовToolStripMenuItem.Size = new System.Drawing.Size(298, 22);
+            this.оценкиСтудентовToolStripMenuItem.Text = "Оценки студентов (Alt+M)";
+            this.оценкиСтудентовToolStripMenuItem.Click += new System.EventHandler(this.оценкиСтудентовToolStripMenuItem_Click);
             // 
             // StartupForm
             // 
@@ -257,6 +277,8 @@
         private System.Windows.Forms.ToolStripMenuItem количествоЧасовНаСтавкуToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem планИНагрузкаНаСтудентаCtrlAltPToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem видыОценокCtrlAlt9ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem оценкиСтудентовToolStripMenuItem;
     }
 }
 

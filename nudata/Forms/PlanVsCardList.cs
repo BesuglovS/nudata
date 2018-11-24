@@ -1,5 +1,6 @@
 ﻿using nudata.DomainClasses.Main;
 using nudata.nubackRepos;
+using nudata.Properties;
 using nudata.Views;
 using System;
 using System.Collections.Generic;
@@ -44,6 +45,9 @@ namespace nudata.Forms
 
         private void PlanVsCardList_Load(object sender, EventArgs e)
         {
+            IntPtr pIcon = Resources.student.GetHicon();
+            Icon = Icon.FromHandle(pIcon);
+
             LoadStudentList();
         }
 

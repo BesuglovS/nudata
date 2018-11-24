@@ -60,6 +60,9 @@ namespace nudata
         bool _markTypeListOpened;
         public MarkTypeList MarkTypeForm;
 
+        bool _markListOpened;
+        public MarkList MarkForm;
+
         public StartupForm()
         {
             InitializeComponent();
@@ -102,6 +105,9 @@ namespace nudata
 
             // Виды оценок - Ctrl-Alt-M
             HotKeyManager.RegisterHotKey(Keys.M, (uint)(KeyModifiers.Control | KeyModifiers.Alt));
+
+            // Оценки студентов - Ctrl-M
+            HotKeyManager.RegisterHotKey(Keys.M, (uint)KeyModifiers.Alt);
 
             HotKeyManager.HotKeyPressed += ManageHotKeys;
 
@@ -161,6 +167,11 @@ namespace nudata
                 {
                     ShowTeacherCardsForm();
                 }
+
+                if (e.Key == Keys.M)
+                {
+                    ShowMarkForm();
+                }
             }
 
             if (e.Modifiers == (KeyModifiers.Control | KeyModifiers.Alt))
@@ -195,6 +206,28 @@ namespace nudata
                     ShowMarkTypeForm();
                 }
             }
+        }
+
+        private void ShowMarkForm()
+        {
+            if (!AppPermissions.Check("MarkList"))
+            {
+                MessageBox.Show("У вас нет разрешения на использование этой части приложения.");
+
+                return;
+            }
+
+            if (_markListOpened)
+            {
+                MarkForm.Activate();
+                MarkForm.Focus();
+                return;
+            }
+
+            MarkForm = new MarkList(ApiEndpoint);
+            _markListOpened = true;
+            MarkForm.Show();
+            _markListOpened = false;
         }
 
         private void ShowMarkTypeForm()
@@ -571,6 +604,11 @@ namespace nudata
         private void видыОценокCtrlAlt9ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowMarkTypeForm();
+        }
+
+        private void оценкиСтудентовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowMarkForm();
         }
     }
 }
