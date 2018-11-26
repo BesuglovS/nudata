@@ -47,7 +47,7 @@ namespace nudata.nubackRepos
                     { "date", Mark.date.ToString("yyyy-MM-dd") },
                     { "attempt", Mark.attempt.ToString() },
                     { "attestation_mark_type_option_id", Mark.attestation_mark_type_option_id.ToString() },
-                    { "semester_rate", Mark.semester_rate.ToString() }
+                    { "semester_rate", Mark.semester_rate.ToString().Replace(',','.') }
 
                 });
 
@@ -86,7 +86,7 @@ namespace nudata.nubackRepos
                     { "date", Mark.date.ToString("yyyy-MM-dd") },
                     { "attempt", Mark.attempt.ToString() },
                     { "attestation_mark_type_option_id", Mark.attestation_mark_type_option_id.ToString() },
-                    { "semester_rate", Mark.semester_rate.ToString() }
+                    { "semester_rate", Mark.semester_rate.ToString().Replace(',','.') }
                 });
 
             return response;
@@ -104,6 +104,25 @@ namespace nudata.nubackRepos
         public List<Mark> studentAll(int studentId)
         {
             var StringResult = ApiHelper.Get(ApiEndpoint + "/mark/student/" + studentId.ToString());
+
+            List<Mark> result;
+
+            try
+            {
+                result = JsonConvert.DeserializeObject<List<Mark>>(StringResult);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+            return result;
+        }
+
+        public List<Mark> studentDisciplineSemesterAll(int studentId, int lpdsId)
+        {
+            var StringResult = ApiHelper.Get(ApiEndpoint + "/mark/studentDisciplineSemester/" + 
+                studentId.ToString() + "/" + lpdsId.ToString());
 
             List<Mark> result;
 
