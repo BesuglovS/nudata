@@ -85,5 +85,23 @@ namespace nudata.nubackRepos
 
             return response;
         }
+
+        public List<MarkTeacher> markAll(int markId)
+        {
+            var StringResult = ApiHelper.Get(ApiEndpoint + "/markTeacher/mark/" + markId.ToString());
+
+            List<MarkTeacher> result;
+
+            try
+            {
+                result = JsonConvert.DeserializeObject<List<MarkTeacher>>(StringResult);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+            return result;
+        }
     }
 }

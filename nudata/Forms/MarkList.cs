@@ -27,6 +27,7 @@ namespace nudata.Forms
         LearningPlanDisciplineSemesterRepo lpdsRepo;
         MarkTypeRepo mtypeRepo;
         MarkTypeOptionRepo mtoRepo;
+        TeacherRepo tRepo;
 
         int currentStudentId;
         LearningPlan currentLearningPlan;
@@ -47,6 +48,7 @@ namespace nudata.Forms
             lpdsRepo = new LearningPlanDisciplineSemesterRepo(ApiEndpoint);
             mtypeRepo = new MarkTypeRepo(ApiEndpoint);
             mtoRepo = new MarkTypeOptionRepo(ApiEndpoint);
+            tRepo = new TeacherRepo(ApiEndpoint);
         }
 
         private void MarkList_Load(object sender, EventArgs e)
@@ -60,6 +62,13 @@ namespace nudata.Forms
             CurrentMarkType.DisplayMember = "name";
             CurrentMarkType.ValueMember = "id";
             CurrentMarkType.DataSource = mTypes;
+
+            var teachers = tRepo.all();
+            var teachersView = TeacherView.TeachersToView(teachers);
+
+            MarkTeacherList.DisplayMember = "fio";
+            MarkTeacherList.ValueMember = "id";
+            MarkTeacherList.DataSource = teachersView;
         }
 
         private void LoadStudentList()
@@ -276,11 +285,13 @@ namespace nudata.Forms
         {
             var marks = mRepo.studentDisciplineSemesterAll(currentStudentId, dwm.id);
 
+            var teachers = tRepo.all().ToDictionary(t => t.id, t => t);
+            
             var markTypes = mtypeRepo.all();
             var markTypeOptions = mtoRepo.all();
 
             MarksGridView.DataSource = MarkView
-                .FromMarkList(marks, markTypes, markTypeOptions)
+                .FromMarkList(marks, markTypes, markTypeOptions, teachers, mtRepo)
                 .OrderBy(mv => mv.attempt)
                 .ToList();
 
@@ -311,6 +322,9 @@ namespace nudata.Forms
 
             MarksGridView.Columns["attempt"].HeaderText = "Попытка";
             MarksGridView.Columns["attempt"].Width = 60;
+
+            MarksGridView.Columns["teachersFio"].HeaderText = "ФИО";
+            MarksGridView.Columns["teachersFio"].Width = 250;
         }
 
         private void addMark_Click(object sender, EventArgs e)
@@ -405,6 +419,8 @@ namespace nudata.Forms
         {
             var markView = ((List<MarkView>)MarksGridView.DataSource)[e.RowIndex];
 
+            UpdateMarkTeachersList(markView);
+
             var markTypes = mtypeRepo.all();
             var markTypeOptions = mtoRepo.all();
 
@@ -426,6 +442,27 @@ namespace nudata.Forms
             MarkDate.Value = markView.date;
         }
 
+        private void UpdateMarkTeachersList(MarkView markView)
+        {
+            var marksTeachers = mtRepo.markAll(markView.id);
+            var teachers = tRepo.all();
+
+            var markTeachersView = MarkTeacherView.FromMarkTeacherList(marksTeachers, teachers);
+
+            MarksTeachersGrid.DataSource = markTeachersView;
+
+            FormatMarksTeachersGrid();
+        }
+
+        private void FormatMarksTeachersGrid()
+        {
+            MarksTeachersGrid.Columns["Id"].Visible = false;
+            MarksTeachersGrid.Columns["MarkId"].Visible = false;
+            MarksTeachersGrid.Columns["TeacherId"].Visible = false;
+            MarksTeachersGrid.Columns["TeacherFio"].HeaderText = "Преподаватель";
+            MarksTeachersGrid.Columns["TeacherFio"].Width = MarksTeachersGrid.Width - 20;
+        }
+
         private void CurrentMarkType_SelectedValueChanged(object sender, EventArgs e)
         {
             if (CurrentMarkType.SelectedValue != null)
@@ -441,6 +478,92 @@ namespace nudata.Forms
                 AttestationMark.ValueMember = "id";
                 AttestationMark.DataSource = markTypeOptions.Where(mto => mto.mark_type_id == (int)CurrentMarkType.SelectedValue).ToList();
             }
+        }
+
+        private void AddMarkTeacher_Click(object sender, EventArgs e)
+        {
+            if (MarksGridView.SelectedCells.Count > 0)
+            {
+                var selectedRowIndex = MarksGridView.SelectedCells[0].RowIndex;
+                var markView = ((List<MarkView>)MarksGridView.DataSource)[selectedRowIndex];
+
+                var newMarkTeacher = new MarkTeacher {
+                    mark_id = markView.id,
+                    teacher_id = (int)MarkTeacherList.SelectedValue
+                };
+
+                mtRepo.add(newMarkTeacher);
+
+                UpdateMarkTeachersList(markView);
+
+                var dwm = ((List<DisciplineWithMark>)SemesterDisciplinesMarksGrid.DataSource)[SemesterDisciplinesMarksGrid.SelectedCells[0].RowIndex];
+                UpdateSemesterDisciplineMarks(dwm);
+
+                if (((List<MarkView>)MarksGridView.DataSource).FirstOrDefault(mv => mv.id == markView.id) != null)
+                {
+                    MarksGridView.ClearSelection();
+                    MarksGridView.Rows[selectedRowIndex].Selected = true;
+                }
+            }
+        }
+
+        private void UpdateMarkTeacher_Click(object sender, EventArgs e)
+        {
+            if (MarksTeachersGrid.SelectedCells.Count > 0 && MarksGridView.SelectedCells.Count > 0)
+            {
+                var selectedRowIndex = MarksGridView.SelectedCells[0].RowIndex;
+                var markView = ((List<MarkView>)MarksGridView.DataSource)[selectedRowIndex];
+
+                var mtView = ((List<MarkTeacherView>)MarksTeachersGrid.DataSource)[MarksTeachersGrid.SelectedCells[0].RowIndex];
+
+                var markTeacher = mtRepo.get(mtView.Id);
+
+                markTeacher.teacher_id = (int)MarkTeacherList.SelectedValue;
+
+                mtRepo.update(markTeacher, markTeacher.id);
+
+                UpdateMarkTeachersList(markView);
+
+                var dwm = ((List<DisciplineWithMark>)SemesterDisciplinesMarksGrid.DataSource)[SemesterDisciplinesMarksGrid.SelectedCells[0].RowIndex];
+                UpdateSemesterDisciplineMarks(dwm);
+
+                if (((List<MarkView>)MarksGridView.DataSource).FirstOrDefault(mv => mv.id == markView.id) != null)
+                {
+                    MarksGridView.ClearSelection();
+                    MarksGridView.Rows[selectedRowIndex].Selected = true;
+                }
+            }
+        }
+
+        private void RemoveMarkTeacher_Click(object sender, EventArgs e)
+        {
+            if (MarksTeachersGrid.SelectedCells.Count > 0 && MarksGridView.SelectedCells.Count > 0)
+            {
+                var selectedRowIndex = MarksGridView.SelectedCells[0].RowIndex;
+                var markView = ((List<MarkView>)MarksGridView.DataSource)[selectedRowIndex];
+
+                var mtView = ((List<MarkTeacherView>)MarksTeachersGrid.DataSource)[MarksTeachersGrid.SelectedCells[0].RowIndex];
+
+                mtRepo.delete(mtView.Id);
+
+                UpdateMarkTeachersList(markView);
+
+                var dwm = ((List<DisciplineWithMark>)SemesterDisciplinesMarksGrid.DataSource)[SemesterDisciplinesMarksGrid.SelectedCells[0].RowIndex];
+                UpdateSemesterDisciplineMarks(dwm);
+
+                if (((List<MarkView>)MarksGridView.DataSource).FirstOrDefault(mv => mv.id == markView.id) != null)
+                {
+                    MarksGridView.ClearSelection();
+                    MarksGridView.Rows[selectedRowIndex].Selected = true;
+                }
+            }
+        }
+
+        private void MarksTeachersGrid_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var teacherView = ((List<MarkTeacherView>)MarksTeachersGrid.DataSource)[e.RowIndex];
+
+            MarkTeacherList.SelectedValue = teacherView.TeacherId;
         }
     }
 }
