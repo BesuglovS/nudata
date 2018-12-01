@@ -103,5 +103,24 @@ namespace nudata.nubackRepos
 
             return result;
         }
+
+        public int deleteMarkAll(int markId)
+        {
+            var StringResult = ApiHelper.Delete(ApiEndpoint + "/markTeacher/mark/" + markId.ToString(),
+                new Dictionary<string, string>());
+
+            int result;
+
+            try
+            {
+                result = JsonConvert.DeserializeObject<int>(StringResult);
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+
+            return result;
+        }
     }
 }

@@ -61,7 +61,11 @@ namespace nudata.Views
             return list.Select(m => {
                 var mw = new MarkView(m, markTypes, markTypeOptions, teachers);
 
-                var teachersFio = mtRepo.markAll(m.id)
+                var marks = mtRepo.markAll(m.id);
+
+                var teachersFio = (marks.Count == 0) ? 
+                    "" :
+                    marks
                     .Select(mt =>
                         teachers[mt.teacher_id].f + " " +
                         teachers[mt.teacher_id].i + " " +

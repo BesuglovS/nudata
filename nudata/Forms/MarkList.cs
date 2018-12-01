@@ -30,6 +30,7 @@ namespace nudata.Forms
         TeacherRepo tRepo;
 
         int currentStudentId;
+        int currentSemester;
         LearningPlan currentLearningPlan;
         List<LearningPlanDiscipline> currentLearningPlanDisciplines;
         List<LearningPlanDisciplineSemester> currentLearningPlanDisciplineSemesters;
@@ -132,6 +133,11 @@ namespace nudata.Forms
             RightTopLeftPlanPanel.Width = (int)Math.Floor((double)RightTopPanel.Width - 200);
 
             RightBottomLeftPanel.Width = (int)Math.Floor((double)RightBottomPanel.Width - 350);
+
+            if (MarksGridView.Columns["teachersFio"] != null)
+            {
+                MarksGridView.Columns["teachersFio"].Width = (MarksGridView.Width - 450 > 250) ? (MarksGridView.Width - 450) : 250;
+            }
         }
 
         private void PlansGrid_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -187,8 +193,8 @@ namespace nudata.Forms
 
         private void SemestersGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            var semester = ((List<IntegerView>)SemestersGrid.DataSource)[e.RowIndex].value;
-            UpdateSemesterDisciplines(semester);
+            currentSemester = ((List<IntegerView>)SemestersGrid.DataSource)[e.RowIndex].value;
+            UpdateSemesterDisciplines(currentSemester);
         }
 
         private void UpdateSemesterDisciplines(int semester)
@@ -324,7 +330,7 @@ namespace nudata.Forms
             MarksGridView.Columns["attempt"].Width = 60;
 
             MarksGridView.Columns["teachersFio"].HeaderText = "ФИО";
-            MarksGridView.Columns["teachersFio"].Width = 250;
+            MarksGridView.Columns["teachersFio"].Width = (MarksGridView.Width - 450 > 250) ? (MarksGridView.Width - 450) : 250;
         }
 
         private void addMark_Click(object sender, EventArgs e)
@@ -395,7 +401,7 @@ namespace nudata.Forms
                 {
                     var semester = ((List<IntegerView>)SemestersGrid.DataSource)
                         [SemestersGrid.SelectedCells[0].RowIndex].value;
-                    UpdateSemesterDisciplines(semester);
+                    UpdateSemesterDisciplines(semester);                    
                 }
             }
         }
@@ -409,9 +415,18 @@ namespace nudata.Forms
                 var dwMark = ((List<DisciplineWithMark>)SemesterDisciplinesMarksGrid.DataSource)
                     [SemesterDisciplinesMarksGrid.SelectedCells[0].RowIndex];
 
+                mtRepo.deleteMarkAll(markView.id);
+
                 mRepo.delete(markView.id);
 
                 UpdateSemesterDisciplineMarks(dwMark);
+
+                if (SemestersGrid.SelectedCells.Count > 0)
+                {
+                    var semester = ((List<IntegerView>)SemestersGrid.DataSource)
+                        [SemestersGrid.SelectedCells[0].RowIndex].value;
+                    UpdateSemesterDisciplines(semester);
+                }
             }
         }
 
