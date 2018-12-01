@@ -32,6 +32,23 @@ namespace nudata.Views
         public DisciplineSemesterView()
         {}
 
+        public DisciplineSemesterView CloneWithNoAttestation()
+        {
+            return new DisciplineSemesterView {
+                id = id,
+                semester = semester,
+                discipline_name = discipline_name,
+                lecture_hours = lecture_hours,
+                lab_hours = lab_hours,
+                practice_hours = practice_hours,
+                independent_work_hours = independent_work_hours,
+                control_hours = control_hours,
+                z_count = z_count,
+                individual_hours = individual_hours,
+                learning_plan_discipline_id = learning_plan_discipline_id
+            };
+        }
+
         public DisciplineSemesterView(LearningPlanDisciplineSemester lpds, Dictionary<int, string> discDict)
         {
             id = lpds.id;

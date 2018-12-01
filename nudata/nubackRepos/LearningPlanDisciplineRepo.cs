@@ -49,7 +49,8 @@ namespace nudata.nubackRepos
                     { "independent_work_hours", LearningPlanDiscipline.independent_work_hours.ToString() },
                     { "control_hours", LearningPlanDiscipline.control_hours.ToString() },
                     { "z_count", LearningPlanDiscipline.z_count.ToString() },
-                    { "learning_plan_id", LearningPlanDiscipline.learning_plan_id.ToString() }
+                    { "learning_plan_id", LearningPlanDiscipline.learning_plan_id.ToString() },
+                    { "order", LearningPlanDiscipline.order.ToString() }
                 });
 
             return response;
@@ -86,7 +87,8 @@ namespace nudata.nubackRepos
                     { "independent_work_hours", LearningPlanDiscipline.independent_work_hours.ToString() },
                     { "control_hours", LearningPlanDiscipline.control_hours.ToString() },
                     { "z_count", LearningPlanDiscipline.z_count.ToString() },
-                    { "learning_plan_id", LearningPlanDiscipline.learning_plan_id.ToString() }
+                    { "learning_plan_id", LearningPlanDiscipline.learning_plan_id.ToString() },
+                    { "order", LearningPlanDiscipline.order.ToString() }
                 });
 
             return response;

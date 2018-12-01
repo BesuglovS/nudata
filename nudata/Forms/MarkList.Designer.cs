@@ -29,10 +29,11 @@
         private void InitializeComponent()
         {
             this.LeftPanel = new System.Windows.Forms.Panel();
-            this.RefreshStudentListPanel = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.StudentListPanel = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.StudentGrid = new System.Windows.Forms.DataGridView();
+            this.RefreshStudentListPanel = new System.Windows.Forms.Panel();
+            this.RefreshStudentList = new System.Windows.Forms.Button();
             this.RightPanel = new System.Windows.Forms.Panel();
             this.RightBottomPanel = new System.Windows.Forms.Panel();
             this.RightBottomRightPanel = new System.Windows.Forms.Panel();
@@ -54,6 +55,17 @@
             this.FinalMark = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.RightBottomLeftPanel = new System.Windows.Forms.Panel();
+            this.MarksPanel = new System.Windows.Forms.Panel();
+            this.MarkTeachersPanel = new System.Windows.Forms.Panel();
+            this.MarkTeacherGridPanel = new System.Windows.Forms.Panel();
+            this.MarksTeachersGrid = new System.Windows.Forms.DataGridView();
+            this.MarkTeacherControlsPanel = new System.Windows.Forms.Panel();
+            this.RemoveMarkTeacher = new System.Windows.Forms.Button();
+            this.UpdateMarkTeacher = new System.Windows.Forms.Button();
+            this.AddMarkTeacher = new System.Windows.Forms.Button();
+            this.MarkTeacherList = new System.Windows.Forms.ComboBox();
+            this.MarksTopPanel = new System.Windows.Forms.Panel();
+            this.MarksGridView = new System.Windows.Forms.DataGridView();
             this.RightMiddleSemesterDisciplinesMarksPanel = new System.Windows.Forms.Panel();
             this.SemesterDisciplinesMarksGrid = new System.Windows.Forms.DataGridView();
             this.RightTopPanel = new System.Windows.Forms.Panel();
@@ -61,26 +73,23 @@
             this.SemestersGrid = new System.Windows.Forms.DataGridView();
             this.RightTopLeftPlanPanel = new System.Windows.Forms.Panel();
             this.PlansGrid = new System.Windows.Forms.DataGridView();
-            this.MarksPanel = new System.Windows.Forms.Panel();
-            this.MarksTopPanel = new System.Windows.Forms.Panel();
-            this.MarksGridView = new System.Windows.Forms.DataGridView();
-            this.MarkTeachersPanel = new System.Windows.Forms.Panel();
-            this.MarkTeacherGridPanel = new System.Windows.Forms.Panel();
-            this.MarksTeachersGrid = new System.Windows.Forms.DataGridView();
-            this.MarkTeacherList = new System.Windows.Forms.ComboBox();
-            this.AddMarkTeacher = new System.Windows.Forms.Button();
-            this.UpdateMarkTeacher = new System.Windows.Forms.Button();
-            this.RemoveMarkTeacher = new System.Windows.Forms.Button();
-            this.MarkTeacherControlsPanel = new System.Windows.Forms.Panel();
             this.LeftPanel.SuspendLayout();
-            this.RefreshStudentListPanel.SuspendLayout();
             this.StudentListPanel.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StudentGrid)).BeginInit();
+            this.RefreshStudentListPanel.SuspendLayout();
             this.RightPanel.SuspendLayout();
             this.RightBottomPanel.SuspendLayout();
             this.RightBottomRightPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Attempt)).BeginInit();
             this.RightBottomLeftPanel.SuspendLayout();
+            this.MarksPanel.SuspendLayout();
+            this.MarkTeachersPanel.SuspendLayout();
+            this.MarkTeacherGridPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MarksTeachersGrid)).BeginInit();
+            this.MarkTeacherControlsPanel.SuspendLayout();
+            this.MarksTopPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MarksGridView)).BeginInit();
             this.RightMiddleSemesterDisciplinesMarksPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SemesterDisciplinesMarksGrid)).BeginInit();
             this.RightTopPanel.SuspendLayout();
@@ -88,18 +97,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.SemestersGrid)).BeginInit();
             this.RightTopLeftPlanPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PlansGrid)).BeginInit();
-            this.MarksPanel.SuspendLayout();
-            this.MarksTopPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.MarksGridView)).BeginInit();
-            this.MarkTeachersPanel.SuspendLayout();
-            this.MarkTeacherGridPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.MarksTeachersGrid)).BeginInit();
-            this.MarkTeacherControlsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // LeftPanel
             // 
-            this.LeftPanel.Controls.Add(this.RefreshStudentListPanel);
             this.LeftPanel.Controls.Add(this.StudentListPanel);
             this.LeftPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.LeftPanel.Location = new System.Drawing.Point(0, 0);
@@ -107,34 +108,24 @@
             this.LeftPanel.Size = new System.Drawing.Size(288, 954);
             this.LeftPanel.TabIndex = 0;
             // 
-            // RefreshStudentListPanel
-            // 
-            this.RefreshStudentListPanel.Controls.Add(this.button1);
-            this.RefreshStudentListPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.RefreshStudentListPanel.Location = new System.Drawing.Point(0, 894);
-            this.RefreshStudentListPanel.Name = "RefreshStudentListPanel";
-            this.RefreshStudentListPanel.Size = new System.Drawing.Size(288, 60);
-            this.RefreshStudentListPanel.TabIndex = 1;
-            // 
-            // button1
-            // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(0, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(288, 60);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Обновить список студентов";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // StudentListPanel
             // 
-            this.StudentListPanel.Controls.Add(this.StudentGrid);
+            this.StudentListPanel.Controls.Add(this.panel1);
+            this.StudentListPanel.Controls.Add(this.RefreshStudentListPanel);
             this.StudentListPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.StudentListPanel.Location = new System.Drawing.Point(0, 0);
             this.StudentListPanel.Name = "StudentListPanel";
             this.StudentListPanel.Size = new System.Drawing.Size(288, 954);
             this.StudentListPanel.TabIndex = 0;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.StudentGrid);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(288, 881);
+            this.panel1.TabIndex = 1;
             // 
             // StudentGrid
             // 
@@ -144,9 +135,29 @@
             this.StudentGrid.Name = "StudentGrid";
             this.StudentGrid.ReadOnly = true;
             this.StudentGrid.RowHeadersVisible = false;
-            this.StudentGrid.Size = new System.Drawing.Size(288, 954);
-            this.StudentGrid.TabIndex = 0;
+            this.StudentGrid.Size = new System.Drawing.Size(288, 881);
+            this.StudentGrid.TabIndex = 1;
             this.StudentGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.StudentGrid_CellClick);
+            // 
+            // RefreshStudentListPanel
+            // 
+            this.RefreshStudentListPanel.Controls.Add(this.RefreshStudentList);
+            this.RefreshStudentListPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.RefreshStudentListPanel.Location = new System.Drawing.Point(0, 881);
+            this.RefreshStudentListPanel.Name = "RefreshStudentListPanel";
+            this.RefreshStudentListPanel.Size = new System.Drawing.Size(288, 73);
+            this.RefreshStudentListPanel.TabIndex = 0;
+            // 
+            // RefreshStudentList
+            // 
+            this.RefreshStudentList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RefreshStudentList.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.RefreshStudentList.Location = new System.Drawing.Point(0, 0);
+            this.RefreshStudentList.Name = "RefreshStudentList";
+            this.RefreshStudentList.Size = new System.Drawing.Size(288, 73);
+            this.RefreshStudentList.TabIndex = 0;
+            this.RefreshStudentList.Text = "Обновить список студентов";
+            this.RefreshStudentList.UseVisualStyleBackColor = true;
             // 
             // RightPanel
             // 
@@ -197,6 +208,7 @@
             // AttestationType
             // 
             this.AttestationType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.AttestationType.Enabled = false;
             this.AttestationType.FormattingEnabled = true;
             this.AttestationType.Items.AddRange(new object[] {
             "Зачёт",
@@ -224,6 +236,7 @@
             // CurrentMarkType
             // 
             this.CurrentMarkType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CurrentMarkType.Enabled = false;
             this.CurrentMarkType.FormattingEnabled = true;
             this.CurrentMarkType.Location = new System.Drawing.Point(12, 74);
             this.CurrentMarkType.Name = "CurrentMarkType";
@@ -293,6 +306,7 @@
             this.MarkDate.Name = "MarkDate";
             this.MarkDate.Size = new System.Drawing.Size(176, 20);
             this.MarkDate.TabIndex = 9;
+            this.MarkDate.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MarkDate_KeyPress);
             // 
             // label5
             // 
@@ -373,6 +387,119 @@
             this.RightBottomLeftPanel.Size = new System.Drawing.Size(700, 366);
             this.RightBottomLeftPanel.TabIndex = 0;
             // 
+            // MarksPanel
+            // 
+            this.MarksPanel.Controls.Add(this.MarkTeachersPanel);
+            this.MarksPanel.Controls.Add(this.MarksTopPanel);
+            this.MarksPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MarksPanel.Location = new System.Drawing.Point(0, 0);
+            this.MarksPanel.Name = "MarksPanel";
+            this.MarksPanel.Size = new System.Drawing.Size(700, 366);
+            this.MarksPanel.TabIndex = 0;
+            // 
+            // MarkTeachersPanel
+            // 
+            this.MarkTeachersPanel.Controls.Add(this.MarkTeacherGridPanel);
+            this.MarkTeachersPanel.Controls.Add(this.MarkTeacherControlsPanel);
+            this.MarkTeachersPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MarkTeachersPanel.Location = new System.Drawing.Point(0, 259);
+            this.MarkTeachersPanel.Name = "MarkTeachersPanel";
+            this.MarkTeachersPanel.Size = new System.Drawing.Size(700, 107);
+            this.MarkTeachersPanel.TabIndex = 1;
+            // 
+            // MarkTeacherGridPanel
+            // 
+            this.MarkTeacherGridPanel.Controls.Add(this.MarksTeachersGrid);
+            this.MarkTeacherGridPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MarkTeacherGridPanel.Location = new System.Drawing.Point(0, 0);
+            this.MarkTeacherGridPanel.Name = "MarkTeacherGridPanel";
+            this.MarkTeacherGridPanel.Size = new System.Drawing.Size(517, 107);
+            this.MarkTeacherGridPanel.TabIndex = 3;
+            // 
+            // MarksTeachersGrid
+            // 
+            this.MarksTeachersGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.MarksTeachersGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MarksTeachersGrid.Location = new System.Drawing.Point(0, 0);
+            this.MarksTeachersGrid.Name = "MarksTeachersGrid";
+            this.MarksTeachersGrid.ReadOnly = true;
+            this.MarksTeachersGrid.RowHeadersVisible = false;
+            this.MarksTeachersGrid.Size = new System.Drawing.Size(517, 107);
+            this.MarksTeachersGrid.TabIndex = 0;
+            this.MarksTeachersGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.MarksTeachersGrid_CellClick);
+            // 
+            // MarkTeacherControlsPanel
+            // 
+            this.MarkTeacherControlsPanel.Controls.Add(this.RemoveMarkTeacher);
+            this.MarkTeacherControlsPanel.Controls.Add(this.UpdateMarkTeacher);
+            this.MarkTeacherControlsPanel.Controls.Add(this.AddMarkTeacher);
+            this.MarkTeacherControlsPanel.Controls.Add(this.MarkTeacherList);
+            this.MarkTeacherControlsPanel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.MarkTeacherControlsPanel.Location = new System.Drawing.Point(517, 0);
+            this.MarkTeacherControlsPanel.Name = "MarkTeacherControlsPanel";
+            this.MarkTeacherControlsPanel.Size = new System.Drawing.Size(183, 107);
+            this.MarkTeacherControlsPanel.TabIndex = 2;
+            // 
+            // RemoveMarkTeacher
+            // 
+            this.RemoveMarkTeacher.Location = new System.Drawing.Point(99, 63);
+            this.RemoveMarkTeacher.Name = "RemoveMarkTeacher";
+            this.RemoveMarkTeacher.Size = new System.Drawing.Size(70, 23);
+            this.RemoveMarkTeacher.TabIndex = 3;
+            this.RemoveMarkTeacher.Text = "Удалить";
+            this.RemoveMarkTeacher.UseVisualStyleBackColor = true;
+            this.RemoveMarkTeacher.Click += new System.EventHandler(this.RemoveMarkTeacher_Click);
+            // 
+            // UpdateMarkTeacher
+            // 
+            this.UpdateMarkTeacher.Location = new System.Drawing.Point(6, 63);
+            this.UpdateMarkTeacher.Name = "UpdateMarkTeacher";
+            this.UpdateMarkTeacher.Size = new System.Drawing.Size(70, 23);
+            this.UpdateMarkTeacher.TabIndex = 2;
+            this.UpdateMarkTeacher.Text = "Изменить";
+            this.UpdateMarkTeacher.UseVisualStyleBackColor = true;
+            this.UpdateMarkTeacher.Click += new System.EventHandler(this.UpdateMarkTeacher_Click);
+            // 
+            // AddMarkTeacher
+            // 
+            this.AddMarkTeacher.Location = new System.Drawing.Point(6, 34);
+            this.AddMarkTeacher.Name = "AddMarkTeacher";
+            this.AddMarkTeacher.Size = new System.Drawing.Size(163, 23);
+            this.AddMarkTeacher.TabIndex = 1;
+            this.AddMarkTeacher.Text = "Добавить";
+            this.AddMarkTeacher.UseVisualStyleBackColor = true;
+            this.AddMarkTeacher.Click += new System.EventHandler(this.AddMarkTeacher_Click);
+            // 
+            // MarkTeacherList
+            // 
+            this.MarkTeacherList.FormattingEnabled = true;
+            this.MarkTeacherList.Location = new System.Drawing.Point(6, 7);
+            this.MarkTeacherList.Name = "MarkTeacherList";
+            this.MarkTeacherList.Size = new System.Drawing.Size(163, 21);
+            this.MarkTeacherList.TabIndex = 0;
+            this.MarkTeacherList.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MarkTeacherList_KeyPress);
+            // 
+            // MarksTopPanel
+            // 
+            this.MarksTopPanel.Controls.Add(this.MarksGridView);
+            this.MarksTopPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.MarksTopPanel.Location = new System.Drawing.Point(0, 0);
+            this.MarksTopPanel.Name = "MarksTopPanel";
+            this.MarksTopPanel.Size = new System.Drawing.Size(700, 259);
+            this.MarksTopPanel.TabIndex = 0;
+            // 
+            // MarksGridView
+            // 
+            this.MarksGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.MarksGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MarksGridView.Location = new System.Drawing.Point(0, 0);
+            this.MarksGridView.Name = "MarksGridView";
+            this.MarksGridView.ReadOnly = true;
+            this.MarksGridView.RowHeadersVisible = false;
+            this.MarksGridView.Size = new System.Drawing.Size(700, 259);
+            this.MarksGridView.TabIndex = 2;
+            this.MarksGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.MarksGridView_CellClick);
+            // 
             // RightMiddleSemesterDisciplinesMarksPanel
             // 
             this.RightMiddleSemesterDisciplinesMarksPanel.Controls.Add(this.SemesterDisciplinesMarksGrid);
@@ -446,118 +573,6 @@
             this.PlansGrid.TabIndex = 0;
             this.PlansGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.PlansGrid_CellClick);
             // 
-            // MarksPanel
-            // 
-            this.MarksPanel.Controls.Add(this.MarkTeachersPanel);
-            this.MarksPanel.Controls.Add(this.MarksTopPanel);
-            this.MarksPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MarksPanel.Location = new System.Drawing.Point(0, 0);
-            this.MarksPanel.Name = "MarksPanel";
-            this.MarksPanel.Size = new System.Drawing.Size(700, 366);
-            this.MarksPanel.TabIndex = 0;
-            // 
-            // MarksTopPanel
-            // 
-            this.MarksTopPanel.Controls.Add(this.MarksGridView);
-            this.MarksTopPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.MarksTopPanel.Location = new System.Drawing.Point(0, 0);
-            this.MarksTopPanel.Name = "MarksTopPanel";
-            this.MarksTopPanel.Size = new System.Drawing.Size(700, 259);
-            this.MarksTopPanel.TabIndex = 0;
-            // 
-            // MarksGridView
-            // 
-            this.MarksGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.MarksGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MarksGridView.Location = new System.Drawing.Point(0, 0);
-            this.MarksGridView.Name = "MarksGridView";
-            this.MarksGridView.ReadOnly = true;
-            this.MarksGridView.RowHeadersVisible = false;
-            this.MarksGridView.Size = new System.Drawing.Size(700, 259);
-            this.MarksGridView.TabIndex = 2;
-            this.MarksGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.MarksGridView_CellClick);
-            // 
-            // MarkTeachersPanel
-            // 
-            this.MarkTeachersPanel.Controls.Add(this.MarkTeacherGridPanel);
-            this.MarkTeachersPanel.Controls.Add(this.MarkTeacherControlsPanel);
-            this.MarkTeachersPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MarkTeachersPanel.Location = new System.Drawing.Point(0, 259);
-            this.MarkTeachersPanel.Name = "MarkTeachersPanel";
-            this.MarkTeachersPanel.Size = new System.Drawing.Size(700, 107);
-            this.MarkTeachersPanel.TabIndex = 1;
-            // 
-            // MarkTeacherGridPanel
-            // 
-            this.MarkTeacherGridPanel.Controls.Add(this.MarksTeachersGrid);
-            this.MarkTeacherGridPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MarkTeacherGridPanel.Location = new System.Drawing.Point(0, 0);
-            this.MarkTeacherGridPanel.Name = "MarkTeacherGridPanel";
-            this.MarkTeacherGridPanel.Size = new System.Drawing.Size(517, 107);
-            this.MarkTeacherGridPanel.TabIndex = 3;
-            // 
-            // MarksTeachersGrid
-            // 
-            this.MarksTeachersGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.MarksTeachersGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MarksTeachersGrid.Location = new System.Drawing.Point(0, 0);
-            this.MarksTeachersGrid.Name = "MarksTeachersGrid";
-            this.MarksTeachersGrid.ReadOnly = true;
-            this.MarksTeachersGrid.RowHeadersVisible = false;
-            this.MarksTeachersGrid.Size = new System.Drawing.Size(517, 107);
-            this.MarksTeachersGrid.TabIndex = 0;
-            this.MarksTeachersGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.MarksTeachersGrid_CellClick);
-            // 
-            // MarkTeacherList
-            // 
-            this.MarkTeacherList.FormattingEnabled = true;
-            this.MarkTeacherList.Location = new System.Drawing.Point(6, 7);
-            this.MarkTeacherList.Name = "MarkTeacherList";
-            this.MarkTeacherList.Size = new System.Drawing.Size(163, 21);
-            this.MarkTeacherList.TabIndex = 0;
-            // 
-            // AddMarkTeacher
-            // 
-            this.AddMarkTeacher.Location = new System.Drawing.Point(6, 34);
-            this.AddMarkTeacher.Name = "AddMarkTeacher";
-            this.AddMarkTeacher.Size = new System.Drawing.Size(163, 23);
-            this.AddMarkTeacher.TabIndex = 1;
-            this.AddMarkTeacher.Text = "Добавить";
-            this.AddMarkTeacher.UseVisualStyleBackColor = true;
-            this.AddMarkTeacher.Click += new System.EventHandler(this.AddMarkTeacher_Click);
-            // 
-            // UpdateMarkTeacher
-            // 
-            this.UpdateMarkTeacher.Location = new System.Drawing.Point(6, 63);
-            this.UpdateMarkTeacher.Name = "UpdateMarkTeacher";
-            this.UpdateMarkTeacher.Size = new System.Drawing.Size(70, 23);
-            this.UpdateMarkTeacher.TabIndex = 2;
-            this.UpdateMarkTeacher.Text = "Изменить";
-            this.UpdateMarkTeacher.UseVisualStyleBackColor = true;
-            this.UpdateMarkTeacher.Click += new System.EventHandler(this.UpdateMarkTeacher_Click);
-            // 
-            // RemoveMarkTeacher
-            // 
-            this.RemoveMarkTeacher.Location = new System.Drawing.Point(99, 63);
-            this.RemoveMarkTeacher.Name = "RemoveMarkTeacher";
-            this.RemoveMarkTeacher.Size = new System.Drawing.Size(70, 23);
-            this.RemoveMarkTeacher.TabIndex = 3;
-            this.RemoveMarkTeacher.Text = "Удалить";
-            this.RemoveMarkTeacher.UseVisualStyleBackColor = true;
-            this.RemoveMarkTeacher.Click += new System.EventHandler(this.RemoveMarkTeacher_Click);
-            // 
-            // MarkTeacherControlsPanel
-            // 
-            this.MarkTeacherControlsPanel.Controls.Add(this.RemoveMarkTeacher);
-            this.MarkTeacherControlsPanel.Controls.Add(this.UpdateMarkTeacher);
-            this.MarkTeacherControlsPanel.Controls.Add(this.AddMarkTeacher);
-            this.MarkTeacherControlsPanel.Controls.Add(this.MarkTeacherList);
-            this.MarkTeacherControlsPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.MarkTeacherControlsPanel.Location = new System.Drawing.Point(517, 0);
-            this.MarkTeacherControlsPanel.Name = "MarkTeacherControlsPanel";
-            this.MarkTeacherControlsPanel.Size = new System.Drawing.Size(183, 107);
-            this.MarkTeacherControlsPanel.TabIndex = 2;
-            // 
             // MarkList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -570,15 +585,23 @@
             this.Load += new System.EventHandler(this.MarkList_Load);
             this.Resize += new System.EventHandler(this.MarkList_Resize);
             this.LeftPanel.ResumeLayout(false);
-            this.RefreshStudentListPanel.ResumeLayout(false);
             this.StudentListPanel.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.StudentGrid)).EndInit();
+            this.RefreshStudentListPanel.ResumeLayout(false);
             this.RightPanel.ResumeLayout(false);
             this.RightBottomPanel.ResumeLayout(false);
             this.RightBottomRightPanel.ResumeLayout(false);
             this.RightBottomRightPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Attempt)).EndInit();
             this.RightBottomLeftPanel.ResumeLayout(false);
+            this.MarksPanel.ResumeLayout(false);
+            this.MarkTeachersPanel.ResumeLayout(false);
+            this.MarkTeacherGridPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.MarksTeachersGrid)).EndInit();
+            this.MarkTeacherControlsPanel.ResumeLayout(false);
+            this.MarksTopPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.MarksGridView)).EndInit();
             this.RightMiddleSemesterDisciplinesMarksPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.SemesterDisciplinesMarksGrid)).EndInit();
             this.RightTopPanel.ResumeLayout(false);
@@ -586,13 +609,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.SemestersGrid)).EndInit();
             this.RightTopLeftPlanPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PlansGrid)).EndInit();
-            this.MarksPanel.ResumeLayout(false);
-            this.MarksTopPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.MarksGridView)).EndInit();
-            this.MarkTeachersPanel.ResumeLayout(false);
-            this.MarkTeacherGridPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.MarksTeachersGrid)).EndInit();
-            this.MarkTeacherControlsPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -600,10 +616,7 @@
         #endregion
 
         private System.Windows.Forms.Panel LeftPanel;
-        private System.Windows.Forms.Panel RefreshStudentListPanel;
         private System.Windows.Forms.Panel StudentListPanel;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridView StudentGrid;
         private System.Windows.Forms.Panel RightPanel;
         private System.Windows.Forms.Panel RightTopPanel;
         private System.Windows.Forms.Panel RightTopRightSemesterPanel;
@@ -643,5 +656,9 @@
         private System.Windows.Forms.ComboBox MarkTeacherList;
         private System.Windows.Forms.Panel MarksTopPanel;
         private System.Windows.Forms.DataGridView MarksGridView;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DataGridView StudentGrid;
+        private System.Windows.Forms.Panel RefreshStudentListPanel;
+        private System.Windows.Forms.Button RefreshStudentList;
     }
 }

@@ -65,7 +65,7 @@ namespace nudata.Forms
             CurrentMarkType.DataSource = mTypes;
 
             var teachers = tRepo.all();
-            var teachersView = TeacherView.TeachersToView(teachers);
+            var teachersView = TeacherView.TeachersToView(teachers).OrderBy(tv => tv.fio).ToList();
 
             MarkTeacherList.DisplayMember = "fio";
             MarkTeacherList.ValueMember = "id";
@@ -132,11 +132,11 @@ namespace nudata.Forms
         {
             RightTopLeftPlanPanel.Width = (int)Math.Floor((double)RightTopPanel.Width - 200);
 
-            RightBottomLeftPanel.Width = (int)Math.Floor((double)RightBottomPanel.Width - 350);
+            RightBottomLeftPanel.Width = (int)Math.Floor((double)RightBottomPanel.Width - 200);
 
             if (MarksGridView.Columns["teachersFio"] != null)
             {
-                MarksGridView.Columns["teachersFio"].Width = (MarksGridView.Width - 450 > 250) ? (MarksGridView.Width - 450) : 250;
+                MarksGridView.Columns["teachersFio"].Width = (MarksGridView.Width - 590 > 250) ? (MarksGridView.Width - 590) : 250;
             }
         }
 
@@ -212,11 +212,71 @@ namespace nudata.Forms
                             .OrderBy(ds => ds.discipline_name)
                             .ToList();
 
+            var splittedDsv = new List<DisciplineSemesterView>();
+            foreach (var dsvItem in dsv)
+            {
+                if (dsvItem.zachet)
+                {
+                    var item = dsvItem.CloneWithNoAttestation();
+                    item.zachet = true;
+                    splittedDsv.Add(item);
+                }
+
+                if (dsvItem.exam)
+                {
+                    var item = dsvItem.CloneWithNoAttestation();
+                    item.exam = true;
+                    splittedDsv.Add(item);
+                }
+
+                if (dsvItem.zachet_with_mark)
+                {
+                    var item = dsvItem.CloneWithNoAttestation();
+                    item.zachet_with_mark = true;
+                    splittedDsv.Add(item);
+                }
+
+                if (dsvItem.course_project)
+                {
+                    var item = dsvItem.CloneWithNoAttestation();
+                    item.course_project = true;
+                    splittedDsv.Add(item);
+                }
+
+                if (dsvItem.course_task)
+                {
+                    var item = dsvItem.CloneWithNoAttestation();
+                    item.course_task = true;
+                    splittedDsv.Add(item);
+                }
+
+                if (dsvItem.control_task)
+                {
+                    var item = dsvItem.CloneWithNoAttestation();
+                    item.control_task = true;
+                    splittedDsv.Add(item);
+                }
+
+                if (dsvItem.referat)
+                {
+                    var item = dsvItem.CloneWithNoAttestation();
+                    item.referat = true;
+                    splittedDsv.Add(item);
+                }
+
+                if (dsvItem.essay)
+                {
+                    var item = dsvItem.CloneWithNoAttestation();
+                    item.essay = true;
+                    splittedDsv.Add(item);
+                }
+            }
+
             var markTypes = mtypeRepo.all();
             var markTypeOptions = mtoRepo.all();
             var studentMarks = mRepo.studentAll(currentStudentId);
 
-            var disciplinesWithMarksView = DisciplineWithMark.FromDisciplineSemesterView(dsv, studentMarks, markTypes, markTypeOptions);
+            var disciplinesWithMarksView = DisciplineWithMark.FromDisciplineSemesterView(splittedDsv, studentMarks, markTypes, markTypeOptions);
             SemesterDisciplinesMarksGrid.DataSource = disciplinesWithMarksView;
             FormatSemesterView();
 
@@ -256,7 +316,7 @@ namespace nudata.Forms
             SemesterDisciplinesMarksGrid.Columns["learning_plan_discipline_id"].Visible = false;
 
             SemesterDisciplinesMarksGrid.Columns["semester"].Width = 40;
-            SemesterDisciplinesMarksGrid.Columns["discipline_name"].Width = 100;
+            SemesterDisciplinesMarksGrid.Columns["discipline_name"].Width = 250;
 
             SemesterDisciplinesMarksGrid.Columns["attempt_count"].Width = 80;
             SemesterDisciplinesMarksGrid.Columns["final_mark"].Width = 100;
@@ -291,10 +351,14 @@ namespace nudata.Forms
         {
             var marks = mRepo.studentDisciplineSemesterAll(currentStudentId, dwm.id);
 
+            marks = Utilities.ConstrainMarksToOneAttestation(marks, dwm);
+
             var teachers = tRepo.all().ToDictionary(t => t.id, t => t);
             
             var markTypes = mtypeRepo.all();
             var markTypeOptions = mtoRepo.all();
+
+            SetMarkTypeAndAttestationType(dwm);
 
             MarksGridView.DataSource = MarkView
                 .FromMarkList(marks, markTypes, markTypeOptions, teachers, mtRepo)
@@ -304,13 +368,29 @@ namespace nudata.Forms
             FormatMarksGrid();
         }
 
+        private void SetMarkTypeAndAttestationType(DisciplineWithMark dwm)
+        {
+            var markTypes = mtypeRepo.all().ToDictionary(mt => mt.name, mt => mt);
+
+            if (dwm.zachet) { AttestationType.Text = "Зачёт"; CurrentMarkType.SelectedValue = markTypes[Constants.AttestationMarkType["Зачёт"]].id; }
+            if (dwm.exam) { AttestationType.Text = "Экзамен"; CurrentMarkType.SelectedValue = markTypes[Constants.AttestationMarkType["Экзамен"]].id; }
+            if (dwm.zachet_with_mark) { AttestationType.Text = "Зачёт с оценкой"; CurrentMarkType.SelectedValue = markTypes[Constants.AttestationMarkType["Зачёт с оценкой"]].id; }
+            if (dwm.course_project) { AttestationType.Text = "Курсовой проект"; CurrentMarkType.SelectedValue = markTypes[Constants.AttestationMarkType["Курсовой проект"]].id; }
+            if (dwm.course_task) { AttestationType.Text = "Курсовая работа"; CurrentMarkType.SelectedValue = markTypes[Constants.AttestationMarkType["Курсовая работа"]].id; }
+            if (dwm.control_task) { AttestationType.Text = "Контрольная работа"; CurrentMarkType.SelectedValue = markTypes[Constants.AttestationMarkType["Контрольная работа"]].id; }
+            if (dwm.referat) { AttestationType.Text = "Реферат"; CurrentMarkType.SelectedValue = markTypes[Constants.AttestationMarkType["Реферат"]].id; }
+            if (dwm.essay) { AttestationType.Text = "Эссе"; CurrentMarkType.SelectedValue = markTypes[Constants.AttestationMarkType["Эссе"]].id; }            
+        }
+
         private void FormatMarksGrid()
         {
             MarksGridView.Columns["id"].Visible = false;
             MarksGridView.Columns["student_id"].Visible = false;
-            MarksGridView.Columns["learning_plan_discipline_semester_id"].Visible = false;
-            MarksGridView.Columns["attestation_type"].Visible = false;
+            MarksGridView.Columns["learning_plan_discipline_semester_id"].Visible = false;            
             MarksGridView.Columns["mark_type_id"].Visible = false;
+
+            MarksGridView.Columns["attestation_type"].HeaderText = "Форма отчётности";
+            MarksGridView.Columns["attestation_type"].Width = 140;
 
             MarksGridView.Columns["mark_type_option_id"].Visible = false;
             MarksGridView.Columns["final_mark"].HeaderText = "Итоговая оценка";
@@ -330,7 +410,7 @@ namespace nudata.Forms
             MarksGridView.Columns["attempt"].Width = 60;
 
             MarksGridView.Columns["teachersFio"].HeaderText = "ФИО";
-            MarksGridView.Columns["teachersFio"].Width = (MarksGridView.Width - 450 > 250) ? (MarksGridView.Width - 450) : 250;
+            MarksGridView.Columns["teachersFio"].Width = (MarksGridView.Width - 590 > 250) ? (MarksGridView.Width - 590) : 250;
         }
 
         private void addMark_Click(object sender, EventArgs e)
@@ -579,6 +659,24 @@ namespace nudata.Forms
             var teacherView = ((List<MarkTeacherView>)MarksTeachersGrid.DataSource)[e.RowIndex];
 
             MarkTeacherList.SelectedValue = teacherView.TeacherId;
+        }
+
+        private void MarkTeacherList_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                AddMarkTeacher.PerformClick();
+            }
+        }
+
+        private void MarkDate_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                addMark.PerformClick();
+
+                MarkTeacherList.Focus();
+            }
         }
     }
 }

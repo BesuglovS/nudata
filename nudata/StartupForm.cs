@@ -103,12 +103,12 @@ namespace nudata
             // План и нагрузка на студента - Ctrl-Alt-P
             HotKeyManager.RegisterHotKey(Keys.P, (uint)(KeyModifiers.Control | KeyModifiers.Alt));
 
-            // Виды оценок - Ctrl-Alt-M
-            HotKeyManager.RegisterHotKey(Keys.M, (uint)(KeyModifiers.Control | KeyModifiers.Alt));
-
-            // Оценки студентов - Ctrl-M
+            // Оценки студентов - Alt-M
             HotKeyManager.RegisterHotKey(Keys.M, (uint)KeyModifiers.Alt);
 
+            // Виды оценок - Ctrl-Alt-M
+            HotKeyManager.RegisterHotKey(Keys.M, (uint)(KeyModifiers.Control | KeyModifiers.Alt));
+            
             HotKeyManager.HotKeyPressed += ManageHotKeys;
 
             trayIcon.Visible = true;

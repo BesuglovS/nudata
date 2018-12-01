@@ -109,6 +109,8 @@
             this.lpdCode = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.openXmlFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.label23 = new System.Windows.Forms.Label();
+            this.order = new System.Windows.Forms.NumericUpDown();
             this.LeftPanel.SuspendLayout();
             this.leftBottomPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LearningPlanGridView)).BeginInit();
@@ -122,6 +124,7 @@
             this.disciplinesViewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DisciplinesDataGrid)).BeginInit();
             this.disciplineControlsPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.order)).BeginInit();
             this.SuspendLayout();
             // 
             // LeftPanel
@@ -670,6 +673,8 @@
             // 
             // disciplineControlsPanel
             // 
+            this.disciplineControlsPanel.Controls.Add(this.order);
+            this.disciplineControlsPanel.Controls.Add(this.label23);
             this.disciplineControlsPanel.Controls.Add(this.lawDM);
             this.disciplineControlsPanel.Controls.Add(this.EssayExists);
             this.disciplineControlsPanel.Controls.Add(this.importXLSPlanSpec);
@@ -907,6 +912,22 @@
             this.openXmlFileDialog.Filter = "Excel files|*.xls";
             this.openXmlFileDialog.InitialDirectory = "D:\\Планы из битрикса\\Excel\\";
             // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(603, 124);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(60, 13);
+            this.label23.TabIndex = 37;
+            this.label23.Text = "№ в плане";
+            // 
+            // order
+            // 
+            this.order.Location = new System.Drawing.Point(599, 140);
+            this.order.Name = "order";
+            this.order.Size = new System.Drawing.Size(69, 20);
+            this.order.TabIndex = 38;
+            // 
             // LearningPlanList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -933,6 +954,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DisciplinesDataGrid)).EndInit();
             this.disciplineControlsPanel.ResumeLayout(false);
             this.disciplineControlsPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.order)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1020,5 +1042,7 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox lpName;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.NumericUpDown order;
+        private System.Windows.Forms.Label label23;
     }
 }

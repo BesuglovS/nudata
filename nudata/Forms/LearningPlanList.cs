@@ -149,11 +149,16 @@ namespace nudata.Forms
 
         private void RefreshLearningPlanDisciplinesList(int planId)
         {
-            var disciplines = lpdRepo.learningPlanAll(planId).OrderBy(d => d.code).ToList();
+            var disciplines = lpdRepo.learningPlanAll(planId)
+                .OrderBy(d => d.order)
+                .ThenBy(d => d.name)
+                .ToList();
 
             DisciplinesDataGrid.DataSource = disciplines;
 
             DisciplinesDataGrid.Columns["id"].Visible = false;
+            DisciplinesDataGrid.Columns["order"].HeaderText = "№";
+            DisciplinesDataGrid.Columns["order"].Width = 30;
             DisciplinesDataGrid.Columns["code"].HeaderText = "Код";
             DisciplinesDataGrid.Columns["name"].HeaderText = "Наименование";
             DisciplinesDataGrid.Columns["total_hours"].HeaderText = "Общее количество часов";
@@ -195,7 +200,8 @@ namespace nudata.Forms
                     independent_work_hours = independent_work_hours,
                     control_hours = control_hours,
                     z_count = z_count,
-                    learning_plan_id = planId
+                    learning_plan_id = planId,
+                    order = decimal.ToInt32(order.Value)
                 };
 
                 lpdRepo.add(newLearningPlanDiscipline);
@@ -233,6 +239,7 @@ namespace nudata.Forms
                 discipline.independent_work_hours = independent_work_hours;
                 discipline.control_hours = control_hours;
                 discipline.z_count = z_count;
+                discipline.order = decimal.ToInt32(order.Value);
 
                 lpdRepo.update(discipline, discipline.id);
 
@@ -267,6 +274,7 @@ namespace nudata.Forms
             lpdIndependentWorkHours.Text = discipline.independent_work_hours.ToString();
             lpdControlHours.Text = discipline.control_hours.ToString();
             lpdZCount.Text = discipline.z_count.ToString();
+            order.Value = discipline.order;
 
             RefreshLearningPlanDisciplineSemesterList(discipline.id);
         }

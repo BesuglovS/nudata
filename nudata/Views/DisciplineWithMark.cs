@@ -69,6 +69,15 @@ namespace nudata.Views
 
             marks = studentMarks.Where(sm => sm.learning_plan_discipline_semester_id == id).ToList();
 
+            if (zachet) marks = marks.Where(m => m.attestation_type == "Зачёт").ToList();
+            if (exam) marks = marks.Where(m => m.attestation_type == "Экзамен").ToList();
+            if (zachet_with_mark) marks = marks.Where(m => m.attestation_type == "Зачёт с оценкой").ToList();
+            if (course_project) marks = marks.Where(m => m.attestation_type == "Курсовой проект").ToList();
+            if (course_task) marks = marks.Where(m => m.attestation_type == "Курсовая работа").ToList();
+            if (control_task) marks = marks.Where(m => m.attestation_type == "Контрольная работа").ToList();
+            if (referat) marks = marks.Where(m => m.attestation_type == "Реферат").ToList();
+            if (essay) marks = marks.Where(m => m.attestation_type == "Эссе").ToList();
+
             attempt_count = marks.Count;
 
             if (marks.Count == 0)
