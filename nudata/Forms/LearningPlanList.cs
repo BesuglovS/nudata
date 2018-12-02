@@ -810,5 +810,35 @@ namespace nudata.Forms
 
             var eprst = 999;
         }
+
+        private void RenumeratePlan_Click(object sender, EventArgs e)
+        {
+            var discList = Clipboard.GetText()
+                .Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries)
+                .ToList();            
+            
+            var plan = ((List<LearningPlan>)LearningPlanGridView.DataSource)[LearningPlanGridView.SelectedCells[0].RowIndex];
+
+            var disciplines = lpdRepo.learningPlanAll(plan.id);
+
+            int newIndex = 1;
+            for (int i = 0; i < discList.Count; i++)
+            {
+                LearningPlanDiscipline disc = null;
+                do
+                { 
+                    disc = disciplines.FirstOrDefault(d => d.name == discList[i] && d.order == 0);
+
+                    if (disc != null)
+                    {
+                        disc.order = newIndex;
+                        lpdRepo.update(disc, disc.id);
+                        newIndex++;
+                    }
+                } while (disc != null);
+            }
+
+            MessageBox.Show("Done");
+        }
     }
 }

@@ -85,6 +85,8 @@
             this.disciplinesViewPanel = new System.Windows.Forms.Panel();
             this.DisciplinesDataGrid = new System.Windows.Forms.DataGridView();
             this.disciplineControlsPanel = new System.Windows.Forms.Panel();
+            this.order = new System.Windows.Forms.NumericUpDown();
+            this.label23 = new System.Windows.Forms.Label();
             this.lawDM = new System.Windows.Forms.CheckBox();
             this.EssayExists = new System.Windows.Forms.CheckBox();
             this.importXLSPlanSpec = new System.Windows.Forms.Button();
@@ -109,8 +111,7 @@
             this.lpdCode = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.openXmlFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.label23 = new System.Windows.Forms.Label();
-            this.order = new System.Windows.Forms.NumericUpDown();
+            this.RenumeratePlan = new System.Windows.Forms.Button();
             this.LeftPanel.SuspendLayout();
             this.leftBottomPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LearningPlanGridView)).BeginInit();
@@ -673,6 +674,7 @@
             // 
             // disciplineControlsPanel
             // 
+            this.disciplineControlsPanel.Controls.Add(this.RenumeratePlan);
             this.disciplineControlsPanel.Controls.Add(this.order);
             this.disciplineControlsPanel.Controls.Add(this.label23);
             this.disciplineControlsPanel.Controls.Add(this.lawDM);
@@ -703,6 +705,22 @@
             this.disciplineControlsPanel.Name = "disciplineControlsPanel";
             this.disciplineControlsPanel.Size = new System.Drawing.Size(896, 178);
             this.disciplineControlsPanel.TabIndex = 0;
+            // 
+            // order
+            // 
+            this.order.Location = new System.Drawing.Point(599, 140);
+            this.order.Name = "order";
+            this.order.Size = new System.Drawing.Size(69, 20);
+            this.order.TabIndex = 38;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(603, 124);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(60, 13);
+            this.label23.TabIndex = 37;
+            this.label23.Text = "№ в плане";
             // 
             // lawDM
             // 
@@ -912,21 +930,15 @@
             this.openXmlFileDialog.Filter = "Excel files|*.xls";
             this.openXmlFileDialog.InitialDirectory = "D:\\Планы из битрикса\\Excel\\";
             // 
-            // label23
+            // RenumeratePlan
             // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(603, 124);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(60, 13);
-            this.label23.TabIndex = 37;
-            this.label23.Text = "№ в плане";
-            // 
-            // order
-            // 
-            this.order.Location = new System.Drawing.Point(599, 140);
-            this.order.Name = "order";
-            this.order.Size = new System.Drawing.Size(69, 20);
-            this.order.TabIndex = 38;
+            this.RenumeratePlan.Location = new System.Drawing.Point(674, 144);
+            this.RenumeratePlan.Name = "RenumeratePlan";
+            this.RenumeratePlan.Size = new System.Drawing.Size(210, 23);
+            this.RenumeratePlan.TabIndex = 39;
+            this.RenumeratePlan.Text = "Перенумеровать план";
+            this.RenumeratePlan.UseVisualStyleBackColor = true;
+            this.RenumeratePlan.Click += new System.EventHandler(this.RenumeratePlan_Click);
             // 
             // LearningPlanList
             // 
@@ -1044,5 +1056,6 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.NumericUpDown order;
         private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Button RenumeratePlan;
     }
 }
